@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Roboto&display=swap");
+body {
+  font-family: "Nunito", sans-serif;
+}
+
+.slick-dots li button:before {
+  font-size: 26px;
+}
+
+.slick-dots li {
+  margin: 0;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #ef8e01;
+}
+
+.community_section .slick-slide img {
+  width: 140px;
+}
+
+.community_section .slick-initialized .slick-slide {
+  margin-top: 67px;
+}
+
+.community_section .slick-center {
+  transform: translateY(-67px);
+  transition: 0.5s ease;
+}
+.community_section .slick-slide img {
+  opacity: 0.8;
+}
+
+.community_section .slick-slide .avatar_wrapper::before {
+  content: "";
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  background-image: url(https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/eXkR-backcommunity.png);
+  filter: grayscale(100%);
+}
+.community_section .slick-center .avatar_wrapper::before {
+  filter: grayscale(0%);
+}
+.community_section .slick-center img {
+  width: 200px;
+  opacity: 1;
+}
+.community_section .slick-center p {
+  color: #2a3c44;
+  font-weight: bold;
+  font-size: 18px;
+}
+.community_section .slick-center span {
+  font-size: 18px;
+  color: #ef8e01;
+}
+
+.css-26l3gy-menu {
+  padding: 0;
+  margin: 0;
+}
+
+@media screen and (max-width: 1330px) {
+  .community_section .slick-slide p {
+    width: 180px;
+  }
+}
+@media screen and (max-width: 1015px) {
+  .community_section .slick-slide p {
+    width: 160px;
+  }
+}
+@media screen and (max-width: 960px) {
+  .community_section .slick-slide p {
+    width: 350px;
+  }
+  .community_section .slick-list {
+    width: 100%;
+    padding: 0px !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .community_section .slick-initialized .slick-slide {
+    margin-top: 0px;
+  }
+  .community_section .slick-slide .avatar_wrapper::before {
+    filter: grayscale(0%);
+  }
+  .community_section .slick-slide p {
+    color: #2a3c44;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .community_section .slick-slide span {
+    font-size: 18px;
+    color: #ef8e01;
+  }
+}
