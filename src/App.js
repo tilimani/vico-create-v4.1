@@ -5,7 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 import theme from "./common/theme";
-import LandingPage from "./components/pages/LandingPage/LandingPage";
+import Assesment from "./components/pages/Assesment/Assesment";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Create from "./components/pages/Create/Create";
 
@@ -20,7 +20,7 @@ function App() {
               <Create />
             </Route>
             <Route exact path="/">
-              <LandingPage />
+              <Assesment />
             </Route>
           </Route>
         </Switch>
