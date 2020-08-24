@@ -3,6 +3,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import VICOButton from "../../../atoms/VICOButton";
+import { Link as RouterLink } from "react-router-dom";
 
 import "./index.css";
 import CustomSelect from "./CustomSelect";
@@ -20,7 +22,7 @@ const housingOptions = [
   { value: "Option 3", label: "Option 3" }
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   search_area: {
     marginTop: "6vh",
     [theme.breakpoints.down("sm")]: {
@@ -108,7 +110,7 @@ const HeroSection = () => {
                 options={cityOptions}
                 isSearchable={true}
                 value={searchElements.city}
-                setValue={value =>
+                setValue={(value) =>
                   setSearchElements({
                     ...searchElements,
                     city: value
@@ -129,7 +131,7 @@ const HeroSection = () => {
             >
               <CustomDatePicker
                 date={searchElements.date}
-                setDate={value =>
+                setDate={(value) =>
                   setSearchElements({
                     ...searchElements,
                     date: value
@@ -138,7 +140,7 @@ const HeroSection = () => {
               />
             </div>
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          {/*<Grid item xs={12} sm={6} md={3}>
             <div
               style={{
                 backgroundColor: "white",
@@ -161,16 +163,16 @@ const HeroSection = () => {
                 }
               />
             </div>
-          </Grid>
+              </Grid>*/}
           <Grid item xs={12} sm={6} md={3}>
-            <Button
+            <VICOButton
+              onClick={() => console.log("test")}
+              component={RouterLink}
+              to="/assessment"
               variant="contained"
               color="primary"
-              className={classes.grid_item_content}
-              onClick={() => handleSearch()}
-            >
-              Search
-            </Button>
+              text="Continue"
+            />
           </Grid>
         </Grid>
       </div>
