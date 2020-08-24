@@ -6,6 +6,8 @@ import "aos/dist/aos.css";
 
 import theme from "./common/theme";
 import Assessment from "./components/pages/Assessment/Assessment";
+import Create from "./components/pages/Create/Create";
+import LandingPage from "./components/pages/LandingPage/LandingPage";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -14,8 +16,16 @@ function App() {
     <ThemeProvider theme={theme}>
       <BrowserRouter basename="/">
         <Switch>
-          <Route path="/assessment">
-            <Assessment />
+          <Route path="/">
+            <Route path="/assessment">
+              <Assessment />
+            </Route>
+            <Route path="/create">
+              <Create />
+            </Route>
+            <Route exact path="/">
+              <LandingPage />
+            </Route>
           </Route>
         </Switch>
       </BrowserRouter>

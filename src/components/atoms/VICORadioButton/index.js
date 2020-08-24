@@ -8,8 +8,7 @@ import {
 } from "@material-ui/core";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import theme from "../../../common/theme";
-import CheckCircle from "@material-ui/icons/CheckCircleOutlined";
-import RadioButtonUnchecked from "@material-ui/icons/RadioButtonUnchecked";
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +21,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "20px",
     fontWeight: "bold"
   },
-  label: {},
+  label: {
+    marginLeft: "12px",
+    "&, & + $fullWidth": {
+      marginLeft: "0px"
+    }
+  },
   overlay: {},
   container: {
     border: ".5px solid #dadada",
@@ -31,7 +35,18 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "12px",
     textAlign: "center",
     boxShadow: "0px 2px 4px rgba(196, 196, 196, 0.65)",
-    transition: ".3s ease"
+    transition: ".3s ease",
+    "&$fullWidth": {
+      width: "100%",
+      height: "auto",
+      minHeight: "60px",
+      paddingTop: "1rem",
+      paddingBottom: "1rem"
+    },
+    "&:hover": {
+      border: "1px solid #ef8e01",
+      boxShadow: "0px 2px 4px rgba(239, 142, 5, 0.53)"
+    }
   },
   checked: {
     "&, & + $label": {
@@ -42,9 +57,45 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#ef8e01",
         border: "#ef8e01",
         boxShadow: "0px 2px 4px rgba(239, 142, 5, 0.53)"
+      },
+      "& svg": {
+        color: "white"
       }
     }
-  }
+  },
+  fullWidth: {
+    marginLeft: "0px",
+    "& $text": {
+      fontSize: "20px",
+      lineHeight: "18px",
+      "& $header": {
+        marginBottom: ".5rem"
+      }
+    }
+  },
+  labelFormControl: {
+    display: "contents"
+  },
+  paddingLeft: {
+    paddingLeft: "11px"
+  },
+  iconButton: {
+    "& $text": {
+      textAlign: "left"
+    },
+    "& svg": {
+      color: theme.palette.primary.main,
+      width: "2rem",
+      height: "2rem"
+    }
+  },
+  subtitle: {
+    color: theme.palette.gray.main,
+    fontSize: "14px",
+    lineHeight: "14px",
+    fontWeight: "400"
+  },
+  header: {}
 }));
 
 const VICOImageCheckbox = (props) => {
@@ -52,9 +103,15 @@ const VICOImageCheckbox = (props) => {
   return (
     <MuiThemeProvider theme={theme}>
       <>
-        <FormControl>
+        <FormControl
+          className={clsx({
+            [classes.paddingLeft]: !props.fullWidth
+          })}
+          fullWidth={props.fullWidth}
+        >
           <FormControlLabel
             classes={{
+              root: props.fullWidth ? classes.labelFormControl : "",
               label: classes.label
             }}
             control={
@@ -75,11 +132,39 @@ const VICOImageCheckbox = (props) => {
                   justify="center"
                   alignItems="center"
                   container
-                  className={classes.container}
+                  className={clsx([classes.container], {
+                    [classes.fullWidth]: props.fullWidth,
+                    [classes.iconButton]: props.icon
+                  })}
                 >
-                  <Grid item className={classes.text}>
-                    {props.label}
-                  </Grid>
+                  {props.icon ? (
+                    <>
+                      <Grid item xs={3}>
+                        <Grid container alignItems="center" justify="center">
+                          {props.icon}
+                        </Grid>
+                      </Grid>
+                      <Grid item xs={9} className={classes.text}>
+                        <div className={classes.header}>{props.label}</div>
+                        {props.subtitle && (
+                          <Grid item xs={12} className={classes.subtitle}>
+                            <div>{props.subtitle}</div>
+                          </Grid>
+                        )}
+                      </Grid>
+                    </>
+                  ) : (
+                    <>
+                      <Grid item className={classes.text}>
+                        <div className={classes.header}>{props.label}</div>
+                        {props.subtitle && (
+                          <Grid item xs={12} className={classes.subtitle}>
+                            <div>{props.subtitle}</div>
+                          </Grid>
+                        )}
+                      </Grid>
+                    </>
+                  )}
                 </Grid>
               </>
             }

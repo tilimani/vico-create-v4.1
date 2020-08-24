@@ -5,19 +5,21 @@ import SplashScreen from "./SplashScreen";
 import Preferences from "./Preferences";
 import Recommendations from "./Recommendations";
 import Grid from "@material-ui/core";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 const Assessment = () => {
   return (
     <>
-      <Route exact path="/assessment/" component={Areas} />
-      <Route exact path="/assessment/budget" component={Budget} />
-      <Route exact path="/assessment/preferences" component={Preferences} />
-      <Route exact path="/assessment/loading" component={SplashScreen} />
-      <Route
-        exact
-        path="/assessment/recommendations"
-        component={Recommendations}
-      />
+      <Switch>
+        <Route exact path="/assessment/" component={Areas} />
+        <Route path="/assessment/budget" component={Budget} />
+        <Route path="/assessment/preferences" component={Preferences} />
+        <Route exact path="/assessment/loading" component={SplashScreen} />
+        <Route
+          exact
+          path="/assessment/recommendations"
+          component={Recommendations}
+        />
+      </Switch>
     </>
   );
 };

@@ -4,6 +4,7 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { Grid, Slider } from "@material-ui/core";
 import VICORadioButton from "../../../atoms/VICORadioButton";
 import VICOButton from "../../../atoms/VICOButton";
+import VICOSelect from "../../../atoms/VICOSelect";
 import { Link as RouterLink } from "react-router-dom";
 
 const VICOPriceSlider = withStyles({
@@ -13,7 +14,6 @@ const VICOPriceSlider = withStyles({
     width: "80%",
     margin: "0 5%"
   },
-
   thumb: {
     height: 24,
     width: 24,
@@ -44,28 +44,36 @@ const VICOPriceSlider = withStyles({
   }
 })(Slider);
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+  spacingBottom: {
+    marginBottom: "2rem"
+  },
+  container: {
+    padding: "1rem"
+  }
+}));
 function valuetext(value) {
-  return `${value}°C`;
+  return `${value}`;
 }
 
 const PlacesSection = () => {
   const classes = useStyles();
-  const [value, setValue] = React.useState([200000, 2500000]);
+  const [value, setValue] = React.useState(2500000);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   return (
     <>
-      <Grid container>
+      <Grid container className={classes.container}>
         <Grid item xs={12}>
-          <h1>¿Cuál es tu presupuesto de la renta mensual?</h1>
+          <h2>¿Cuál es tu presupuesto de la renta mensual?</h2>
+          <p>
+            Según tu presupuesto podemos ofrecerte diferentes opciones, tenemos
+            VICOs en diferentes niveles de precios.
+          </p>
         </Grid>
         <Grid item xs={12}>
-          <h2>Precio</h2>
-          <h3>
-            {value[0]} - {value[1]}
-          </h3>
+          <h3>Precios máximo hasta {value}</h3>
           <VICOPriceSlider
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
@@ -76,8 +84,9 @@ const PlacesSection = () => {
             max={2500000}
           />
         </Grid>
-        <Grid item xs={12}>
-          <h2>Radio Buttons Moneda</h2>
+        {/*
+        <Grid className={classes.spacingBottom} item xs={12}>
+          <h4>Mostrar precios en tu moneda:</h4>
           <VICORadioButton
             label={"COP"}
             checked={true}
@@ -108,29 +117,33 @@ const PlacesSection = () => {
             }
           />
         </Grid>
-        <Grid item xs={12}>
-          <h2>Radio Buttons Language</h2>
-
-          <VICORadioButton
-            label={"Es"}
-            checked={true}
-            name={"allAreas"}
-            //onChange={handleChange}
-            image={
-              "https://getvico.com/images/categories_medellin.png?5f565f54f7c6c02692b353b45c965859"
-            }
-          />
-          <VICORadioButton
-            label={"En"}
-            //checked={false}
-            name={"allAreas"}
-            //onChange={handleChange}
-            image={
-              "https://getvico.com/images/categories_medellin.png?5f565f54f7c6c02692b353b45c965859"
-            }
-          />
+      */}
+        <Grid
+          className={classes.spacingBottom}
+          container
+          alignItems={"baseline"}
+        >
+          <Grid item>
+            <span>Mostrar precios en tu moneda:</span>
+          </Grid>
+          <Grid item>
+            <VICOSelect
+              //label={translations.trans('label_city')+'*'}
+              label={"Idioma"}
+              variant="filled"
+              name={"language"}
+              underlined="true"
+              style={{ display: "inline-block" }}
+              options={[
+                { value: "usd", label: "USD" },
+                { value: "cop", label: "COP" },
+                { value: "eur", label: "EUR" }
+              ]}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
+
+        <Grid className={classes.spacingBottom} item xs={12}>
           <VICOButton
             component={RouterLink}
             to="/assessment/preferences"

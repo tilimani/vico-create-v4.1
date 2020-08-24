@@ -4,7 +4,7 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import theme from "../../../common/theme";
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
-    height: 2,
+    height: 3,
     borderRadius: 5
   },
   colorPrimary: {

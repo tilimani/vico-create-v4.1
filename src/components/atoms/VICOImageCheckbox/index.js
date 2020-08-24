@@ -24,7 +24,9 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   img: {
-    width: "100%",
+    width: "150px",
+    size: "contain",
+    height: "100px",
     borderRadius: "12px"
   },
   checked: {
@@ -59,11 +61,16 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     color: "white",
-    fontSize: "20px",
+    fontSize: "18px",
     position: "absolute",
     bottom: "1rem",
-    right: "1rem",
-    fontWeight: "bold"
+    right: ".5rem",
+    fontWeight: "bold",
+    textAlign: "right",
+    lineHeight: 1
+  },
+  paddingLeft: {
+    paddingLeft: "11px"
   }
 }));
 
@@ -72,7 +79,7 @@ const VICOImageCheckbox = (props) => {
   return (
     <MuiThemeProvider theme={theme}>
       <>
-        <FormControl>
+        <FormControl className={classes.paddingLeft}>
           <FormControlLabel
             classes={{
               label: classes.label

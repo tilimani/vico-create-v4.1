@@ -4,45 +4,57 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import VICOBorderLinearProgress from "../../../atoms/VICOBorderLinearProgress";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   marginBottom: {
     marginBottom: "2rem"
   },
   container: {
-    width: "100vw",
-    height: "100vh",
-    backgroundColor: "black"
+    position: "fixed",
+    width: "100%",
+    height: "100%",
+    left: "0",
+    top: "0"
     //padding: "4rem"
   },
   splashScreen: {
     background:
-      "linear-gradient(180deg, rgba(0, 0, 0, .1) 0%, #00000045 60%, #000000 100%), url('https://www.getvico.com/blog/wp-content/uploads/2019/05/parques_de_medellin.jpg'), #C4C4C4",
+      "linear-gradient(180deg, rgba(0, 0, 0, .1) 0%, #00000045 60%, #000000 100%), url('https://vico.imgix.net/City_filter_medellin.jpg?auto=format&q=40&w=1280'), #C4C4C4",
     backgroundSize: "cover",
-    maxWidth: "100vw",
+
     height: "100%",
     padding: "4rem"
   },
   contentBox: {
+    position: "relative",
     border: "0px solid #dadada45",
     width: "100%",
     height: "100%"
   },
   progressBar: {
-    width: "60%"
+    width: "80%"
   },
   title: {
-    color: "white"
+    color: "white",
+    fontSize: "24px",
+    textAlign: "center"
   },
   subtitle: {
-    color: "white"
+    color: "white",
+    fontSize: "18px"
+  },
+  logo: {
+    width: "3rem"
   }
 }));
 
 const PlacesSection = () => {
+  const history = useHistory();
   const [redirect, setRedirect] = useState(false);
   useEffect(() => {
     //setTimeout(() => setRedirect(`/assessment/recommendations`), 1500);
+    setTimeout(() => history.push("/assessment/recommendations"), 1500);
   }, []);
   const classes = useStyles();
   if (redirect) {
@@ -59,11 +71,12 @@ const PlacesSection = () => {
           <Grid
             container
             direction="column"
-            justify="center"
+            justify="flex-start"
             alignItems="center"
             className={classes.contentBox}
           >
             <img
+              className={classes.logo}
               alt="vico logo"
               src="https://www.getvico.com/images/vico_logo_white.svg?fc3892511ebae032cd339477c02a2090"
             />

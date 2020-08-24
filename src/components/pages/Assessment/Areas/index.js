@@ -4,13 +4,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import VICOImageCheckbox from "../../../atoms/VICOImageCheckbox";
 import VICOCitySelect from "../../../atoms/VICOCitySelect";
-import VICOTextField from "../../../atoms/VICOTextField";
 import VICOButton from "../../../atoms/VICOButton";
 import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   marginBottom: {
     marginBottom: "1rem"
+  },
+  container: {
+    padding: "1rem"
   }
 }));
 const neighborhoods = [
@@ -62,9 +64,12 @@ const Areas = () => {
   };
   return (
     <>
-      <Grid container>
+      <Grid container className={classes.container}>
         <Grid item xs={12}>
-          <h1>Elige las areas de tu interés</h1>
+          <h2>Elige las areas de tu interés</h2>
+          <p>
+            Defina en en cuáles sectores de la ciudad estás buscando tu VICO.
+          </p>
         </Grid>
         <Grid container alignItems={"baseline"}>
           <Grid item>
@@ -82,7 +87,7 @@ const Areas = () => {
             />
           </Grid>
         </Grid>
-        <Grid container spacing={1}>
+        <Grid container spacing={1} className={classes.marginBottom}>
           <Grid item xs={6} sm={4} lg={2}>
             <VICOImageCheckbox
               label={"All"}
@@ -106,6 +111,7 @@ const Areas = () => {
             </Grid>
           ))}
         </Grid>
+        {/*
         <Grid item xs={12}>
           <h2>Dirección: Busca tu lugar de trabajo o universidad</h2>
           <VICOTextField
@@ -117,7 +123,7 @@ const Areas = () => {
             fullWidth="true"
           />
         </Grid>
-
+         */}
         <Grid item xs={12}>
           <VICOButton
             component={RouterLink}
