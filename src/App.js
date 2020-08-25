@@ -20,12 +20,12 @@ function App() {
             <Route path="/assessment">
               <AssessmentWrapper />
             </Route>
-            {/*<Route path="/create">
+            <Route path="/create">
               <Create />
             </Route>
             <Route exact path="/">
               <LandingPage />
-            </Route>*/}
+            </Route>
           </Route>
         </Switch>
       </BrowserRouter>
