@@ -79,13 +79,13 @@ const WhatIsVicoView = () => {
     <div className={classes.whatIsVicoViewWrapper}>
       <div className={classes.whatIsVicoViewContent}>
         {isMediumScreen && (
-          <div>
+          <RouterLink to="/create">
             <img
               src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/NHCp-Arrow.png"
               alt="arrow-back"
             />
             <span className={classes.backText}>Atrás</span>
-          </div>
+          </RouterLink>
         )}
         <div className={classes.innerContent}>
           <span className={classes.whatIsVicoViewTitle}>¿QUÉ ES UNA VICO?</span>

@@ -8,7 +8,7 @@ import VICOButton from "../../../atoms/VICOButton";
 import StepItem from "./StepItem";
 
 const useStyles = makeStyles((theme) => ({
-  whatIsVicoViewWrapper: {
+  howToViewViewWrapper: {
     [theme.breakpoints.down("md")]: {
       display: "flex",
       flexDirection: "column",
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
       display: "block"
     }
   },
-  whatIsVicoViewContent: {
+  howToViewViewContent: {
     boxShadow: "0px 5px 4px 0px #AEA7A1",
     borderRadius: 8,
     padding: "40px 50px 50px",
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
       padding: 0
     }
   },
-  whatIsVicoViewTitle: {
+  howToViewViewTitle: {
     fontSize: 30,
     color: theme.palette.secondary.main,
     fontWeight: "bold",
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: 26
     }
   },
-  whatIsVicoViewSubtitle: {
+  howToViewViewSubtitle: {
     color: theme.palette.secondary.main,
     fontSize: 16,
     width: 480,
@@ -79,23 +79,23 @@ const VicoHowToView = () => {
   const isMediumScreen = useMediaQuery("(max-width:960px)");
   const buttonWidth = isMediumScreen ? "100%" : 267;
   return (
-    <div className={classes.whatIsVicoViewWrapper}>
-      <div className={classes.whatIsVicoViewContent}>
+    <div className={classes.howToViewViewWrapper}>
+      <div className={classes.howToViewViewContent}>
         {isMediumScreen && (
-          <div>
+          <RouterLink to="/create/vicoinfo">
             <img
               src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/NHCp-Arrow.png"
               alt="arrow-back"
             />
             <span className={classes.backText}>Atrás</span>
-          </div>
+          </RouterLink>
         )}
         <div className={classes.innerContent}>
-          <span className={classes.whatIsVicoViewTitle}>
+          <span className={classes.howToViewViewTitle}>
             CREA TU VICO EN 4 SIMPLES PASOS
             {/* <img src={four} alt="four" className="imgFour" /> */}
           </span>
-          <p className={classes.whatIsVicoViewSubtitle}>
+          <p className={classes.howToViewViewSubtitle}>
             Conoce el proceso para publicar tu VICO en nuestra plataforma.
           </p>
           <Grid
