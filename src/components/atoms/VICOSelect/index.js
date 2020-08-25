@@ -11,9 +11,6 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import theme from "../../../common/theme";
 
 const useStylesVICO = makeStyles((theme) => ({
-  fullWidth: {
-    width: "100%"
-  },
   padding: {
     paddingLeft: theme.spacing(1.5)
   },
@@ -42,7 +39,29 @@ const useStylesVICO = makeStyles((theme) => ({
       padding: "27px 12px 10px"
     }
   },
-  focused: {}
+  focused: {},
+  fullWidth: {
+    width: "100%"
+  },
+  underlined: {
+    border: "0px solid",
+    color: "#ef8e01",
+    borderRadius: "0px",
+    backgroundColor: "white",
+    borderBottom: "1px solid " + theme.palette.primary.main,
+    height: "24px",
+    "& $inputLabel": {
+      display: "none"
+    },
+    "& $padding": {
+      paddingLeft: "8px",
+      marginTop: "-4px",
+      color: "#ef8e01"
+    },
+    "& svg": {
+      color: theme.palette.primary.main
+    }
+  }
 }));
 
 function VICOSelect(props) {
@@ -52,7 +71,10 @@ function VICOSelect(props) {
     <MuiThemeProvider theme={theme}>
       <FormControl
         variant="outlined"
-        className={clsx(classes.root, classes.fullWidth)}
+        className={clsx([classes.root], {
+          [classes.fullWidth]: props.fullWidth,
+          [classes.underlined]: true
+        })}
       >
         <InputLabel className={classes.inputLabel}>{props.label}</InputLabel>
         <NativeSelect

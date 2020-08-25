@@ -5,7 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 import theme from "./common/theme";
-import Assessment from "./components/pages/Assessment/Assessment";
+import AssessmentWrapper from "./components/pages/Assessment/AssessmentWrapper";
 import Create from "./components/pages/Create/Create";
 import LandingPage from "./components/pages/LandingPage/LandingPage";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
@@ -18,14 +18,14 @@ function App() {
         <Switch>
           <Route path="/">
             <Route path="/assessment">
-              <Assessment />
+              <AssessmentWrapper />
             </Route>
-            <Route path="/create">
+            {/*<Route path="/create">
               <Create />
             </Route>
             <Route exact path="/">
               <LandingPage />
-            </Route>
+            </Route>*/}
           </Route>
         </Switch>
       </BrowserRouter>

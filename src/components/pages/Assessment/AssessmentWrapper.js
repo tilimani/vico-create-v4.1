@@ -1,11 +1,5 @@
 import React from "react";
-import Areas from "./Areas";
-import Budget from "./Budget";
-import SplashScreen from "./SplashScreen";
-import Preferences from "./Preferences";
-import Recommendations from "./Recommendations";
-import { Route, Switch } from "react-router-dom";
-
+import AssessmentRoutes from "./AssessmentRoutes";
 import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/";
@@ -16,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
   container: {
     [theme.breakpoints.up("sm")]: {
       padding: "2rem",
-      background: "#212529",
       position: "fixed",
       width: "100%",
       height: "100%",
@@ -24,23 +17,55 @@ const useStyles = makeStyles((theme) => ({
       top: "0"
     }
   },
+  container__backgroundImage: {
+    display: "none",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    background:
+      "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%), url(https://vico.imgix.net/City_filter_medellin.jpg?auto=format&q=40&w=1280), #C4C4C4",
+    height: "100%",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    filter: "blur(4px)",
+    [theme.breakpoints.up("sm")]: {
+      display: "block"
+    }
+  },
   container__inside: {
     background: "white",
+    margin: "auto",
+    borderRadius: "12px",
     [theme.breakpoints.up("sm")]: {
-      width: "60%",
-      height: "80%"
+      width: "100%",
+      boxShadow: "0 5px 8px rgba(0,0,0,0.6)"
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "70%"
     }
   },
   container__header: {
+    height: "60px",
     padding: "1rem",
     color: "white",
     //background: theme.palette.primary.main,
     background: "#ef8e01",
     textAlign: "center",
-    [theme.breakpoints.up("sm")]: {},
+    [theme.breakpoints.up("sm")]: {
+      borderRadius: "12px 12px 0 0"
+    },
     "& img": {
       maxHeight: "32px"
     }
+  },
+  container__content: {
+    [theme.breakpoints.up("sm")]: {
+      paddingLeft: "2rem",
+      paddingRight: "2rem"
+    },
+    [theme.breakpoints.down("sm")]: {}
   }
 }));
 
@@ -49,6 +74,8 @@ const Assessment = () => {
   const classes = useStyles();
   return (
     <>
+      <div className={classes.container__backgroundImage}></div>
+
       <Grid container className={classes.container}>
         <Grid container className={classes.container__inside}>
           <Grid
@@ -72,17 +99,14 @@ const Assessment = () => {
               <CloseIcon onClick={() => history.goBack()} />
             </Grid>
           </Grid>
-          <Switch>
-            <Route exact path="/assessment/" component={Areas} />
-            <Route path="/assessment/budget" component={Budget} />
-            <Route path="/assessment/preferences" component={Preferences} />
-            <Route exact path="/assessment/loading" component={SplashScreen} />
-            <Route
-              exact
-              path="/assessment/recommendations"
-              component={Recommendations}
-            />
-          </Switch>
+          <Grid
+            alignItems="center"
+            justify="center"
+            container
+            className={classes.container__content}
+          >
+            <AssessmentRoutes />
+          </Grid>
         </Grid>
       </Grid>
     </>
