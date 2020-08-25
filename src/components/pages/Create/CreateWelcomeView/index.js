@@ -11,7 +11,12 @@ const useStyles = makeStyles((theme) => ({
     position: "relative"
   },
   welcomeViewContent: {
-    width: 500,
+    width: 300,
+    [theme.breakpoints.down("sm")]: {
+      width: "80%",
+      paddingLeft: 20,
+      paddingRight: 20
+    },
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -28,11 +33,16 @@ const useStyles = makeStyles((theme) => ({
   welcomeDescription: {
     fontSize: 25,
     color: "#ffffff",
-    textAlign: "center"
+    textAlign: "center",
+    marginTop: "0.5em",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 20
+    }
   },
   sloganText: {
     fontSize: 20,
-    color: "#ffffff"
+    color: "#ffffff",
+    marginTop: 30
   }
 }));
 
@@ -54,7 +64,9 @@ const CreateWelcomeView = () => {
           style={{
             color: "#EF8E01",
             backgroundColor: "white",
-            width: 267
+            width: 267,
+            marginTop: 30,
+            fontSize: 20
           }}
         />
         <span className={classes.sloganText}>#lovewhereyoulive</span>
