@@ -7,21 +7,40 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     [theme.breakpoints.down("sm")]: {
-      alignItems: "flex-start"
+      alignItems: "flex-start",
+      flexDirection: "row"
     }
   },
+  iconWrapper: {
+    marginRight: 20
+  },
   icon: {
-    width: 30
+    width: 40,
+    [theme.breakpoints.down("md")]: {
+      width: 30
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: 20
+    }
   },
   textWrapper: {
-    marginTop: 20
+    marginTop: 20,
+    [theme.breakpoints.down("sm")]: {
+      marginTop: 0
+    }
   },
   title: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#2A3C44"
+    color: theme.palette.secondary.main
   },
-  subtitle: { fontSize: 16, color: "#2A3C44" }
+  subtitle: {
+    fontSize: 16,
+    color: theme.palette.secondary.main,
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "0.2em"
+    }
+  }
 }));
 
 const VICOTypeItem = (props) => {
