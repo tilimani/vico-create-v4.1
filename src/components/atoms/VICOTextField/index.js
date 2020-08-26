@@ -31,7 +31,6 @@ const useStylesVICO = makeStyles((theme) => ({
 
 function VICOTextField(props) {
   const classes = useStylesVICO();
-
   return (
     <MuiThemeProvider theme={theme}>
       <TextField

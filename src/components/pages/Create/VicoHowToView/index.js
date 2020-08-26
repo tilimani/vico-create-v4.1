@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles } from "@material-ui/core";
@@ -6,6 +6,8 @@ import Grid from "@material-ui/core/Grid";
 import VICOButton from "../../../atoms/VICOButton";
 
 import StepItem from "./StepItem";
+import VICODialog from "../../../atoms/VICODialog";
+import ContactNumberDialogContent from "./ContactNumberDialogContent";
 
 const useStyles = makeStyles((theme) => ({
   howToViewViewWrapper: {
@@ -78,6 +80,24 @@ const VicoHowToView = () => {
   const classes = useStyles();
   const isMediumScreen = useMediaQuery("(max-width:960px)");
   const buttonWidth = isMediumScreen ? "100%" : 267;
+
+  const [openedPersonalInfoDialog, setOpenedPersonalInfoDialog] = useState(
+    false
+  );
+
+  const [personalInfoType, setPersonalInfoType] = useState("");
+
+  const getForm = () => {
+    return (
+      <div>
+        {personalInfoType === "contact_number" && (
+          <ContactNumberDialogContent
+            setOpenedPersonalInfoDialog={setOpenedPersonalInfoDialog}
+          />
+        )}
+      </div>
+    );
+  };
   return (
     <div className={classes.howToViewViewWrapper}>
       <div className={classes.howToViewViewContent}>
@@ -130,14 +150,27 @@ const VicoHowToView = () => {
           </Grid>
         </div>
         <VICOButton
-          component={RouterLink}
-          to="/create/type"
+          // component={RouterLink}
+          // to="/create/type"
+          onClick={() => {
+            setOpenedPersonalInfoDialog(true);
+            setPersonalInfoType("contact_number");
+          }}
           variant="contained"
           color="primary"
           text="¡Comencemos!"
           style={{ width: buttonWidth, marginTop: isMediumScreen ? 20 : 40 }}
         />
       </div>
+      {personalInfoType === "contact_number" && (
+        <VICODialog
+          dialogOpened={openedPersonalInfoDialog}
+          setDialogOpened={setOpenedPersonalInfoDialog}
+          title="INGRESO"
+          subtitle="Ingresa tus datos de contacto."
+          form={getForm()}
+        />
+      )}
     </div>
   );
 };
