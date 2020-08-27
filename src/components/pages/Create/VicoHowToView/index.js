@@ -107,7 +107,7 @@ const VicoHowToView = () => {
                   setOpenedPersonalInfoDialog={setOpenedPersonalInfoDialog}
                   action={() => {
                     setPersonalInfoType(nextStep);
-                    state.changeState("createStep", state.createStep + 1);
+                    state.changeState("createStep", 1);
                   }}
                 />
               )}
@@ -116,7 +116,7 @@ const VicoHowToView = () => {
                   setOpenedPersonalInfoDialog={setOpenedPersonalInfoDialog}
                   action={() => {
                     setPersonalInfoType(nextStep);
-                    state.changeState("createStep", state.createStep + 1);
+                    state.changeState("createStep", 2);
                   }}
                 />
               )}
@@ -125,7 +125,7 @@ const VicoHowToView = () => {
                   setOpenedPersonalInfoDialog={setOpenedPersonalInfoDialog}
                   action={() => {
                     setPersonalInfoType(nextStep);
-                    state.changeState("createStep", state.createStep + 1);
+                    state.changeState("createStep", 3);
                   }}
                 />
               )}
