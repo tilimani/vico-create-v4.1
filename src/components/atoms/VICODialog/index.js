@@ -15,6 +15,14 @@ import VICOMobileLinearProgress from "./VICOMobileLinearProgress";
 
 const useStyles = makeStyles((theme) => ({
   title: {
+    fontSize: 20,
+    color: theme.palette.secondary.main,
+    fontWeight: "bold",
+    marginTop: 14,
+    width: 300,
+    textAlign: "center"
+  },
+  titleIngreso: {
     fontSize: 30,
     color: theme.palette.secondary.main,
     fontWeight: "bold",
@@ -23,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
   subtitle: {
     fontSize: 16,
     color: theme.palette.secondary.main,
-    marginTop: 10
+    marginTop: 10,
+    width: 300
   },
   titleWrapper: {
     display: "flex",
@@ -51,21 +60,28 @@ function VICODialog(props) {
       onClose={handleClose}
       className="dialogWrapper"
     >
-      {isMobileScreen && (
-        <div className={classes.mobileHeader}>
-          <VICOMobileLinearProgress />
-        </div>
-      )}
-      <DialogTitle>
+      <DialogContent>
+        {isMobileScreen && (
+          <div className={classes.mobileHeader}>
+            <VICOMobileLinearProgress />
+          </div>
+        )}
+
         <div className={classes.titleWrapper}>
           <img src={logoletter} alt="logo-letter" />
-          <span className={classes.title}>{props.title}</span>
+          <span
+            className={
+              props.title === "INGRESO" ? classes.titleIngreso : classes.title
+            }
+          >
+            {props.title}
+          </span>
           {props.subtitle && (
             <span className={classes.subtitle}>{props.subtitle}</span>
           )}
         </div>
-      </DialogTitle>
-      <DialogContent>{props.form}</DialogContent>
+        {props.form}
+      </DialogContent>
     </Dialog>
   );
 }

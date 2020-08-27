@@ -10,7 +10,7 @@ const VICOMobileLinearProgress = (props) => {
     <div>
       <LinearProgress
         variant="determinate"
-        value={1}
+        value={2}
         classes={{
           colorPrimary: classes.colorPrimary,
           barColorPrimary: classes.barColorPrimary

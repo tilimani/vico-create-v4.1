@@ -5,7 +5,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import VICOButton from "../../../atoms/VICOButton";
 
-import "./ContactNumberDialogContent.css";
+// import "./VerifNumberDialogFrom.css";
 const useStyles = makeStyles((theme) => ({
   formWrapper: {
     display: "flex",
@@ -20,19 +20,30 @@ const useStyles = makeStyles((theme) => ({
     width: 311,
     height: 67
   },
-  useMyEmail: {
+  note: {
     fontSize: 16,
-    color: theme.palette.secondary.main
+    color: theme.palette.secondary.main,
+    marginTop: 30
+  },
+  textFieldWrapper: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "flex-end"
   }
 }));
 
-const ContactNumberDialogContent = (props) => {
+const VerifNumberDialogFrom = (props) => {
   const classes = useStyles();
   const isMediumScreen = useMediaQuery("(max-width:960px)");
   const buttonWidth = isMediumScreen ? "100%" : 267;
   return (
     <div className={`${classes.formWrapper} formWrapper`}>
-      <TextField label="Número de WhatsApp" className={classes.textField} />
+      <div className={classes.textFieldWrapper}>
+        <TextField label="Código" className={classes.textField} />
+        <p className={classes.note}>Reenviar en 30 segundos</p>
+      </div>
+
       <VICOButton
         onClick={() => {
           props.setOpenedPersonalInfoDialog(true);
@@ -43,12 +54,11 @@ const ContactNumberDialogContent = (props) => {
         text="Continuar"
         style={{
           width: 267,
-          marginTop: 40
+          marginTop: 20
         }}
       />
-      <p className={classes.useMyEmail}>Prefiero utilizar mi correo</p>
     </div>
   );
 };
 
-export default ContactNumberDialogContent;
+export default VerifNumberDialogFrom;

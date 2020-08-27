@@ -8,6 +8,14 @@ import VICOButton from "../../../atoms/VICOButton";
 import StepItem from "./StepItem";
 import VICODialog from "../../../atoms/VICODialog";
 import ContactNumberDialogContent from "./ContactNumberDialogContent";
+import VerifNumberDialogFrom from "./VerifNumberDialogForm";
+import CredentialsDialogForm from "./CredentialsDialogForm";
+
+const personalInfoSteps = [
+  "contact_number",
+  "verification_code",
+  "credentials"
+];
 
 const useStyles = makeStyles((theme) => ({
   howToViewViewWrapper: {
@@ -86,13 +94,26 @@ const VicoHowToView = () => {
   );
 
   const [personalInfoType, setPersonalInfoType] = useState("");
-
-  const getForm = () => {
+  const getForm = (step) => {
+    const nextStep = personalInfoSteps[personalInfoSteps.indexOf(step) + 1];
     return (
       <div>
-        {personalInfoType === "contact_number" && (
+        {step === "contact_number" && (
           <ContactNumberDialogContent
             setOpenedPersonalInfoDialog={setOpenedPersonalInfoDialog}
+            action={() => setPersonalInfoType(nextStep)}
+          />
+        )}
+        {step === "verification_code" && (
+          <VerifNumberDialogFrom
+            setOpenedPersonalInfoDialog={setOpenedPersonalInfoDialog}
+            action={() => setPersonalInfoType(nextStep)}
+          />
+        )}
+        {step === "credentials" && (
+          <CredentialsDialogForm
+            setOpenedPersonalInfoDialog={setOpenedPersonalInfoDialog}
+            action={() => setPersonalInfoType(nextStep)}
           />
         )}
       </div>
@@ -168,7 +189,25 @@ const VicoHowToView = () => {
           setDialogOpened={setOpenedPersonalInfoDialog}
           title="INGRESO"
           subtitle="Ingresa tus datos de contacto."
-          form={getForm()}
+          form={getForm("contact_number")}
+        />
+      )}
+      {personalInfoType === "verification_code" && (
+        <VICODialog
+          dialogOpened={openedPersonalInfoDialog}
+          setDialogOpened={setOpenedPersonalInfoDialog}
+          title="Te mandamos un código al +573008189816"
+          subtitle="Introduce el código para verificar tu identidad."
+          form={getForm("verification_code")}
+        />
+      )}
+      {personalInfoType === "credentials" && (
+        <VICODialog
+          dialogOpened={openedPersonalInfoDialog}
+          setDialogOpened={setOpenedPersonalInfoDialog}
+          title="Dinos tu nombre"
+          form={getForm("credentials")}
+          hideLogo
         />
       )}
     </div>
