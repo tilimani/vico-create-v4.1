@@ -5,6 +5,8 @@ import { makeStyles, Dialog, DialogContent } from "@material-ui/core";
 import "./index.css";
 
 import VICOMobileLinearProgress from "./VICOMobileLinearProgress";
+import VICOReturnButton from "../VICOReturnButton";
+import { CreateConsumer } from "../../../common/context";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -58,9 +60,20 @@ function VICODialog(props) {
     >
       <DialogContent>
         {isMobileScreen && (
-          <div className={classes.mobileHeader}>
-            <VICOMobileLinearProgress step={props.step} />
-          </div>
+          <CreateConsumer>
+            {(state) => {
+              return (
+                <div className={classes.mobileHeader}>
+                  <VICOMobileLinearProgress step={state.createStep} />
+                  <VICOReturnButton
+                    action={() => {
+                      props.backAction();
+                    }}
+                  />
+                </div>
+              );
+            }}
+          </CreateConsumer>
         )}
 
         <div className={classes.titleWrapper}>

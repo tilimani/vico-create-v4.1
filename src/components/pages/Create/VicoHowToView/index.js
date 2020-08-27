@@ -97,6 +97,7 @@ const VicoHowToView = () => {
   const [personalInfoType, setPersonalInfoType] = useState("");
   const getForm = (step) => {
     const nextStep = personalInfoSteps[personalInfoSteps.indexOf(step) + 1];
+
     return (
       <CreateConsumer>
         {(state) => {
@@ -107,7 +108,7 @@ const VicoHowToView = () => {
                   setOpenedPersonalInfoDialog={setOpenedPersonalInfoDialog}
                   action={() => {
                     setPersonalInfoType(nextStep);
-                    state.changeState("createStep", 1);
+                    state.changeState("createStep", 2);
                   }}
                 />
               )}
@@ -116,17 +117,13 @@ const VicoHowToView = () => {
                   setOpenedPersonalInfoDialog={setOpenedPersonalInfoDialog}
                   action={() => {
                     setPersonalInfoType(nextStep);
-                    state.changeState("createStep", 2);
+                    state.changeState("createStep", 3);
                   }}
                 />
               )}
               {step === "credentials" && (
                 <CredentialsDialogForm
                   setOpenedPersonalInfoDialog={setOpenedPersonalInfoDialog}
-                  action={() => {
-                    setPersonalInfoType(nextStep);
-                    state.changeState("createStep", 3);
-                  }}
                 />
               )}
             </div>
@@ -135,6 +132,7 @@ const VicoHowToView = () => {
       </CreateConsumer>
     );
   };
+
   return (
     <div className={classes.howToViewViewWrapper}>
       <div className={classes.howToViewViewContent}>
@@ -186,18 +184,26 @@ const VicoHowToView = () => {
             </Grid>
           </Grid>
         </div>
-        <VICOButton
-          // component={RouterLink}
-          // to="/create/type"
-          onClick={() => {
-            setOpenedPersonalInfoDialog(true);
-            setPersonalInfoType("contact_number");
-          }}
-          variant="contained"
-          color="primary"
-          text="¡Comencemos!"
-          style={{ width: buttonWidth, marginTop: isMediumScreen ? 20 : 40 }}
-        />
+        <CreateConsumer>
+          {(state) => (
+            <VICOButton
+              // component={RouterLink}
+              // to="/create/type"
+              onClick={() => {
+                setOpenedPersonalInfoDialog(true);
+                setPersonalInfoType("contact_number");
+                state.changeState("createStep", 1);
+              }}
+              variant="contained"
+              color="primary"
+              text="¡Comencemos!"
+              style={{
+                width: buttonWidth,
+                marginTop: isMediumScreen ? 20 : 40
+              }}
+            />
+          )}
+        </CreateConsumer>
       </div>
       <CreateConsumer>
         {(state) => (
@@ -209,7 +215,10 @@ const VicoHowToView = () => {
                 title="INGRESO"
                 subtitle="Ingresa tus datos de contacto."
                 form={getForm("contact_number")}
-                step={state.createStep + 1}
+                backAction={() => {
+                  setPersonalInfoType("");
+                  state.changeState("createStep", 0);
+                }}
               />
             )}
             {personalInfoType === "verification_code" && (
@@ -219,7 +228,10 @@ const VicoHowToView = () => {
                 title="Te mandamos un código al +573008189816"
                 subtitle="Introduce el código para verificar tu identidad."
                 form={getForm("verification_code")}
-                step={state.createStep + 1}
+                backAction={() => {
+                  setPersonalInfoType("contact_number");
+                  state.changeState("createStep", 1);
+                }}
               />
             )}
             {personalInfoType === "credentials" && (
@@ -228,8 +240,11 @@ const VicoHowToView = () => {
                 setDialogOpened={setOpenedPersonalInfoDialog}
                 title="Dinos tu nombre"
                 form={getForm("credentials")}
-                step={state.createStep + 1}
                 hideLogo
+                backAction={() => {
+                  setPersonalInfoType("verification_code");
+                  state.changeState("createStep", 2);
+                }}
               />
             )}
           </div>
