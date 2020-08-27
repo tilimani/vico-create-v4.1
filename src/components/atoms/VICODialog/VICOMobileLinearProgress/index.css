@@ -2,6 +2,6 @@
   height: 15px;
 }
 .MuiDialogContent-root {
-  padding: 0;
+  padding: 0 !important;
   padding-top: 0 !important;
 }

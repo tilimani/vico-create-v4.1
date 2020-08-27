@@ -39,7 +39,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    padding: "20px 10px"
+    padding: "20px 10px",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: 80
+    }
   },
   mobileHeader: {
     position: "relative",
@@ -68,7 +71,10 @@ function VICODialog(props) {
         )}
 
         <div className={classes.titleWrapper}>
-          <img src={logoletter} alt="logo-letter" />
+          <img
+            src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/9kW1-logo-letter.png"
+            alt="logo-letter"
+          />
           <span
             className={
               props.title === "INGRESO" ? classes.titleIngreso : classes.title
