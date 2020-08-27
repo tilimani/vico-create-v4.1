@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 
-const CreateContext = React.createContext();
+const CreateContext = React.createContext({
+  state: {},
+  changeState: () => {}
+});
 
 const HouseType = {
   shared: "shared",
@@ -35,6 +38,7 @@ class CreateProvider extends Component {
           ...this.state,
           changeState: this.changeState
         }}
+        // value={this.state.createStep}
       >
         {children}
       </CreateContext.Provider>

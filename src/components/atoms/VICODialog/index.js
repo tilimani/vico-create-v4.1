@@ -1,13 +1,6 @@
 import React from "react";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import {
-  makeStyles,
-  Dialog,
-  DialogTitle,
-  DialogContent
-} from "@material-ui/core";
-
-import logoletter from "../../../assets/logo-letter.png";
+import { makeStyles, Dialog, DialogContent } from "@material-ui/core";
 
 import "./index.css";
 
@@ -66,7 +59,7 @@ function VICODialog(props) {
       <DialogContent>
         {isMobileScreen && (
           <div className={classes.mobileHeader}>
-            <VICOMobileLinearProgress />
+            <VICOMobileLinearProgress step={props.step} />
           </div>
         )}
 

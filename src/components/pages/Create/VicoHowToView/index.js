@@ -10,6 +10,7 @@ import VICODialog from "../../../atoms/VICODialog";
 import ContactNumberDialogContent from "./ContactNumberDialogContent";
 import VerifNumberDialogFrom from "./VerifNumberDialogForm";
 import CredentialsDialogForm from "./CredentialsDialogForm";
+import { CreateConsumer } from "../../../../common/context";
 
 const personalInfoSteps = [
   "contact_number",
@@ -97,26 +98,41 @@ const VicoHowToView = () => {
   const getForm = (step) => {
     const nextStep = personalInfoSteps[personalInfoSteps.indexOf(step) + 1];
     return (
-      <div>
-        {step === "contact_number" && (
-          <ContactNumberDialogContent
-            setOpenedPersonalInfoDialog={setOpenedPersonalInfoDialog}
-            action={() => setPersonalInfoType(nextStep)}
-          />
-        )}
-        {step === "verification_code" && (
-          <VerifNumberDialogFrom
-            setOpenedPersonalInfoDialog={setOpenedPersonalInfoDialog}
-            action={() => setPersonalInfoType(nextStep)}
-          />
-        )}
-        {step === "credentials" && (
-          <CredentialsDialogForm
-            setOpenedPersonalInfoDialog={setOpenedPersonalInfoDialog}
-            action={() => setPersonalInfoType(nextStep)}
-          />
-        )}
-      </div>
+      <CreateConsumer>
+        {(state) => {
+          return (
+            <div>
+              {step === "contact_number" && (
+                <ContactNumberDialogContent
+                  setOpenedPersonalInfoDialog={setOpenedPersonalInfoDialog}
+                  action={() => {
+                    setPersonalInfoType(nextStep);
+                    state.changeState("createStep", state.createStep + 1);
+                  }}
+                />
+              )}
+              {step === "verification_code" && (
+                <VerifNumberDialogFrom
+                  setOpenedPersonalInfoDialog={setOpenedPersonalInfoDialog}
+                  action={() => {
+                    setPersonalInfoType(nextStep);
+                    state.changeState("createStep", state.createStep + 1);
+                  }}
+                />
+              )}
+              {step === "credentials" && (
+                <CredentialsDialogForm
+                  setOpenedPersonalInfoDialog={setOpenedPersonalInfoDialog}
+                  action={() => {
+                    setPersonalInfoType(nextStep);
+                    state.changeState("createStep", state.createStep + 1);
+                  }}
+                />
+              )}
+            </div>
+          );
+        }}
+      </CreateConsumer>
     );
   };
   return (
@@ -183,33 +199,42 @@ const VicoHowToView = () => {
           style={{ width: buttonWidth, marginTop: isMediumScreen ? 20 : 40 }}
         />
       </div>
-      {personalInfoType === "contact_number" && (
-        <VICODialog
-          dialogOpened={openedPersonalInfoDialog}
-          setDialogOpened={setOpenedPersonalInfoDialog}
-          title="INGRESO"
-          subtitle="Ingresa tus datos de contacto."
-          form={getForm("contact_number")}
-        />
-      )}
-      {personalInfoType === "verification_code" && (
-        <VICODialog
-          dialogOpened={openedPersonalInfoDialog}
-          setDialogOpened={setOpenedPersonalInfoDialog}
-          title="Te mandamos un código al +573008189816"
-          subtitle="Introduce el código para verificar tu identidad."
-          form={getForm("verification_code")}
-        />
-      )}
-      {personalInfoType === "credentials" && (
-        <VICODialog
-          dialogOpened={openedPersonalInfoDialog}
-          setDialogOpened={setOpenedPersonalInfoDialog}
-          title="Dinos tu nombre"
-          form={getForm("credentials")}
-          hideLogo
-        />
-      )}
+      <CreateConsumer>
+        {(state) => (
+          <div>
+            {personalInfoType === "contact_number" && (
+              <VICODialog
+                dialogOpened={openedPersonalInfoDialog}
+                setDialogOpened={setOpenedPersonalInfoDialog}
+                title="INGRESO"
+                subtitle="Ingresa tus datos de contacto."
+                form={getForm("contact_number")}
+                step={state.createStep + 1}
+              />
+            )}
+            {personalInfoType === "verification_code" && (
+              <VICODialog
+                dialogOpened={openedPersonalInfoDialog}
+                setDialogOpened={setOpenedPersonalInfoDialog}
+                title="Te mandamos un código al +573008189816"
+                subtitle="Introduce el código para verificar tu identidad."
+                form={getForm("verification_code")}
+                step={state.createStep + 1}
+              />
+            )}
+            {personalInfoType === "credentials" && (
+              <VICODialog
+                dialogOpened={openedPersonalInfoDialog}
+                setDialogOpened={setOpenedPersonalInfoDialog}
+                title="Dinos tu nombre"
+                form={getForm("credentials")}
+                step={state.createStep + 1}
+                hideLogo
+              />
+            )}
+          </div>
+        )}
+      </CreateConsumer>
     </div>
   );
 };
