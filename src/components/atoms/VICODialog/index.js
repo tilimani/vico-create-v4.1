@@ -4,7 +4,7 @@ import { makeStyles, Dialog, DialogContent } from "@material-ui/core";
 
 import "./index.css";
 
-import VICOMobileLinearProgress from "./VICOMobileLinearProgress";
+import VICOMobileLinearProgress from "../VICOMobileLinearProgress";
 import VICOReturnButton from "../VICOReturnButton";
 import { CreateConsumer } from "../../../common/context";
 
