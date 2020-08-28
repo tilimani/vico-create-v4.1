@@ -5,7 +5,7 @@ import VICOButton from "../../../atoms/VICOButton";
 const VicoTypeView = () => {
   return (
     <>
-      Vico Type
+      Vico Type 1
       <VICOButton
         component={RouterLink}
         to="/create/name"
