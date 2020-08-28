@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 5
   }
 }));
-const VicoHowToView = () => {
+const VicoHowToView = (props) => {
   const classes = useStyles();
   const isMediumScreen = useMediaQuery("(max-width:960px)");
   const buttonWidth = isMediumScreen ? "100%" : 267;
@@ -124,6 +124,7 @@ const VicoHowToView = () => {
               {step === "credentials" && (
                 <CredentialsDialogForm
                   setOpenedPersonalInfoDialog={setOpenedPersonalInfoDialog}
+                  history={props.history}
                 />
               )}
             </div>
