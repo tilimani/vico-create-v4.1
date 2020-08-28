@@ -32,7 +32,7 @@ class CreateProvider extends Component {
 
   render() {
     const { children } = this.props;
-    console.log(this.state.createStep, "++++++++++++++++++");
+    console.log(this.state, "++++++++++++++++++");
     return (
       <CreateContext.Provider
         value={{

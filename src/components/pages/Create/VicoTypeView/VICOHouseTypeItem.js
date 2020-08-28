@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
+import { CreateConsumer } from "../../../../common/context";
 
 const useStyles = makeStyles((theme) => ({
   VICOHouseTypeItemWrapper: {
@@ -24,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     //   boxShadow: "0px 2px 4px #EF8E01"
     // }
   },
+  activeItem: {
+    boxShadow: "0px 2px 4px #EF8E01"
+  },
   iconWrapper: {
     marginRight: 20
   },
@@ -45,18 +49,33 @@ const useStyles = makeStyles((theme) => ({
 const VICOHouseTypeItem = (props) => {
   const classes = useStyles();
   return (
-    <div
-      className={classes.VICOHouseTypeItemWrapper}
-      onClick={() => console.log("++++++++++++")}
-    >
-      <div className={classes.iconWrapper}>
-        <img src={props.icon} alt="icon" className={classes.icon} />
-      </div>
-      <div className={classes.textWrapper}>
-        <span className={classes.title}>{props.title}</span>
-        <p className={classes.subtitle}>{props.subtitle}</p>
-      </div>
-    </div>
+    <CreateConsumer>
+      {(state) => {
+        return (
+          <div
+            className={
+              state.house.type === props.houseType
+                ? `${classes.VICOHouseTypeItemWrapper} ${classes.activeItem}`
+                : classes.VICOHouseTypeItemWrapper
+            }
+            onClick={() => {
+              state.changeState("house", {
+                ...state.house,
+                type: props.houseType
+              });
+            }}
+          >
+            <div className={classes.iconWrapper}>
+              <img src={props.icon} alt="icon" className={classes.icon} />
+            </div>
+            <div className={classes.textWrapper}>
+              <span className={classes.title}>{props.title}</span>
+              <p className={classes.subtitle}>{props.subtitle}</p>
+            </div>
+          </div>
+        );
+      }}
+    </CreateConsumer>
   );
 };
 

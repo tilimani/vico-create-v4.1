@@ -141,6 +141,7 @@ const vicoTypeView = (props) => {
                 icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/eDLd-shared.png"
                 title="Vivienda Compartida"
                 subtitle="Una casa o un apartamento con varias habitaciones, las cuales se alquilan individualmente."
+                houseType="shared"
               />
             </Grid>
             <Grid item xs={12} md={4}>
@@ -148,6 +149,7 @@ const vicoTypeView = (props) => {
                 icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/v1t5-studio.png"
                 title="Apartaestudio"
                 subtitle="Normalmente un apartamento de un ambiente que combina una cocina, sala y dormitorio."
+                houseType="studio"
               />
             </Grid>
             <Grid item xs={12} md={4}>
@@ -155,6 +157,7 @@ const vicoTypeView = (props) => {
                 icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Nt_y-private.png"
                 title="Apartamento privado"
                 subtitle="Una casa o un apartamento con varias habitaciones. Se alquila completo. "
+                houseType="private"
               />
             </Grid>
           </Grid>
