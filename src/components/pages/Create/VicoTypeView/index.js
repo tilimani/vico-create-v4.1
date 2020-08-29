@@ -7,6 +7,7 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 
 import VICOHouseTypeItem from "./VICOHouseTypeItem";
 import VICOReturnButton from "../../../atoms/VICOReturnButton";
+import VICOSaveButton from "../../../atoms/VICOSaveButton";
 import { CreateConsumer } from "../../../../common/context";
 import VICOMobileLinearProgress from "../../../atoms/VICOMobileLinearProgress";
 
@@ -98,6 +99,10 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 10,
     position: "absolute",
     top: 30
+  },
+  actionsWrapper: {
+    display: "flex",
+    justifyContent: "space-between"
   }
 }));
 const vicoTypeView = (props) => {
@@ -115,12 +120,20 @@ const vicoTypeView = (props) => {
               return (
                 <div>
                   <VICOMobileLinearProgress step={state.createStep} />
-                  <VICOReturnButton
-                    action={() => {
-                      props.history.push("/create/howto");
-                      state.changeState("createStep", 0);
-                    }}
-                  />
+                  <div className={classes.actionsWrapper}>
+                    <VICOReturnButton
+                      action={() => {
+                        props.history.push("/create/howto");
+                        state.changeState("createStep", 0);
+                      }}
+                    />
+                    <VICOSaveButton
+                      action={() => {
+                        props.history.push("/create/name");
+                        state.changeState("createStep", 5);
+                      }}
+                    />
+                  </div>
                 </div>
               );
             }}
