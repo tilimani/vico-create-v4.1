@@ -23,7 +23,11 @@ const useStyles = makeStyles((theme) => ({
     padding: "40px 20px",
     margin: "auto",
     marginTop: 70,
-    width: 506
+    width: 506,
+    [theme.breakpoints.down("sm")]: {
+      width: "auto",
+      boxShadow: "none"
+    }
   },
   title: {
     fontSize: 20,
