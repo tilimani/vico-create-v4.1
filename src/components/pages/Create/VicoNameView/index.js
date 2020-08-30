@@ -83,7 +83,7 @@ const VicoNameView = (props) => {
   const classes = useStyles();
   const isMediumScreen = useMediaQuery("(max-width:960px)");
 
-  const [VICOName, setVICOName] = useState("Sweet home");
+  const [VICOName, setVICOName] = useState("");
 
   return (
     <div>
@@ -104,6 +104,12 @@ const VicoNameView = (props) => {
                     action={() => {
                       props.history.push("/create/address");
                       state.changeState("createStep", 6);
+                      state.changeState("house", {
+                        ...state.house,
+                        name: VICOName
+                          ? VICOName
+                          : Math.random().toString(36).substring(7)
+                      });
                     }}
                   />
                 </div>
@@ -150,6 +156,12 @@ const VicoNameView = (props) => {
                   onClick={() => {
                     props.history.push("/create/address");
                     state.changeState("createStep", 6);
+                    state.changeState("house", {
+                      ...state.house,
+                      name: VICOName
+                        ? VICOName
+                        : Math.random().toString(36).substring(7)
+                    });
                   }}
                   variant="contained"
                   color="primary"
