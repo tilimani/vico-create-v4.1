@@ -96,7 +96,7 @@ const VicoNameView = (props) => {
                 <div className={classes.actionsWrapper}>
                   <VICOReturnButton
                     action={() => {
-                      props.history.push("/create/name");
+                      props.history.push("/create/type");
                       state.changeState("createStep", 4);
                     }}
                   />
@@ -143,20 +143,25 @@ const VicoNameView = (props) => {
               </div>
             </div>
           </div>
-
-          <VICOButton
-            onClick={() => {
-              props.setOpenedPersonalInfoDialog(true);
-              props.action();
+          <CreateConsumer>
+            {(state) => {
+              return (
+                <VICOButton
+                  onClick={() => {
+                    props.history.push("/create/address");
+                    state.changeState("createStep", 6);
+                  }}
+                  variant="contained"
+                  color="primary"
+                  text="Continuar"
+                  style={{
+                    width: 267,
+                    marginTop: 46
+                  }}
+                />
+              );
             }}
-            variant="contained"
-            color="primary"
-            text="Continuar"
-            style={{
-              width: 267,
-              marginTop: 46
-            }}
-          />
+          </CreateConsumer>
           <p className={classes.note}>Lo haré más tarde</p>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { CreateConsumer } from "../../../../common/context";
 
 const useStyles = makeStyles((theme) => ({
@@ -48,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 const VICOHouseTypeItem = (props) => {
   const classes = useStyles();
+  const isDesktop = useMediaQuery("(min-width:960px)");
   return (
     <CreateConsumer>
       {(state) => {
@@ -63,6 +65,10 @@ const VICOHouseTypeItem = (props) => {
                 ...state.house,
                 type: props.houseType
               });
+              if (isDesktop) {
+                props.history.push("/create/name");
+                state.changeState("createStep", 5);
+              }
             }}
           >
             <div className={classes.iconWrapper}>

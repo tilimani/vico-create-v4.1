@@ -1,5 +1,4 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
@@ -109,7 +108,6 @@ const vicoTypeView = (props) => {
   const classes = useStyles();
   const isMediumScreen = useMediaQuery("(max-width:960px)");
   const isMobileScreen = useMediaQuery("(max-width:600px)");
-  const buttonWidth = isMediumScreen ? "100%" : 267;
 
   return (
     <div className={classes.vicoTypeViewWrapper}>
@@ -155,6 +153,7 @@ const vicoTypeView = (props) => {
                 title="Vivienda Compartida"
                 subtitle="Una casa o un apartamento con varias habitaciones, las cuales se alquilan individualmente."
                 houseType="shared"
+                history={props.history}
               />
             </Grid>
             <Grid item xs={12} md={4}>
@@ -163,6 +162,7 @@ const vicoTypeView = (props) => {
                 title="Apartaestudio"
                 subtitle="Normalmente un apartamento de un ambiente que combina una cocina, sala y dormitorio."
                 houseType="studio"
+                history={props.history}
               />
             </Grid>
             <Grid item xs={12} md={4}>
@@ -171,6 +171,7 @@ const vicoTypeView = (props) => {
                 title="Apartamento privado"
                 subtitle="Una casa o un apartamento con varias habitaciones. Se alquila completo. "
                 houseType="private"
+                history={props.history}
               />
             </Grid>
           </Grid>
