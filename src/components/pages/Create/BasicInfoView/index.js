@@ -127,6 +127,7 @@ const BasicInfoView = (props) => {
         )}
         <div className={`${classes.formWrapper}`}>
           <span className={classes.title}>INFORMACIÓN DE TU VICO</span>
+          {/** HOUSE TYPE = SHARED  */}
           {house.type === "shared" && (
             <Grid container spacing={3} className={classes.sharedInfoWrapper}>
               <Grid item xs={12} md={6}>
@@ -134,27 +135,119 @@ const BasicInfoView = (props) => {
                   yesNoQuestion
                   title="¿Tu vives en la VICO?"
                   subtitle="Queremos saber si vas a convivir con tus invitados."
+                  value={house.is_manager_in_house}
+                  action={(value) =>
+                    changeState("house", {
+                      ...house,
+                      is_manager_in_house: value
+                    })
+                  }
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <BasicInfoItem
                   title="¿Cuántas habitaciones tiene tu VICO en total?"
                   subtitle="Pon el número total de habitaciones, incluso aunque no las vayas a alquilar todas."
-                  numericValue={roomsQuantity}
-                  setNumericValue={setRoomsQuantity}
+                  numericValue={house.rooms_quantity}
+                  action={(value) =>
+                    changeState("house", {
+                      ...house,
+                      rooms_quantity: value
+                    })
+                  }
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <BasicInfoItem
                   title="¿Cuántos baños tiene tu VICO?"
                   subtitle="Número total de baños en toda la casa."
-                  numericValue={bathsQuantity}
-                  setNumericValue={setBathsQuantity}
+                  numericValue={house.baths_quantity}
+                  action={(value) =>
+                    changeState("house", {
+                      ...house,
+                      baths_quantity: value
+                    })
+                  }
+                />
+              </Grid>
+            </Grid>
+          )}
+          {/** HOUSE TYPE = STUDIO */}
+          {house.type === "studio" && (
+            <Grid container spacing={3} className={classes.sharedInfoWrapper}>
+              <Grid item xs={12} md={6}>
+                <BasicInfoItem
+                  title="Cuántas personas pueden dormir en tu VICO"
+                  subtitle="Número de personas que podrían hospedarse en tu VICO en total."
+                  numericValue={house.capacity}
+                  action={(value) =>
+                    changeState("house", {
+                      ...house,
+                      capacity: value
+                    })
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <BasicInfoItem
+                  title="¿Cuántos baños tiene tu VICO?"
+                  subtitle="Número total de baños en toda la casa."
+                  numericValue={house.baths_quantity}
+                  action={(value) =>
+                    changeState("house", {
+                      ...house,
+                      baths_quantity: value
+                    })
+                  }
                 />
               </Grid>
             </Grid>
           )}
         </div>
+        {/** HOUSE TYPE = PRIVATE */}
+        {house.type === "private" && (
+          <Grid container spacing={3} className={classes.sharedInfoWrapper}>
+            <Grid item xs={12} md={6}>
+              <BasicInfoItem
+                title="¿Cuántos baños tiene tu VICO?"
+                subtitle="Número total de baños en toda la casa."
+                numericValue={house.baths_quantity}
+                action={(value) =>
+                  changeState("house", {
+                    ...house,
+                    baths_quantity: value
+                  })
+                }
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <BasicInfoItem
+                title="¿Cuántas habitaciones tiene tu VICO en total?"
+                subtitle="Pon el número total de habitaciones, incluso aunque no las vayas a alquilar todas."
+                numericValue={house.rooms_quantity}
+                action={(value) =>
+                  changeState("house", {
+                    ...house,
+                    rooms_quantity: value
+                  })
+                }
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <BasicInfoItem
+                title="Cuántas personas pueden dormir en tu VICO"
+                subtitle="Número de personas que podrían hospedarse en tu VICO en total."
+                numericValue={house.capacity}
+                action={(value) =>
+                  changeState("house", {
+                    ...house,
+                    capacity: value
+                  })
+                }
+              />
+            </Grid>
+          </Grid>
+        )}
         <VICOButton
           onClick={() => {
             if (house.type === "shared") {

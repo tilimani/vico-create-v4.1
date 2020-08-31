@@ -59,35 +59,29 @@ const PlusButton = withStyles({
 
 const BasicInfoItem = (props) => {
   const classes = useStyles();
-  const {
-    title,
-    subtitle,
-    numericValue,
-    setNumericValue,
-    yesNoQuestion
-  } = props;
+  const { title, subtitle, numericValue, action, yesNoQuestion } = props;
   return (
     <div>
       <span className={classes.title}>{title}</span>
       <p className={classes.subtitle}>{subtitle}</p>
       {yesNoQuestion ? (
         <div className={classes.yesNoBtnsWrapper}>
-          <VICOYesNoBtn text="Si" />
-          <VICOYesNoBtn text="No" />
+          <VICOYesNoBtn text="Si" active={props.value} />
+          <VICOYesNoBtn text="No" active={!props.value} />
         </div>
       ) : (
         <div className={classes.handleNumericValueWrapper}>
           <PlusButton
             onClick={() => {
               if (numericValue > 1) {
-                setNumericValue(numericValue - 1);
+                action(numericValue - 1);
               }
             }}
           >
             <RemoveIcon />
           </PlusButton>
           <span className={classes.numericValue}>{numericValue}</span>
-          <PlusButton onClick={() => setNumericValue(numericValue + 1)}>
+          <PlusButton onClick={() => action(numericValue + 1)}>
             <AddIcon />
           </PlusButton>
         </div>
