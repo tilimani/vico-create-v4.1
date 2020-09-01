@@ -6,10 +6,6 @@ import Joyride from "react-joyride";
 import LeftMenu from "./LeftMenu";
 import Cover from "./Cover";
 import TutorialStep from "./TutorialStep";
-import rules from "../../../../assets/rules.png";
-import socialZones from "../../../../assets/socialZones.png";
-import interests from "../../../../assets/interests.png";
-import description from "../../../../assets/description.png";
 
 import VICOButton from "../../../atoms/VICOButton";
 import { CreateContext } from "../../../../common/context";
@@ -139,7 +135,7 @@ const CreateDashboard = (props) => {
               >
                 <TutorialStep
                   done={false}
-                  image={rules}
+                  image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/8z2E-rules.png"
                   text="Normas de la VICO"
                 />
               </div>
@@ -147,21 +143,21 @@ const CreateDashboard = (props) => {
             <Grid item xs={6} sm={3} className={classes.tutorialStepGridItem}>
               <TutorialStep
                 done={false}
-                image={socialZones}
+                image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/oAv_-socialZones.png"
                 text="Zonas sociales"
               />
             </Grid>
             <Grid item xs={6} sm={3} className={classes.tutorialStepGridItem}>
               <TutorialStep
                 done={false}
-                image={interests}
+                image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/sF9B-interests.png"
                 text="Puntos de interés"
               />
             </Grid>
             <Grid item xs={6} sm={3} className={classes.tutorialStepGridItem}>
               <TutorialStep
                 done={false}
-                image={description}
+                image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/UdO0-description.png"
                 text="Descripción de tu VICO"
               />
             </Grid>

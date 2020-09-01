@@ -1,8 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 import VICOTransparentIconBtn from "../../../atoms/VICOTransparentIconBtn";
-import coverImage from "../../../../assets/cover.png";
-import edit from "../../../../assets/edit.png";
 
 const useStyles = makeStyles((theme) => ({
   coverWrapper: {
@@ -10,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cover: {
     height: "30vh",
-    backgroundImage: `url(${coverImage})`,
+    backgroundImage: `url(https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Uq7j-cover.png)`,
     backgroundPosition: "bottom",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
@@ -94,7 +92,12 @@ const Cover = (props) => {
           </div>
           <div className={classes.editIconWrapper}>
             <VICOTransparentIconBtn
-              iconComponent={<img src={edit} alt="edit" />}
+              iconComponent={
+                <img
+                  src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/mM1H-edit.png"
+                  alt="edit"
+                />
+              }
               text="editar imagen"
               action={() => {}}
             />
