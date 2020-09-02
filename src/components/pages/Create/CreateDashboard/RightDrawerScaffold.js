@@ -21,28 +21,14 @@ const useStyles = makeStyles((theme) => ({
 
 const RightDrawerScaffold = (props) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
   return (
-    <Drawer
-      anchor="right"
-      open={true}
-      className={classes.drawer}
-      onClose={() => handleDrawerClose()}
-    >
+    <Drawer anchor="right" open={true} className={classes.drawer}>
       <div className={classes.drawerHeader}>
         <div className={classes.headerLeftBtn}>
-          <VICOTransparantButton text="Cerrar" />
+          <VICOTransparantButton text="Cerrar" action={props.close} />
         </div>
         <div className={classes.headerRightBtn}>
-          <VICOTransparantButton text="Guadar" />
+          <VICOTransparantButton text="Guadar" action={props.save} />
         </div>
       </div>
 

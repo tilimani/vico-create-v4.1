@@ -11,6 +11,7 @@ import VICOButton from "../../../atoms/VICOButton";
 import { CreateContext } from "../../../../common/context";
 
 import Rules from "./Rules";
+import Services from "./Services";
 
 const useStyles = makeStyles((theme) => ({
   leftMenu: { position: "relative", height: "100%" },
@@ -178,9 +179,8 @@ const CreateDashboard = (props) => {
 
       {/** Routes */}
       {/** Rules */}
-      <Route path="/create/dashboard/:houseId/rules">
-        <Rules />
-      </Route>
+      <Route path="/create/dashboard/:houseId/rules" component={Rules} />
+      <Route path="/create/dashboard/:houseId/services" component={Services} />
       {/** Modal displayed once this dashboard is opened showing that the vico is successfully */}
       {/* <Dialog
         open={creationSuccessDialogIsOpen}

@@ -89,11 +89,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Rules = () => {
+const Rules = (props) => {
   const classes = useStyles();
-
   return (
-    <RightDrawerScaffold>
+    <RightDrawerScaffold
+      close={() => props.history.push("/create/dashboard/1")}
+      save={() => props.history.push("/create/dashboard/1/services")}
+    >
       <div className={classes.drawerContent}>
         <span className={classes.title}>Normas de la VICO</span>
 
@@ -248,6 +250,7 @@ const Rules = () => {
 
         <div className={classes.continueBtnWrapper}>
           <VICOButton
+            onClick={() => props.history.push("/create/dashboard/1/services")}
             variant="contained"
             color="primary"
             text="Continuar"
