@@ -8,6 +8,9 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "white",
     boxShadow: `0px 2px 4px ${theme.palette.primary.main}`,
     color: theme.palette.primary.main
+  },
+  primary: {
+    backgroundColor: theme.palette.primary.main
   }
 }));
 const SquareButton = withStyles({
@@ -41,9 +44,13 @@ const SquareButton = withStyles({
 
 const VICOSquareBtn = (props) => {
   const classes = useStyles();
-  const { text, icon, active } = props;
+  const { text, icon, active, color } = props;
+  console.log(color);
   return (
-    <SquareButton className={active && classes.active}>
+    <SquareButton
+      className={active && classes.active}
+      style={color && color === "primary" ? { backgroundColor: "#EF8E01" } : {}}
+    >
       {text && text} {icon && <img src={icon} alt="icon" />}
     </SquareButton>
   );

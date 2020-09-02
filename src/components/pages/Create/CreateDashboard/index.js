@@ -12,6 +12,7 @@ import { CreateContext } from "../../../../common/context";
 
 import Rules from "./Rules";
 import Services from "./Services";
+import CommonAreas from "./CommonAreas";
 
 const useStyles = makeStyles((theme) => ({
   leftMenu: { position: "relative", height: "100%" },
@@ -77,6 +78,7 @@ const CreateDashboard = (props) => {
   ] = useState(true);
 
   const [tutorialOne, setTutorialOne] = useState({});
+  const [tutorialTwo, setTutorialTwo] = useState({});
 
   const joyrideSettings = {
     continuous: true,
@@ -106,6 +108,42 @@ const CreateDashboard = (props) => {
         disableBeacon: true,
         placement: "bottom",
 
+        styles: {
+          buttonNext: {
+            display: "none"
+          }
+        }
+      }
+    ],
+    two: [
+      {
+        target: "#rules_button",
+        content: "Gracias por crear tus condiciones!",
+        disableBeacon: true,
+        placement: "bottom"
+      },
+      {
+        target: "#common_areas_button",
+        content: "Zonas sociales",
+        disableBeacon: true,
+        placement: "bottom",
+        styles: {
+          buttonNext: {
+            display: "none"
+          }
+        }
+      },
+      {
+        target: "#common_areas_gallery",
+        content: "Fotos de las Zonas sociales",
+        disableBeacon: true,
+        placement: "left"
+      },
+      {
+        target: "#common_areas_info",
+        content: "Informacion sobre las Zonas sociales",
+        disableBeacon: true,
+        placement: "top",
         styles: {
           buttonNext: {
             display: "none"
@@ -142,11 +180,22 @@ const CreateDashboard = (props) => {
               </div>
             </Grid>
             <Grid item xs={6} sm={3} className={classes.tutorialStepGridItem}>
-              <TutorialStep
-                done={false}
-                image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/oAv_-socialZones.png"
-                text="Zonas sociales"
-              />
+              <div
+                id="common_areas_button"
+                className={classes.rulesButton}
+                onClick={() => {
+                  setTimeout(() => {
+                    tutorialTwo.next();
+                  }, 300);
+                  props.history.push("/create/dashboard/1/commonareas");
+                }}
+              >
+                <TutorialStep
+                  done={false}
+                  image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/oAv_-socialZones.png"
+                  text="Zonas sociales"
+                />
+              </div>
             </Grid>
             <Grid item xs={6} sm={3} className={classes.tutorialStepGridItem}>
               <TutorialStep
@@ -176,11 +225,23 @@ const CreateDashboard = (props) => {
         }}
         {...joyrideSettings}
       />
+      <Joyride
+        key={"second-tutorial"}
+        steps={tutorialSteps.two}
+        run={createStep === 2}
+        getHelpers={(helpers) => {
+          setTutorialTwo(helpers);
+        }}
+        {...joyrideSettings}
+      />
 
       {/** Routes */}
       {/** Rules */}
       <Route path="/create/dashboard/:houseId/rules" component={Rules} />
       <Route path="/create/dashboard/:houseId/services" component={Services} />
+      <Route path="/create/dashboard/:houseId/commonareas">
+        <CommonAreas tutorial={tutorialTwo} />
+      </Route>
       {/** Modal displayed once this dashboard is opened showing that the vico is successfully */}
       {/* <Dialog
         open={creationSuccessDialogIsOpen}
