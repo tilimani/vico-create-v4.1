@@ -80,7 +80,7 @@ const Availability = (props) => {
                   <VICOSaveButton
                     action={() => {
                       props.history.push(`/create/dashboard/${house.id}`);
-                      // changeState("createStep", 9);
+                      changeState("createStep", 1);
                     }}
                   />
                 </div>
@@ -104,7 +104,7 @@ const Availability = (props) => {
                   <VICOSaveButton
                     action={() => {
                       props.history.push(`/create/dashboard/${house.id}`);
-                      // changeState("createStep", 9);
+                      changeState("createStep", 1);
                     }}
                   />
                 </div>

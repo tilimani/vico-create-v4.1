@@ -12,28 +12,31 @@ const useStylesVICO = makeStyles((theme) => ({
     overflow: "hidden",
     borderRadius: 4,
     backgroundColor: "#fcfcfb",
-    height: 58,
     paddingLeft: 20,
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
     transition: theme.transitions.create(["border-color", "box-shadow"]),
     "&.MuiInputBase-multiline": {
       paddingLeft: theme.spacing(1.5),
-      paddingRight: theme.spacing(1)
+      paddingRight: theme.spacing(1),
+      border: "1px solid #e2e2e1"
     },
     "&:hover": {
       backgroundColor: "#fff",
       boxShadow: `0px 2px 4px ${theme.palette.primary.main}`,
-      borderColor: theme.palette.primary.main
+      borderColor: theme.palette.primary.main,
+      border: "1px solid #e2e2e1"
     },
     "&:active": {
       backgroundColor: "#fff",
       boxShadow: `0px 2px 4px ${theme.palette.primary.main}`,
-      borderColor: theme.palette.primary.main
+      borderColor: theme.palette.primary.main,
+      border: "1px solid #e2e2e1"
     },
     "&:focus": {
       backgroundColor: "#fff",
       boxShadow: `0px 2px 4px ${theme.palette.primary.main}`,
-      borderColor: theme.palette.primary.main
+      borderColor: theme.palette.primary.main,
+      border: "1px solid #e2e2e1"
     }
     // "&$focused": {
     //   backgroundColor: "#fff",

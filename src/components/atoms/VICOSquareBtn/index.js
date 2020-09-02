@@ -14,13 +14,14 @@ const SquareButton = withStyles({
   root: {
     boxShadow: "0px 2px 4px #C4C4C4",
     textTransform: "none",
-    fontSize: 18,
+    fontSize: 16,
     padding: "6px 12px",
     border: "none",
     backgroundColor: "white",
     height: 80,
     width: 88,
     borderRadius: 12,
+    lineHeight: 1,
     "&:hover": {
       backgroundColor: "white",
       boxShadow: `0px 2px 4px ${theme.palette.primary.main}`,

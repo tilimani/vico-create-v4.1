@@ -66,7 +66,6 @@ const BasicInfoView = (props) => {
   const [capacity, setCapacity] = useState(1);
   const [roomsQuantity, setRoomsQuantity] = useState(1);
 
-  console.log(house, "***********");
   return (
     <div>
       {isMediumScreen && (
@@ -86,10 +85,10 @@ const BasicInfoView = (props) => {
                     action={() => {
                       if (house.type === "shared") {
                         props.history.push(`/create/dashboard/${house.id}`);
+                        state.changeState("createStep", 1);
                       } else {
                         props.history.push("/create/availability");
                       }
-                      state.changeState("createStep", 8);
                     }}
                   />
                 </div>
