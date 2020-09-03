@@ -1,5 +1,11 @@
 import React, { Children } from "react";
-import { Button, Grid, makeStyles, Drawer } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  makeStyles,
+  Drawer,
+  withStyles
+} from "@material-ui/core";
 import VICOTransparantButton from "../../../atoms/VICOTransparantButton";
 
 const useStyles = makeStyles((theme) => ({
@@ -19,10 +25,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const CustomDrawer = withStyles((theme) => ({
+  root: {
+    zIndex: "80 !important"
+  }
+}))(Drawer);
+
 const RightDrawerScaffold = (props) => {
   const classes = useStyles();
   return (
-    <Drawer anchor="right" open={true} className={classes.drawer}>
+    <CustomDrawer anchor="right" open={true} className={classes.drawer}>
       <div className={classes.drawerHeader}>
         <div className={classes.headerLeftBtn}>
           <VICOTransparantButton text="Cerrar" action={props.close} />
@@ -33,7 +45,7 @@ const RightDrawerScaffold = (props) => {
       </div>
 
       {props.children}
-    </Drawer>
+    </CustomDrawer>
   );
 };
 

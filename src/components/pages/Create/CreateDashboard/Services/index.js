@@ -66,19 +66,31 @@ const Services = (props) => {
         </span>
         <div className={classes.responseWrapper}>
           <div className={classes.response}>
-            <VICOSquareBtn color="primary" icon={wifi} />
+            <VICOSquareBtn
+              color="primary"
+              icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/1RiF-wifi.png"
+            />
             <span>Wifi</span>
           </div>
           <div className={classes.response}>
-            <VICOSquareBtn color="primary" icon={water} />
+            <VICOSquareBtn
+              color="primary"
+              icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Pkk0-water.png"
+            />
             <span>Agua</span>
           </div>
           <div className={classes.response}>
-            <VICOSquareBtn color="primary" icon={gas} />
+            <VICOSquareBtn
+              color="primary"
+              icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/_T7M-gas.png"
+            />
             <span>Gas</span>
           </div>
           <div className={classes.response}>
-            <VICOSquareBtn color="primary" icon={light} />
+            <VICOSquareBtn
+              color="primary"
+              icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Xb8l-light.png"
+            />
             <span>Luz</span>
           </div>
         </div>
