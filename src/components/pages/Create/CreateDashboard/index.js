@@ -240,7 +240,7 @@ const CreateDashboard = (props) => {
       <Route path="/create/dashboard/:houseId/rules" component={Rules} />
       <Route path="/create/dashboard/:houseId/services" component={Services} />
       <Route path="/create/dashboard/:houseId/commonareas">
-        <CommonAreas tutorial={tutorialTwo} />
+        <CommonAreas tutorial={tutorialTwo} history={props.history} />
       </Route>
       {/** Modal displayed once this dashboard is opened showing that the vico is successfully */}
       {/* <Dialog

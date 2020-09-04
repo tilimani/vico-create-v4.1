@@ -6,11 +6,6 @@ import { CreateContext } from "../../../../../common/context";
 import RightDrawerScaffold from "../RightDrawerScaffold";
 import VICOSquareBtn from "../../../../atoms/VICOSquareBtn";
 import VICOButton from "../../../../atoms/VICOButton";
-
-import gas from "../../../../../assets/gas.png";
-import wifi from "../../../../../assets/wifi.png";
-import water from "../../../../../assets/water.png";
-import light from "../../../../../assets/light.png";
 import VICOCheckbox from "../../../../atoms/VICOCheckbox";
 
 const useStyles = makeStyles((theme) => ({
@@ -43,6 +38,11 @@ const useStyles = makeStyles((theme) => ({
   },
   confirmCheckboxWrapper: {
     marginTop: 40
+  },
+  responseText: {
+    marginTop: 20,
+    fontSize: 16,
+    color: theme.palette.secondary.main
   }
 }));
 
@@ -70,28 +70,28 @@ const Services = (props) => {
               color="primary"
               icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/1RiF-wifi.png"
             />
-            <span>Wifi</span>
+            <span className={classes.responseText}>Wifi</span>
           </div>
           <div className={classes.response}>
             <VICOSquareBtn
               color="primary"
               icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Pkk0-water.png"
             />
-            <span>Agua</span>
+            <span className={classes.responseText}>Agua</span>
           </div>
           <div className={classes.response}>
             <VICOSquareBtn
               color="primary"
               icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/_T7M-gas.png"
             />
-            <span>Gas</span>
+            <span className={classes.responseText}>Gas</span>
           </div>
           <div className={classes.response}>
             <VICOSquareBtn
               color="primary"
               icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Xb8l-light.png"
             />
-            <span>Luz</span>
+            <span className={classes.responseText}>Luz</span>
           </div>
         </div>
 

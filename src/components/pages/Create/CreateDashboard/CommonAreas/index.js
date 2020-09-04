@@ -11,26 +11,54 @@ import { CreateContext } from "../../../../../common/context";
 import CloseIcon from "@material-ui/icons/Close";
 import CheckIcon from "@material-ui/icons/Check";
 import RightDrawerScaffold from "../RightDrawerScaffold";
+import VICOButton from "../../../../atoms/VICOButton";
 
 import "./index.css";
 import VICODropZone from "../../../../atoms/VICODropZone";
+import VICOTag from "../../../../atoms/VICOTag";
+import VICOSquareBtn from "../../../../atoms/VICOSquareBtn";
+
+import sencilla from "../../../../../assets/sencilla.png";
+import semidouble from "../../../../../assets/semidouble.png";
+import doble from "../../../../../assets/doble.png";
+import privatebath from "../../../../../assets/privatebath.png";
+import sharedbath from "../../../../../assets/sharedbath.png";
+import outside from "../../../../../assets/outside.png";
+import inside from "../../../../../assets/inside.png";
+import nowindow from "../../../../../assets/nowindow.png";
+import tothepatio from "../../../../../assets/tothepatio.png";
+
+import comedor from "../../../../../assets/comedor.png";
+import horno from "../../../../../assets/horno.png";
+import tv from "../../../../../assets/tv.png";
+import cafeteria from "../../../../../assets/cafeteria.png";
+import licuadora from "../../../../../assets/licuadora.png";
+import lavadora from "../../../../../assets/lavadora.png";
+import secadora from "../../../../../assets/secadora.png";
+import duchas from "../../../../../assets/duchas.png";
+import porteria from "../../../../../assets/porteria.png";
+
+import cocina from "../../../../../assets/cocina.png";
+import gym from "../../../../../assets/gym.png";
+import piscina from "../../../../../assets/piscina.png";
+import sauna from "../../../../../assets/sauna.png";
+import ascensor from "../../../../../assets/ascensor.png";
+import garaje from "../../../../../assets/garaje.png";
+
+import escritorio from "../../../../../assets/escritorio.png";
+import nevara from "../../../../../assets/nevara.png";
+import espaciodetrabajo from "../../../../../assets/espaciodetrabajo.png";
 
 const useStyles = makeStyles((theme) => ({
-  commonAreasGallery: {
-    position: "fixed",
-    height: "100vh",
-    right: 0,
-    top: 0,
-    backgroundColor: "white",
-    width: 742,
-    zIndex: 80
-  },
   drawerContent: {
     width: 450,
     flexShrink: 0,
     marginLeft: 160,
     marginRight: 160,
-    marginTop: 100
+    marginTop: 40
+  },
+  additionalContent: {
+    marginTop: 40
   },
   title: {
     fontSize: 20,
@@ -46,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 46
   },
   tipsTitle: {
-    fontSize: 20,
+    fontSize: 16,
     color: theme.palette.secondary.main,
     marginTop: 30,
     fontWeight: "bold"
@@ -73,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 40
   },
   questionTitle: {
-    fontSize: 20,
+    fontSize: 16,
     color: theme.palette.secondary.main,
     fontWeight: "bold"
   },
@@ -81,8 +109,43 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 16,
     color: theme.palette.secondary.main
   },
-  TextAreaResponseWrapper: {
+  responseWrapper: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  tagsResponseWrapper: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  response: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 40,
     marginTop: 20
+  },
+  squareBtnDesc: {
+    marginTop: 10,
+    fontSize: 16,
+    color: theme.palette.secondary.main,
+    textAlign: "center"
+  },
+  squareBtnsWrapper: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-between"
+  },
+  cameraTypeResponse: {
+    display: "flex",
+    justifyContent: "space-between"
+  },
+  bathTypeResponse: {
+    display: "flex",
+    justifyContent: "space-around"
+  },
+  continueBtnWrapper: {
+    textAlign: "center"
   }
 }));
 
@@ -103,23 +166,24 @@ const CommonAreas = ({ tutorial, history }) => {
   };
 
   return (
-    <div id="common_areas_gallery" className={classes.commonAreasGallery}>
-      <RightDrawerScaffold
-        close={() => {
-          // history.push("/create/dashboard/1")
-        }}
-        save={() => {
-          // changeState("createStep", 3);
-          // history.push("/create/dashboard/1/services");
-        }}
-      >
-        <div>
-          <div className={classes.drawerContent}>
+    <RightDrawerScaffold
+      close={() => {
+        history.push("/create/dashboard/1");
+      }}
+      save={() => {
+        changeState("createStep", 3);
+        history.push("/create/dashboard/1");
+      }}
+    >
+      <div>
+        <div className={classes.drawerContent}>
+          <div id="common_areas_gallery">
             <span className={classes.title}>Galeria zonas sociales</span>
             <p className={classes.subtitle}>
               Sube mínimo 5 fotos de las zonas sociales y áreas compartidas de
               tu VICO.
             </p>
+
             <VICODropZone />
 
             <div className={classes.tips}>
@@ -154,27 +218,253 @@ const CommonAreas = ({ tutorial, history }) => {
                   </span>
                 </div>
               </div>
-              <div className={classes.question}>
-                <span className={classes.questionTitle}>Adicional</span>
-                <p className={classes.questionDescription}>
-                  ¿Tienes un video de tu VICO?
-                </p>
-                <div className={classes.TextAreaResponseWrapper}>
-                  <CustomTextField
-                    placeholder="Ingresa el link"
-                    label="Video"
-                    InputLabelProps={{
-                      shrink: true
-                    }}
-                  />
-                  {/* <VICOTextField placeholder="Ingresa el link" label="Video" /> */}
-                </div>
+            </div>
+
+            <span className={classes.title}>Adicional</span>
+            <div className={classes.question}>
+              <p className={classes.questionDescription}>
+                ¿Tienes un video de tu VICO?
+              </p>
+              <div className={classes.responseWrapper}>
+                <CustomTextField
+                  placeholder="Ingresa el link"
+                  label="Video"
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                />
               </div>
             </div>
           </div>
+          <div className={classes.additionalContent}>
+            <div className={classes.question} style={{ paddingTop: 20 }}>
+              <span className={classes.questionTitle}>
+                ¿Cómo definirías tu VICO?
+              </span>
+              <p className={classes.questionDescription}>
+                Selecciona los tags con los que identificas a tu VICO.
+              </p>
+              <div className={classes.tagsResponseWrapper}>
+                {[
+                  "Pet friendly",
+                  "Weed friendly",
+                  "Independiente",
+                  "Invitados profesionales",
+                  "Digital nomads",
+                  "Estudiantes"
+                ].map((item, index) => (
+                  <VICOTag key={index} label={item} action={() => {}} />
+                ))}
+              </div>
+            </div>
+
+            <div className={classes.question}>
+              <span className={classes.questionTitle}>Tipo de cama</span>
+              <div className={classes.cameraTypeResponse}>
+                {[
+                  {
+                    icon: sencilla,
+                    text: "Sencilla"
+                  },
+                  {
+                    icon: semidouble,
+                    text: "Semi-doble"
+                  },
+                  {
+                    icon: doble,
+                    text: "Doble"
+                  }
+                ].map((item, index) => (
+                  <div className={classes.response}>
+                    <VICOSquareBtn icon={item.icon} />
+                    <span className={classes.squareBtnDesc}>{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className={classes.question}>
+              <span className={classes.questionTitle}>
+                Tipo de baño al que tiene acceso
+              </span>
+              <div className={classes.bathTypeResponse}>
+                {[
+                  {
+                    icon: privatebath,
+                    text: "Baño privado"
+                  },
+                  {
+                    icon: sharedbath,
+                    text: "Baño compartido"
+                  }
+                ].map((item, index) => (
+                  <div className={classes.response}>
+                    <VICOSquareBtn icon={item.icon} />
+                    <span className={classes.squareBtnDesc}>{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className={classes.question}>
+              <span className={classes.questionTitle}>
+                ¿Hacia dónde mira la ventana?
+              </span>
+              <div className={classes.squareBtnsWrapper}>
+                {[
+                  {
+                    icon: nowindow,
+                    text: "Sin ventana"
+                  },
+                  {
+                    icon: inside,
+                    text: "Hacia dentro"
+                  },
+                  {
+                    icon: tothepatio,
+                    text: "Hacia el patio"
+                  },
+                  {
+                    icon: outside,
+                    text: "Hacia afuera"
+                  }
+                ].map((item, index) => (
+                  <div className={classes.response}>
+                    <VICOSquareBtn icon={item.icon} />
+                    <span className={classes.squareBtnDesc}>{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className={classes.question}>
+              <span className={classes.questionTitle}>
+                ¿Cuáles servicios o facilidades están incluidos en el alquiler
+                mensual?
+              </span>
+              <div className={classes.squareBtnsWrapper}>
+                {[
+                  {
+                    icon: comedor,
+                    text: "Comedor"
+                  },
+                  {
+                    icon: horno,
+                    text: "Horno"
+                  },
+                  {
+                    icon: tv,
+                    text: "Tv"
+                  },
+                  {
+                    icon: cafeteria,
+                    text: "Cafetera"
+                  },
+                  {
+                    icon: licuadora,
+                    text: "Licuadora"
+                  },
+                  {
+                    icon: lavadora,
+                    text: "Lavadora"
+                  },
+                  {
+                    icon: secadora,
+                    text: "Secadora"
+                  },
+                  {
+                    icon: duchas,
+                    text: "Duchas"
+                  },
+                  {
+                    icon: outside,
+                    text: "Balcón"
+                  },
+                  {
+                    icon: porteria,
+                    text: "Portería"
+                  },
+                  {
+                    icon: cocina,
+                    text: "Cocina"
+                  },
+                  {
+                    icon: gym,
+                    text: "Gym"
+                  },
+
+                  {
+                    icon: piscina,
+                    text: "Piscina"
+                  },
+                  {
+                    icon: sauna,
+                    text: "Sauna"
+                  },
+                  {
+                    icon: ascensor,
+                    text: "Ascensor"
+                  },
+
+                  {
+                    icon: garaje,
+                    text: "Garaje"
+                  },
+                  {
+                    icon: nevara,
+                    text: "Nevera"
+                  },
+                  {
+                    icon: nevara,
+                    text: "Aire"
+                  },
+                  {
+                    icon: nevara,
+                    text: "Closet"
+                  },
+                  {
+                    icon: escritorio,
+                    text: "Escritorio"
+                  },
+                  {
+                    icon: escritorio,
+                    text: "Bbq"
+                  }
+                ].map((item, index) => (
+                  <div className={classes.response}>
+                    <VICOSquareBtn icon={item.icon} />
+                    <span className={classes.squareBtnDesc}>{item.text}</span>
+                  </div>
+                ))}
+                <div className={classes.response}>
+                  <VICOSquareBtn icon={espaciodetrabajo} />
+                  <span className={classes.squareBtnDesc}>
+                    Espacio <br />
+                    de trabajo
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div id="common_areas_info" className={classes.continueBtnWrapper}>
+              <VICOButton
+                component={RouterLink}
+                to="/create/dashboard/1"
+                onClick={handleClick}
+                variant="contained"
+                color="primary"
+                text="Continuar"
+                style={{
+                  width: 267,
+                  marginTop: 46
+                }}
+              />
+            </div>
+          </div>
         </div>
-      </RightDrawerScaffold>
-    </div>
+      </div>
+    </RightDrawerScaffold>
+
     // <>
     //   <Grid container style={{ margin: "4rem", backgroundColor: "#dadada" }}>
     //     <Grid item xs={8}>
