@@ -129,7 +129,6 @@ const CommonAreas = ({ tutorial, history }) => {
       <div>
         <div className={classes.drawerContent}>
           <Gallery images={images} setImages={setImages} tutorial={tutorial} />
-
           <div id="common_areas_info" className={classes.additionalContent}>
             <div className={classes.question} style={{ paddingTop: 20 }}>
               <span className={classes.questionTitle}>

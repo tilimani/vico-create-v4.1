@@ -7,7 +7,12 @@ import LeftMenu from "./LeftMenu";
 import Cover from "./Cover";
 import TutorialStep from "./TutorialStep";
 
-import VICOButton from "../../../atoms/VICOButton";
+import SuccessfulCreatedVICO from "./JoyrideCustomContents/SuccessfulCreatedVICO";
+import CreateVICORules from "./JoyrideCustomContents/CreateVICORules";
+import SuccessfulCreatedVICORules from "./JoyrideCustomContents/SuccessfulCreatedVICORules";
+import CreateVICOCommonAreas from "./JoyrideCustomContents/CreateVICOCommonAreas";
+import CommonAreasGallery from "./JoyrideCustomContents/CommonAreasGallery";
+
 import { CreateContext } from "../../../../common/context";
 
 import Rules from "./Rules";
@@ -25,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     height: "86vh"
   },
   tutorialSteps: {
-    padding: "100px 200px"
+    padding: "70px 200px"
   },
   tutorialStepGridItem: {
     display: "flex",
@@ -33,34 +38,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center"
   },
-  /** dialog */
-  dialogInnerContent: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    width: 362
-  },
-  dialogImg: {
-    width: 100,
-    marginTop: 20
-  },
-  dialogTitle: {
-    fontSize: 20,
-    color: theme.palette.secondary.main,
-    fontWeight: "bold",
-    marginTop: 20,
-    width: "60%",
-    textAlign: "center"
-  },
-  dialogDescription: {
-    fontSize: 16,
-    color: theme.palette.secondary.main,
-    marginTop: 20,
-    width: "80%",
-    textAlign: "center"
-  },
-
   rulesButton: {
     cursor: "pointer"
   }
@@ -71,21 +48,17 @@ const CreateDashboard = (props) => {
 
   /** Context */
   const { house, createStep, changeState } = useContext(CreateContext);
-  /** Dialog: VICO is created successfully */
-  const [
-    creationSuccessDialogIsOpen,
-    setCreationSuccessDialogIsOpen
-  ] = useState(true);
 
   const [tutorialOne, setTutorialOne] = useState({});
   const [tutorialTwo, setTutorialTwo] = useState({});
 
   const joyrideSettings = {
     continuous: true,
-    locale: { next: "Continue", last: "Continue" },
+    locale: { next: "Continuar", last: "Continue" },
     disableOverlayClose: true,
     spotlightClicks: true,
     styles: {
+      options: { width: 360, height: 270 },
       buttonClose: {
         display: "none"
       },
@@ -94,17 +67,30 @@ const CreateDashboard = (props) => {
       }
     }
   };
-
   const [tutorialSteps] = useState({
     one: [
       {
-        content: <h2>Felicitaciones tu vico ha sido creada</h2>,
+        content: <SuccessfulCreatedVICO />,
         placement: "center",
-        target: "body"
+        target: "body",
+        styles: {
+          buttonNext: {
+            backgroundColor: "#EF8E01",
+            marginRight: 40,
+            marginLeft: 40,
+            width: 273,
+            height: 58,
+            borderRadius: 12,
+            fontFamily: `"Nunito", sans-serif`,
+            fontWeight: "bold",
+            marginBottom: 20,
+            outline: "none"
+          }
+        }
       },
       {
         target: "#rules_button",
-        content: "Normas de la vico define tus condiciones",
+        content: <CreateVICORules />,
         disableBeacon: true,
         placement: "bottom",
 
@@ -118,13 +104,27 @@ const CreateDashboard = (props) => {
     two: [
       {
         target: "#rules_button",
-        content: "Gracias por crear tus condiciones!",
+        content: <SuccessfulCreatedVICORules />,
         disableBeacon: true,
-        placement: "bottom"
+        placement: "bottom",
+        styles: {
+          buttonNext: {
+            backgroundColor: "#EF8E01",
+            marginRight: 40,
+            marginLeft: 40,
+            width: 273,
+            height: 50,
+            borderRadius: 12,
+            fontFamily: `"Nunito", sans-serif`,
+            fontWeight: "bold",
+            marginBottom: 10,
+            outline: "none"
+          }
+        }
       },
       {
         target: "#common_areas_button",
-        content: "Zonas sociales",
+        content: <CreateVICOCommonAreas />,
         disableBeacon: true,
         placement: "bottom",
         styles: {
@@ -135,9 +135,26 @@ const CreateDashboard = (props) => {
       },
       {
         target: "#common_areas_gallery",
-        content: "Fotos de las Zonas sociales",
+        content: <CommonAreasGallery tutorial={tutorialTwo} />,
         disableBeacon: true,
-        placement: "left"
+        placement: "left",
+        locale: { next: "Omitir", last: "Continue" },
+        styles: {
+          buttonNext: {
+            height: "auto",
+            border: "none",
+            backgroundColor: "transparent",
+            marginRight: 40,
+            marginLeft: 40,
+            width: 273,
+            borderRadius: 12,
+            fontFamily: `"Nunito", sans-serif`,
+            fontWeight: "bold",
+            marginBottom: 10,
+            outline: "none",
+            color: "#2A3C44"
+          }
+        }
       },
       {
         target: "#common_areas_info",
