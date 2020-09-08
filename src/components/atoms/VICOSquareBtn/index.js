@@ -45,7 +45,6 @@ const SquareButton = withStyles({
 const VICOSquareBtn = (props) => {
   const classes = useStyles();
   const { text, icon, active, color } = props;
-  console.log(color);
   return (
     <SquareButton
       className={active && classes.active}

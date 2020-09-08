@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Grid, makeStyles } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 import { CreateContext } from "../../../../../common/context";
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 40
   },
   responseText: {
-    marginTop: 20,
+    marginTop: 10,
     fontSize: 16,
     color: theme.palette.secondary.main
   }
@@ -50,13 +50,15 @@ const Services = (props) => {
   const classes = useStyles();
 
   const { changeState } = React.useContext(CreateContext);
-
+  const [utilitiesIncluded, setUtilitiesIncluded] = useState(false);
   return (
     <RightDrawerScaffold
-      close={() => props.history.push("/create/dashboard/1")}
+      close={() => {
+        // props.history.push("/create/dashboard/1")
+      }}
       save={() => {
-        changeState("createStep", 2);
-        props.history.push("/create/dashboard/1/services");
+        // changeState("createStep", 2);
+        // props.history.push("/create/dashboard/1/services");
       }}
     >
       <div className={classes.drawerContent}>
@@ -96,7 +98,12 @@ const Services = (props) => {
         </div>
 
         <div className={classes.confirmCheckboxWrapper}>
-          <VICOCheckbox text="Confirmo que en el alquiler se incluyen los servicios de WIFI, agua, gas y luz." />
+          <VICOCheckbox
+            handleChange={(event) => {
+              setUtilitiesIncluded(event.target.checked);
+            }}
+            text="Confirmo que en el alquiler se incluyen los servicios de WIFI, agua, gas y luz."
+          />
         </div>
         <div className={classes.continueBtnWrapper}>
           <VICOButton
@@ -104,12 +111,14 @@ const Services = (props) => {
               changeState("createStep", 2);
               props.history.push("/create/dashboard/1");
             }}
+            disabled={!utilitiesIncluded}
             variant="contained"
             color="primary"
             text="Continuar"
             style={{
               width: 267,
-              marginTop: 46
+              marginTop: 46,
+              color: "white"
             }}
           />
         </div>

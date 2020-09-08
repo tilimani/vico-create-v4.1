@@ -116,11 +116,14 @@ const Rules = (props) => {
     !rules.cleaningIncluded ||
     (!isSharedHouse && !rules.monthlyRentCost) ||
     (!isSharedHouse && !rules.couplePrice);
-  console.log(isContinueBtnDisabled, ".................");
   return (
     <RightDrawerScaffold
-      close={() => props.history.push("/create/dashboard/1")}
-      save={() => props.history.push("/create/dashboard/1/services")}
+      close={() => {
+        //props.history.push("/create/dashboard/1")
+      }}
+      save={() => {
+        //props.history.push("/create/dashboard/1/services")
+      }}
     >
       <div className={classes.drawerContent}>
         <span className={classes.title}>Normas de la VICO</span>
