@@ -193,7 +193,10 @@ const VICODropZone = (props) => {
           onDrop={fileDrop}
         >
           <div className={classes.dropZoneIcon}>
-            <img src={upload} alt="upload-icon" />
+            <img
+              src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/t_Lg-upload.png"
+              alt="upload-icon"
+            />
           </div>
           <span className={classes.dropZoneText}>Arrastra las fotos acá</span>
           <span className={classes.dropZoneText}>o</span>

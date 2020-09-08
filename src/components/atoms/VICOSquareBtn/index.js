@@ -2,11 +2,12 @@ import React from "react";
 import { Button, makeStyles } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import theme from "../../../common/theme";
-
+import clsx from "clsx";
+import "./index.css";
 const useStyles = makeStyles(() => ({
   active: {
-    backgroundColor: "white",
-    boxShadow: `0px 2px 4px ${theme.palette.primary.main}`,
+    backgroundColor: "#EF8E01 !important",
+    boxShadow: `0px 2px 4px ${theme.palette.primary.main} !important`,
     color: theme.palette.primary.main
   },
   primary: {
@@ -44,11 +45,12 @@ const SquareButton = withStyles({
 
 const VICOSquareBtn = (props) => {
   const classes = useStyles();
-  const { text, icon, active, color } = props;
+  const { text, icon, active, color, action, selected } = props;
   return (
     <SquareButton
-      className={active && classes.active}
+      className={active || selected ? clsx(classes.active, "active") : null}
       style={color && color === "primary" ? { backgroundColor: "#EF8E01" } : {}}
+      onClick={action && action}
     >
       {text && text} {icon && <img src={icon} alt="icon" />}
     </SquareButton>

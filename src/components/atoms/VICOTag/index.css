@@ -1,0 +1,5 @@
+.selectedTag:hover,
+.selectedTag:focus {
+  background-color: #ef8e01 !important;
+  box-shadow: 0px 2px 4px #ef8e01;
+}

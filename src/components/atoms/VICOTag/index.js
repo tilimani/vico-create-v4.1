@@ -1,8 +1,17 @@
 import React from "react";
 
 import Chip from "@material-ui/core/Chip";
-import { withStyles } from "@material-ui/core";
-
+import { withStyles, makeStyles } from "@material-ui/core";
+import clsx from "clsx";
+import "./index.css";
+const useStyles = makeStyles((theme) => ({
+  selectedTag: {
+    background: "#EF8E01",
+    boxShadow: "0px 2px 4px #EF8E01",
+    color: "white !important",
+    border: "none"
+  }
+}));
 const CustomChip = withStyles((theme) => ({
   root: {
     height: 40,
@@ -17,11 +26,15 @@ const CustomChip = withStyles((theme) => ({
   }
 }))(Chip);
 const VICOTag = (props) => {
+  const classes = useStyles();
   return (
     <CustomChip
       label={props.label}
-      onClick={() => props.action}
+      onClick={props.action}
       variant="outlined"
+      className={
+        props.selected ? clsx(classes.selectedTag, "selectedTag") : null
+      }
     />
   );
 };

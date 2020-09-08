@@ -18,7 +18,7 @@ class CreateProvider extends Component {
       house: {
         id: 1,
         name: "VICO R",
-        type: HouseType.shared,
+        type: HouseType.studio,
         rooms: [{}, {}, {}],
         is_manager_in_house: true,
         capacity: 1,
@@ -36,7 +36,6 @@ class CreateProvider extends Component {
 
   render() {
     const { children } = this.props;
-    console.log(this.state, "++++++++++++++++++");
     return (
       <CreateContext.Provider
         value={{

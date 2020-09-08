@@ -10,37 +10,8 @@ import "./index.css";
 
 import VICOTag from "../../../../atoms/VICOTag";
 import VICOSquareBtn from "../../../../atoms/VICOSquareBtn";
+import VICORadioButton from "../../../../atoms/VICORadioButton";
 
-import sencilla from "../../../../../assets/sencilla.png";
-import semidouble from "../../../../../assets/semidouble.png";
-import doble from "../../../../../assets/doble.png";
-import privatebath from "../../../../../assets/privatebath.png";
-import sharedbath from "../../../../../assets/sharedbath.png";
-import outside from "../../../../../assets/outside.png";
-import inside from "../../../../../assets/inside.png";
-import nowindow from "../../../../../assets/nowindow.png";
-import tothepatio from "../../../../../assets/tothepatio.png";
-
-import comedor from "../../../../../assets/comedor.png";
-import horno from "../../../../../assets/horno.png";
-import tv from "../../../../../assets/tv.png";
-import cafeteria from "../../../../../assets/cafeteria.png";
-import licuadora from "../../../../../assets/licuadora.png";
-import lavadora from "../../../../../assets/lavadora.png";
-import secadora from "../../../../../assets/secadora.png";
-import duchas from "../../../../../assets/duchas.png";
-import porteria from "../../../../../assets/porteria.png";
-
-import cocina from "../../../../../assets/cocina.png";
-import gym from "../../../../../assets/gym.png";
-import piscina from "../../../../../assets/piscina.png";
-import sauna from "../../../../../assets/sauna.png";
-import ascensor from "../../../../../assets/ascensor.png";
-import garaje from "../../../../../assets/garaje.png";
-
-import escritorio from "../../../../../assets/escritorio.png";
-import nevara from "../../../../../assets/nevara.png";
-import espaciodetrabajo from "../../../../../assets/espaciodetrabajo.png";
 import Gallery from "./Gallery";
 
 const useStyles = makeStyles((theme) => ({
@@ -110,8 +81,18 @@ const CommonAreas = ({ tutorial, history }) => {
   const classes = useStyles();
 
   const [images, setImages] = useState([]);
+  const [videoUrl, setVideoUrl] = useState(null);
+  const [information, setInformation] = useState({
+    tags: [],
+    cameraType: null,
+    bathType: null,
+    windowLook: null,
+    facilities: []
+  });
 
-  const { changeState } = useContext(CreateContext);
+  console.log(information.facilities, "*******************");
+
+  const { changeState, house } = useContext(CreateContext);
   const handleClick = () => {
     changeState("createStep", 3);
   };
@@ -139,97 +120,172 @@ const CommonAreas = ({ tutorial, history }) => {
               </p>
               <div className={classes.tagsResponseWrapper}>
                 {[
-                  "Pet friendly",
-                  "Weed friendly",
-                  "Independiente",
-                  "Invitados profesionales",
-                  "Digital nomads",
-                  "Estudiantes"
-                ].map((item, index) => (
-                  <VICOTag key={index} label={item} action={() => {}} />
+                  { id: 1, name: "Pet friendly", deviceId: 1, icon: "" },
+                  { id: 2, name: "Weed friendly", deviceId: 2, icon: "" },
+                  { id: 3, name: "Independiente", deviceId: 3, icon: "" },
+                  {
+                    id: 4,
+                    name: "Invitados profesionales",
+                    deviceId: 4,
+                    icon: ""
+                  },
+                  { id: 5, name: "Digital nomads", deviceId: 5, icon: "" },
+                  { id: 6, name: "Estudiantes", deviceId: 6, icon: "" }
+                ].map((item) => (
+                  <VICOTag
+                    key={item.id}
+                    label={item.name}
+                    selected={information.tags.indexOf(item.id) >= 0}
+                    action={() => {
+                      const tagIsSelected =
+                        information.tags.length &&
+                        information.tags.indexOf(item.id) >= 0;
+
+                      if (!tagIsSelected) {
+                        const arr = [...information.tags, item.id];
+                        setInformation({
+                          ...information,
+                          tags: arr
+                        });
+                      } else {
+                        setInformation({
+                          ...information,
+                          tags: information.tags.filter((i) => i !== item.id)
+                        });
+                      }
+                    }}
+                  />
                 ))}
               </div>
             </div>
-
-            <div className={classes.question}>
-              <span className={classes.questionTitle}>Tipo de cama</span>
-              <div className={classes.cameraTypeResponse}>
-                {[
-                  {
-                    icon: sencilla,
-                    text: "Sencilla"
-                  },
-                  {
-                    icon: semidouble,
-                    text: "Semi-doble"
-                  },
-                  {
-                    icon: doble,
-                    text: "Doble"
-                  }
-                ].map((item, index) => (
-                  <div className={classes.response}>
-                    <VICOSquareBtn icon={item.icon} />
-                    <span className={classes.squareBtnDesc}>{item.text}</span>
+            {house.type === "studio" && (
+              <>
+                {/** Option = studio  */}
+                <div className={classes.question}>
+                  <span className={classes.questionTitle}>Tipo de cama</span>
+                  <div className={classes.cameraTypeResponse}>
+                    {[
+                      {
+                        icon:
+                          "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/qKoY-sencilla.png",
+                        text: "Sencilla"
+                      },
+                      {
+                        icon:
+                          "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/YxsV-semidouble.png",
+                        text: "Semi-doble"
+                      },
+                      {
+                        icon:
+                          "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/YxsV-doble.png",
+                        text: "Doble"
+                      }
+                    ].map((item, index) => (
+                      <div className={classes.response}>
+                        <VICORadioButton
+                          icon={item.icon}
+                          value={item.text}
+                          checked={information.cameraType === item.text}
+                          onChange={(event) => {
+                            setInformation({
+                              ...information,
+                              cameraType: event.target.value
+                            });
+                          }}
+                        />
+                        <span className={classes.squareBtnDesc}>
+                          {item.text}
+                        </span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
-
-            <div className={classes.question}>
-              <span className={classes.questionTitle}>
-                Tipo de baño al que tiene acceso
-              </span>
-              <div className={classes.bathTypeResponse}>
-                {[
-                  {
-                    icon: privatebath,
-                    text: "Baño privado"
-                  },
-                  {
-                    icon: sharedbath,
-                    text: "Baño compartido"
-                  }
-                ].map((item, index) => (
-                  <div className={classes.response}>
-                    <VICOSquareBtn icon={item.icon} />
-                    <span className={classes.squareBtnDesc}>{item.text}</span>
+                </div>
+                {/** Option = studio  */}
+                <div className={classes.question}>
+                  <span className={classes.questionTitle}>
+                    Tipo de baño al que tiene acceso
+                  </span>
+                  <div className={classes.bathTypeResponse}>
+                    {[
+                      {
+                        icon:
+                          "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/rsnv-privatebath.png",
+                        text: "Baño privado"
+                      },
+                      {
+                        icon:
+                          "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/KN8H-sharedbath.png",
+                        text: "Baño compartido"
+                      }
+                    ].map((item, index) => (
+                      <div className={classes.response}>
+                        <VICORadioButton
+                          icon={item.icon}
+                          value={item.text}
+                          checked={information.bathType === item.text}
+                          onChange={(event) => {
+                            setInformation({
+                              ...information,
+                              bathType: event.target.value
+                            });
+                          }}
+                        />
+                        <span className={classes.squareBtnDesc}>
+                          {item.text}
+                        </span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
-
-            <div className={classes.question}>
-              <span className={classes.questionTitle}>
-                ¿Hacia dónde mira la ventana?
-              </span>
-              <div className={classes.squareBtnsWrapper}>
-                {[
-                  {
-                    icon: nowindow,
-                    text: "Sin ventana"
-                  },
-                  {
-                    icon: inside,
-                    text: "Hacia dentro"
-                  },
-                  {
-                    icon: tothepatio,
-                    text: "Hacia el patio"
-                  },
-                  {
-                    icon: outside,
-                    text: "Hacia afuera"
-                  }
-                ].map((item, index) => (
-                  <div className={classes.response}>
-                    <VICOSquareBtn icon={item.icon} />
-                    <span className={classes.squareBtnDesc}>{item.text}</span>
+                </div>
+                {/** Option = studio  */}
+                <div className={classes.question}>
+                  <span className={classes.questionTitle}>
+                    ¿Hacia dónde mira la ventana?
+                  </span>
+                  <div className={classes.squareBtnsWrapper}>
+                    {[
+                      {
+                        icon:
+                          "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/irNV-nowindow.png",
+                        text: "Sin ventana"
+                      },
+                      {
+                        icon:
+                          "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/87wV-inside.png",
+                        text: "Hacia dentro"
+                      },
+                      {
+                        icon:
+                          "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/S97j-tothepatio.png",
+                        text: "Hacia el patio"
+                      },
+                      {
+                        icon:
+                          "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Vkzl-outside.png",
+                        text: "Hacia afuera"
+                      }
+                    ].map((item, index) => (
+                      <div key={index} className={classes.response}>
+                        <VICORadioButton
+                          icon={item.icon}
+                          value={item.text}
+                          checked={information.windowLook === item.text}
+                          onChange={(event) => {
+                            setInformation({
+                              ...information,
+                              windowLook: event.target.value
+                            });
+                          }}
+                        />
+                        <span className={classes.squareBtnDesc}>
+                          {item.text}
+                        </span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
-
+                </div>
+              </>
+            )}
             <div className={classes.question}>
               <span className={classes.questionTitle}>
                 ¿Cuáles servicios o facilidades están incluidos en el alquiler
@@ -238,104 +294,172 @@ const CommonAreas = ({ tutorial, history }) => {
               <div className={classes.squareBtnsWrapper}>
                 {[
                   {
-                    icon: comedor,
+                    id: 1,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/XuGT-comedor.png",
                     text: "Comedor"
                   },
                   {
-                    icon: horno,
+                    id: 2,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/cpWT-horno.png",
                     text: "Horno"
                   },
                   {
-                    icon: tv,
+                    id: 3,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/I17g-tv.png",
                     text: "Tv"
                   },
                   {
-                    icon: cafeteria,
+                    id: 4,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/ocNZ-cafeteria.png",
                     text: "Cafetera"
                   },
                   {
-                    icon: licuadora,
+                    id: 5,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/q53_-licuadora.png",
                     text: "Licuadora"
                   },
                   {
-                    icon: lavadora,
+                    id: 6,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/_qRs-lavadora.png",
                     text: "Lavadora"
                   },
                   {
-                    icon: secadora,
+                    id: 7,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/62Xo-secadora.png",
                     text: "Secadora"
                   },
                   {
-                    icon: duchas,
+                    id: 8,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/421t-duchas.png",
                     text: "Duchas"
                   },
                   {
-                    icon: outside,
+                    id: 9,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Vkzl-outside.png",
                     text: "Balcón"
                   },
                   {
-                    icon: porteria,
+                    id: 10,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/5qeE-porteria.png",
                     text: "Portería"
                   },
                   {
-                    icon: cocina,
+                    id: 11,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/c7Xb-cocina.png",
                     text: "Cocina"
                   },
                   {
-                    icon: gym,
+                    id: 12,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/ANf9-gym.png",
                     text: "Gym"
                   },
 
                   {
-                    icon: piscina,
+                    id: 13,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/DIJo-piscina.png",
                     text: "Piscina"
                   },
                   {
-                    icon: sauna,
+                    id: 14,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/bHdu-sauna.png",
                     text: "Sauna"
                   },
                   {
-                    icon: ascensor,
+                    id: 15,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/cjpG-ascensor.png",
                     text: "Ascensor"
                   },
 
                   {
-                    icon: garaje,
+                    id: 16,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/ziIC-garaje.png",
                     text: "Garaje"
                   },
                   {
-                    icon: nevara,
+                    id: 17,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/HNj8-escritorio.png",
                     text: "Nevera"
                   },
                   {
-                    icon: nevara,
+                    id: 18,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/x1dW-nevara.png",
                     text: "Aire"
                   },
                   {
-                    icon: nevara,
+                    id: 19,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/x1dW-nevara.png",
                     text: "Closet"
                   },
                   {
-                    icon: escritorio,
+                    id: 20,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/HNj8-escritorio.png",
                     text: "Escritorio"
                   },
                   {
-                    icon: escritorio,
+                    id: 21,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/HNj8-escritorio.png",
                     text: "Bbq"
+                  },
+                  {
+                    id: 22,
+                    icon:
+                      "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/D3xd-espaciodetrabajo.png",
+                    text: (
+                      <span>
+                        Espacio <br /> de trabajo
+                      </span>
+                    )
                   }
-                ].map((item, index) => (
-                  <div className={classes.response}>
-                    <VICOSquareBtn icon={item.icon} />
+                ].map((item) => (
+                  <div key={item.id} className={classes.response}>
+                    <VICOSquareBtn
+                      icon={item.icon}
+                      selected={information.facilities.indexOf(item.id) >= 0}
+                      action={() => {
+                        const facilityIsSelected =
+                          information.facilities.length &&
+                          information.facilities.indexOf(item.id) >= 0;
+
+                        if (!facilityIsSelected) {
+                          const arr = [...information.facilities, item.id];
+                          setInformation({
+                            ...information,
+                            facilities: arr
+                          });
+                        } else {
+                          setInformation({
+                            ...information,
+                            facilities: information.facilities.filter(
+                              (i) => i !== item.id
+                            )
+                          });
+                        }
+                      }}
+                    />
                     <span className={classes.squareBtnDesc}>{item.text}</span>
                   </div>
                 ))}
-                <div className={classes.response}>
-                  <VICOSquareBtn icon={espaciodetrabajo} />
-                  <span className={classes.squareBtnDesc}>
-                    Espacio <br />
-                    de trabajo
-                  </span>
-                </div>
               </div>
             </div>
 

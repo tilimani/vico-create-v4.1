@@ -9,7 +9,7 @@ import {
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import theme from "../../../common/theme";
 import clsx from "clsx";
-
+import "./index.css";
 const useStyles = makeStyles((theme) => ({
   root: {
     opacity: 0,
@@ -140,17 +140,21 @@ const VICOImageCheckbox = (props) => {
                     <>
                       <Grid item xs={3}>
                         <Grid container alignItems="center" justify="center">
-                          {props.icon}
+                          <img
+                            src={props.icon}
+                            alt=""
+                            className={props.checked ? "active" : null}
+                          />
                         </Grid>
                       </Grid>
-                      <Grid item xs={9} className={classes.text}>
+                      {/* <Grid item xs={9} className={classes.text}>
                         <div className={classes.header}>{props.label}</div>
                         {props.subtitle && (
                           <Grid item xs={12} className={classes.subtitle}>
                             <div>{props.subtitle}</div>
                           </Grid>
                         )}
-                      </Grid>
+                      </Grid> */}
                     </>
                   ) : (
                     <>
