@@ -78,14 +78,14 @@ const BasicInfoView = (props) => {
                   <VICOReturnButton
                     action={() => {
                       props.history.push("/create/address");
-                      state.changeState("createStep", 6);
+                      // state.changeState("createStep", 6);
                     }}
                   />
                   <VICOSaveButton
                     action={() => {
                       if (house.type === "shared") {
                         props.history.push(`/create/dashboard/${house.id}`);
-                        state.changeState("createStep", 1);
+                        // state.changeState("createStep", 1);
                       } else {
                         props.history.push("/create/availability");
                       }
@@ -106,7 +106,7 @@ const BasicInfoView = (props) => {
                   <VICOReturnButton
                     action={() => {
                       props.history.push("/create/address");
-                      state.changeState("createStep", 6);
+                      // state.changeState("createStep", 6);
                     }}
                   />
                   <VICOSaveButton
@@ -116,7 +116,7 @@ const BasicInfoView = (props) => {
                       } else {
                         props.history.push("/create/availability");
                       }
-                      state.changeState("createStep", 8);
+                      // state.changeState("createStep", 8);
                     }}
                   />
                 </div>
@@ -251,11 +251,12 @@ const BasicInfoView = (props) => {
           onClick={() => {
             if (house.type === "shared") {
               props.history.push(`/create/dashboard/${house.id}`);
+              changeState("createStep", 1);
             } else {
               props.history.push("/create/availability");
             }
 
-            changeState("createStep", 8);
+            // changeState("createStep", 8);
           }}
           variant="contained"
           color="primary"

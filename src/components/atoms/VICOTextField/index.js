@@ -38,11 +38,6 @@ const useStylesVICO = makeStyles((theme) => ({
       borderColor: theme.palette.primary.main,
       border: "1px solid #e2e2e1"
     }
-    // "&$focused": {
-    //   backgroundColor: "#fff",
-    //   boxShadow: `${fade(theme.palette.primary.main, 0.25)} 0 0 0 2px`,
-    //   borderColor: theme.palette.primary.main
-    // }
   },
   focused: {}
 }));

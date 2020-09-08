@@ -1,36 +1,57 @@
 import React, { useState, useContext } from "react";
 import { Link as RouterLink, Route, withRouter } from "react-router-dom";
-import { makeStyles, Grid, Dialog, DialogContent } from "@material-ui/core";
+import {
+  makeStyles,
+  Grid,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button
+} from "@material-ui/core";
+
 import Joyride from "react-joyride";
 
 import LeftMenu from "./LeftMenu";
 import Cover from "./Cover";
 import TutorialStep from "./TutorialStep";
 
+import VICOButton from "../../../atoms/VICOButton";
+
 import SuccessfulCreatedVICO from "./JoyrideCustomContents/SuccessfulCreatedVICO";
 import CreateVICORules from "./JoyrideCustomContents/CreateVICORules";
 import SuccessfulCreatedVICORules from "./JoyrideCustomContents/SuccessfulCreatedVICORules";
 import CreateVICOCommonAreas from "./JoyrideCustomContents/CreateVICOCommonAreas";
 import CommonAreasGallery from "./JoyrideCustomContents/CommonAreasGallery";
-
+import CommonAreasInfo from "./JoyrideCustomContents/CommonAreasInfo";
+import EditRoom from "./JoyrideCustomContents/EditRoom";
+import SuccessfulCreatedCommonAreas from "./JoyrideCustomContents/SuccessfulCreatedCommonAreas";
 import { CreateContext } from "../../../../common/context";
 
 import Rules from "./Rules";
 import Services from "./Services";
 import CommonAreas from "./CommonAreas";
+import Room from "./Room";
 
 const useStyles = makeStyles((theme) => ({
-  leftMenu: { position: "relative", height: "100%" },
+  leftMenu: { position: "relative" },
   dashboardContent: {
     backgroundColor: "#ffffff",
-    position: "relative",
-    height: "100%"
+    position: "relative"
   },
   dashboardWrapper: {
-    height: "86vh"
+    minHeight: "100vh"
   },
-  tutorialSteps: {
-    padding: "70px 200px"
+  tutoStepsWrapper: {
+    padding: "70px 100px",
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  roomsWrapper: {
+    padding: "30px 100px",
+    display: "flex",
+    flexWrap: "wrap"
   },
   tutorialStepGridItem: {
     display: "flex",
@@ -39,7 +60,15 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center"
   },
   rulesButton: {
-    cursor: "pointer"
+    cursor: "pointer",
+    marginRight: 40,
+    marginTop: 40
+  },
+  sectionTitle: {
+    fontSize: 22,
+    color: theme.palette.secondary.main,
+    fontWeight: "bold",
+    padding: "70px 100px 20px"
   }
 }));
 
@@ -48,9 +77,32 @@ const CreateDashboard = (props) => {
 
   /** Context */
   const { house, createStep, changeState } = useContext(CreateContext);
-
+  const hasRooms = house.type !== "studio" ? true : false;
+  const [openDatepicker, setOpenDatepicker] = useState(false);
+  const [openScheduled, setOpenScheduled] = useState(false);
   const [tutorialOne, setTutorialOne] = useState({});
   const [tutorialTwo, setTutorialTwo] = useState({});
+  const [tutorialThree, setTutorialThree] = useState({});
+  const [tutorialFour, setTutorialFour] = useState({});
+
+  const nextStep = () => {
+    if (hasRooms) {
+      changeState("createStep", 4);
+    } else {
+      changeState("createStep", 6);
+      setOpenDatepicker(true);
+      // props.history.push(`/create/dashboard/${house.id}`);
+    }
+  };
+
+  const handleDatepickerClose = () => {
+    setOpenDatepicker(false);
+  };
+
+  const handleScheduleVisit = () => {
+    setOpenDatepicker(false);
+    setOpenScheduled(true);
+  };
 
   const joyrideSettings = {
     continuous: true,
@@ -158,9 +210,46 @@ const CreateDashboard = (props) => {
       },
       {
         target: "#common_areas_info",
-        content: "Informacion sobre las Zonas sociales",
+        content: <CommonAreasInfo />,
         disableBeacon: true,
-        placement: "top",
+        placement: "left-start",
+        styles: {
+          buttonNext: {
+            display: "none"
+          }
+        }
+      }
+    ],
+    three: [
+      {
+        target: "#common_areas_button",
+        content: (
+          <>
+            <SuccessfulCreatedCommonAreas />
+            <VICOButton
+              variant="contained"
+              color="primary"
+              onClick={nextStep}
+              text="Continuar"
+              style={{ marginBottom: 0, marginTop: 10, height: 50 }}
+            />
+          </>
+        ),
+        disableBeacon: true,
+        placement: "bottom",
+        styles: {
+          buttonNext: {
+            display: "none"
+          }
+        }
+      }
+    ],
+    four: [
+      {
+        target: "#room_button",
+        content: <EditRoom />,
+        placement: "bottom",
+        disableBeacon: true,
         styles: {
           buttonNext: {
             display: "none"
@@ -178,8 +267,78 @@ const CreateDashboard = (props) => {
         </Grid>
         <Grid item xs={9} className={classes.dashboardContent}>
           <Cover vicoType="Apartaestudio" />
-
-          <Grid container spacing={0} className={classes.tutorialSteps}>
+          <div className={classes.tutoStepsWrapper}>
+            <div
+              id="rules_button"
+              className={classes.rulesButton}
+              onClick={() => {
+                tutorialOne.close();
+                props.history.push("/create/dashboard/1/rules");
+              }}
+            >
+              <TutorialStep
+                done={false}
+                image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/8z2E-rules.png"
+                text="Normas de la VICO"
+              />
+            </div>
+            <div
+              id="common_areas_button"
+              className={classes.rulesButton}
+              onClick={() => {
+                setTimeout(() => {
+                  tutorialTwo.next();
+                }, 300);
+                props.history.push("/create/dashboard/1/commonareas");
+              }}
+            >
+              <TutorialStep
+                done={false}
+                image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/oAv_-socialZones.png"
+                text="Zonas sociales"
+              />
+            </div>
+            <div className={classes.rulesButton}>
+              <TutorialStep
+                done={false}
+                image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/sF9B-interests.png"
+                text="Puntos de interés"
+              />
+            </div>
+            <div className={classes.rulesButton}>
+              <TutorialStep
+                done={false}
+                image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/UdO0-description.png"
+                text="Descripción de tu VICO"
+              />
+            </div>
+          </div>
+          <div>
+            <span className={classes.sectionTitle}>Habitationes</span>
+          </div>
+          <div className={classes.roomsWrapper}>
+            {house.rooms.map((item, index) => (
+              <div
+                key={index}
+                item
+                xs={6}
+                sm={3}
+                className={classes.tutorialStepGridItem}
+              >
+                <div
+                  id="room_button"
+                  className={classes.rulesButton}
+                  onClick={() => {
+                    // tutorialOne.close();
+                    // props.history.push("/create/dashboard/1/rules");
+                  }}
+                >
+                  <Room key={index} roomNumber={index + 1} />
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* <Grid container spacing={0} className={classes.tutorialSteps}>
             <Grid item xs={6} sm={3} className={classes.tutorialStepGridItem}>
               <div
                 id="rules_button"
@@ -228,9 +387,45 @@ const CreateDashboard = (props) => {
                 text="Descripción de tu VICO"
               />
             </Grid>
-          </Grid>
+          </Grid> */}
+
+          {/* <div>
+            <span className={classes.sectionTitle}>Habitationes</span>
+          </div>
+          <Grid container spacing={0} className={classes.tutorialSteps}>
+            {house.rooms.map((item, index) => (
+              <Grid item xs={6} sm={3} className={classes.tutorialStepGridItem}>
+                <div
+                  id="room_button"
+                  className={classes.rulesButton}
+                  onClick={() => {
+                    // tutorialOne.close();
+                    // props.history.push("/create/dashboard/1/rules");
+                  }}
+                >
+                  <Room key={index} roomNumber={index} />
+                </div>
+              </Grid>
+            ))}
+          </Grid> */}
         </Grid>
       </Grid>
+
+      {/* Map for each room */}
+      {/* {hasRooms && (
+        <Button
+          component={RouterLink}
+          to="/create/dashboard/1/room/1"
+          variant="contained"
+          color="secondary"
+          id="room_button"
+          onClick={() => {
+            tutorialFour.close();
+          }}
+        >
+          Room 1
+        </Button>
+      )} */}
 
       {/** Joyrides */}
       <Joyride
@@ -251,6 +446,25 @@ const CreateDashboard = (props) => {
         }}
         {...joyrideSettings}
       />
+      <Joyride
+        key={"third-tutorial"}
+        steps={tutorialSteps.three}
+        run={createStep === 3}
+        getHelpers={(helpers) => {
+          setTutorialThree(helpers);
+        }}
+        {...joyrideSettings}
+      />
+
+      <Joyride
+        key={"four-tutorial"}
+        steps={tutorialSteps.four}
+        run={createStep === 4}
+        getHelpers={(helpers) => {
+          setTutorialFour(helpers);
+        }}
+        {...joyrideSettings}
+      />
 
       {/** Routes */}
       {/** Rules */}
@@ -259,6 +473,35 @@ const CreateDashboard = (props) => {
       <Route path="/create/dashboard/:houseId/commonareas">
         <CommonAreas tutorial={tutorialTwo} history={props.history} />
       </Route>
+
+      {/** Datepicker dialog */}
+      {/* Datepicker Dialog */}
+      <Dialog
+        maxWidth="sm"
+        open={openDatepicker}
+        onClose={handleDatepickerClose}
+        aria-labelledby="max-width-dialog-title"
+      >
+        <DialogTitle id="max-width-dialog-title">
+          Fecha de verificacion
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            En que fecha podrias verificar tu VICO con nuestro equipo?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <VICOButton
+            onClick={handleScheduleVisit}
+            variant="contained"
+            color="primary"
+            text="Agendar mi cita"
+          />
+          <Button onClick={handleDatepickerClose} color="primary">
+            Omitir
+          </Button>
+        </DialogActions>
+      </Dialog>
       {/** Modal displayed once this dashboard is opened showing that the vico is successfully */}
       {/* <Dialog
         open={creationSuccessDialogIsOpen}

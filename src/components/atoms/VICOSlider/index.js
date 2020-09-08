@@ -53,14 +53,15 @@ const marks = [
   }
 ];
 
-const VICOSlider = () => {
+const VICOSlider = (props) => {
   return (
     <PrettoSlider
       valueLabelDisplay="on"
       aria-label="pretto slider"
       defaultValue={50}
-      valueLabelFormat={valueLabelFormat}
+      valueLabelFormat={valueLabelFormat(props.value)}
       marks={marks}
+      onChange={(event, value) => props.setDeposit(value)}
     />
   );
 };

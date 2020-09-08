@@ -1,0 +1,5 @@
+.iconBtn:hover,
+.iconBtn:focus,
+.iconBtn:active {
+  background-color: transparent;
+}

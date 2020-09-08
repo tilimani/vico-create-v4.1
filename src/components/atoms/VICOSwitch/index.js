@@ -60,14 +60,10 @@ const CustomSwitch = withStyles((theme) => ({
 
 const VICOSwitch = (props) => {
   return (
-    <FormControlLabel
-      control={
-        <CustomSwitch
-          checked={props.checked}
-          onChange={props.handleChange}
-          name="checked"
-        />
-      }
+    <CustomSwitch
+      checked={props.checked}
+      onChange={props.handleChange}
+      name="checked"
     />
   );
 };

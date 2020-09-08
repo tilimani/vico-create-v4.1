@@ -18,8 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     color: theme.palette.secondary.dark,
-    fontSize: "20px",
-    fontWeight: "bold"
+    fontSize: "16px"
   },
   label: {
     marginLeft: "12px",
@@ -30,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
   overlay: {},
   container: {
     border: ".5px solid #dadada",
-    width: "60px",
-    height: "60px",
+    width: "88px",
+    height: "80px",
     borderRadius: "12px",
     textAlign: "center",
     boxShadow: "0px 2px 4px rgba(196, 196, 196, 0.65)",

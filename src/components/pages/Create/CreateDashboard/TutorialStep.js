@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.25)"
   },
   doneStatus: {
     color: "#07A529"
