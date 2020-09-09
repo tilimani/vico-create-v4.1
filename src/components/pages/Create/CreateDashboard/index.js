@@ -1,15 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link as RouterLink, Route, withRouter } from "react-router-dom";
-import {
-  makeStyles,
-  Grid,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-  Button
-} from "@material-ui/core";
+import { makeStyles, Grid } from "@material-ui/core";
 
 import Joyride from "react-joyride";
 
@@ -33,6 +24,7 @@ import Rules from "./Rules";
 import Services from "./Services";
 import CommonAreas from "./CommonAreas";
 import Room from "./Room";
+import VerificationDateDialog from "./VerificationDateDialog";
 
 const useStyles = makeStyles((theme) => ({
   leftMenu: { position: "relative" },
@@ -99,9 +91,10 @@ const CreateDashboard = (props) => {
     setOpenDatepicker(false);
   };
 
-  const handleScheduleVisit = () => {
+  const handleScheduleVisit = (date) => {
+    console.log(date, "XXXXXXXXXXXXXXXXXXXXXXXx");
     setOpenDatepicker(false);
-    setOpenScheduled(true);
+    // setOpenScheduled(true);
   };
 
   const joyrideSettings = {
@@ -475,66 +468,11 @@ const CreateDashboard = (props) => {
       </Route>
 
       {/** Datepicker dialog */}
-      {/* Datepicker Dialog */}
-      <Dialog
-        maxWidth="sm"
-        open={openDatepicker}
-        onClose={handleDatepickerClose}
-        aria-labelledby="max-width-dialog-title"
-      >
-        <DialogTitle id="max-width-dialog-title">
-          Fecha de verificacion
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            En que fecha podrias verificar tu VICO con nuestro equipo?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <VICOButton
-            onClick={handleScheduleVisit}
-            variant="contained"
-            color="primary"
-            text="Agendar mi cita"
-          />
-          <Button onClick={handleDatepickerClose} color="primary">
-            Omitir
-          </Button>
-        </DialogActions>
-      </Dialog>
-      {/** Modal displayed once this dashboard is opened showing that the vico is successfully */}
-      {/* <Dialog
-        open={creationSuccessDialogIsOpen}
-        onClose={() => setCreationSuccessDialogIsOpen(false)}
-      >
-        <DialogContent>
-          <div className={classes.dialogInnerContent}>
-            <img
-              src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/PUeT-creationSuccess.png"
-              alt=""
-              className={classes.dialogImg}
-            />
-            <span className={classes.dialogTitle}>
-              ¡Felicitaciones! Tu VICO ha sido creada.
-            </span>
-            <p className={classes.dialogDescription}>
-              Queremos que tu VICO se vea de la mejor manera posible. A
-              continuación, vamos a guiarte para que puedas personalizarla.
-            </p>
-            <VICOButton
-              onClick={() => setCreationSuccessDialogIsOpen(false)}
-              variant="contained"
-              color="primary"
-              text="Continuar"
-              style={{
-                width: 267,
-                marginTop: 20,
-                marginBottom: 40
-              }}
-            />
-          </div>
-        </DialogContent>
-      </Dialog> */}
+      <VerificationDateDialog
+        openDatepicker={openDatepicker}
+        handleDatepickerClose={handleDatepickerClose}
+        handleScheduleVisit={handleScheduleVisit}
+      />
     </>
   );
 };
