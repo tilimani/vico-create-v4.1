@@ -27,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 16,
     color: theme.palette.secondary.main,
     marginTop: 10,
-    width: 300
+    width: 300,
+    textAlign: "center"
   },
   titleWrapper: {
     display: "flex",

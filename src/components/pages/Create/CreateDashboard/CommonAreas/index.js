@@ -90,8 +90,6 @@ const CommonAreas = ({ tutorial, history }) => {
     facilities: []
   });
 
-  console.log(information.facilities, "*******************");
-
   const { changeState, house } = useContext(CreateContext);
   const handleClick = () => {
     changeState("createStep", 3);

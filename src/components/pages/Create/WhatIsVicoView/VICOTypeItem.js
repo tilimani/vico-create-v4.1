@@ -11,9 +11,7 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "row"
     }
   },
-  iconWrapper: {
-    marginRight: 20
-  },
+  iconWrapper: { marginRight: 20 },
   icon: {
     width: 40,
     [theme.breakpoints.down("md")]: {
@@ -37,9 +35,8 @@ const useStyles = makeStyles((theme) => ({
   subtitle: {
     fontSize: 16,
     color: theme.palette.secondary.main,
-    [theme.breakpoints.down("sm")]: {
-      marginTop: "0.2em"
-    }
+    marginTop: 6,
+    marginBottom: 0
   }
 }));
 

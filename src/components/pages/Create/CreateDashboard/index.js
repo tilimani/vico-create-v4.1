@@ -25,6 +25,7 @@ import Services from "./Services";
 import CommonAreas from "./CommonAreas";
 import Room from "./Room";
 import VerificationDateDialog from "./VerificationDateDialog";
+import ScheduledDialog from "./ScheduledDialog";
 
 const useStyles = makeStyles((theme) => ({
   leftMenu: { position: "relative" },
@@ -91,10 +92,13 @@ const CreateDashboard = (props) => {
     setOpenDatepicker(false);
   };
 
+  const handleScheduledClose = () => {
+    setOpenScheduled(false);
+  };
+
   const handleScheduleVisit = (date) => {
-    console.log(date, "XXXXXXXXXXXXXXXXXXXXXXXx");
     setOpenDatepicker(false);
-    // setOpenScheduled(true);
+    setOpenScheduled(true);
   };
 
   const joyrideSettings = {
@@ -331,76 +335,6 @@ const CreateDashboard = (props) => {
               </div>
             ))}
           </div>
-          {/* <Grid container spacing={0} className={classes.tutorialSteps}>
-            <Grid item xs={6} sm={3} className={classes.tutorialStepGridItem}>
-              <div
-                id="rules_button"
-                className={classes.rulesButton}
-                onClick={() => {
-                  tutorialOne.close();
-                  props.history.push("/create/dashboard/1/rules");
-                }}
-              >
-                <TutorialStep
-                  done={false}
-                  image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/8z2E-rules.png"
-                  text="Normas de la VICO"
-                />
-              </div>
-            </Grid>
-            <Grid item xs={6} sm={3} className={classes.tutorialStepGridItem}>
-              <div
-                id="common_areas_button"
-                className={classes.rulesButton}
-                onClick={() => {
-                  setTimeout(() => {
-                    tutorialTwo.next();
-                  }, 300);
-                  props.history.push("/create/dashboard/1/commonareas");
-                }}
-              >
-                <TutorialStep
-                  done={false}
-                  image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/oAv_-socialZones.png"
-                  text="Zonas sociales"
-                />
-              </div>
-            </Grid>
-            <Grid item xs={6} sm={3} className={classes.tutorialStepGridItem}>
-              <TutorialStep
-                done={false}
-                image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/sF9B-interests.png"
-                text="Puntos de interés"
-              />
-            </Grid>
-            <Grid item xs={6} sm={3} className={classes.tutorialStepGridItem}>
-              <TutorialStep
-                done={false}
-                image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/UdO0-description.png"
-                text="Descripción de tu VICO"
-              />
-            </Grid>
-          </Grid> */}
-
-          {/* <div>
-            <span className={classes.sectionTitle}>Habitationes</span>
-          </div>
-          <Grid container spacing={0} className={classes.tutorialSteps}>
-            {house.rooms.map((item, index) => (
-              <Grid item xs={6} sm={3} className={classes.tutorialStepGridItem}>
-                <div
-                  id="room_button"
-                  className={classes.rulesButton}
-                  onClick={() => {
-                    // tutorialOne.close();
-                    // props.history.push("/create/dashboard/1/rules");
-                  }}
-                >
-                  <Room key={index} roomNumber={index} />
-                </div>
-              </Grid>
-            ))}
-          </Grid> */}
         </Grid>
       </Grid>
 
@@ -472,6 +406,11 @@ const CreateDashboard = (props) => {
         openDatepicker={openDatepicker}
         handleDatepickerClose={handleDatepickerClose}
         handleScheduleVisit={handleScheduleVisit}
+      />
+      {/* Visit Scheduled Dialog */}
+      <ScheduledDialog
+        openScheduled={openScheduled}
+        handleScheduledClose={handleScheduledClose}
       />
     </>
   );

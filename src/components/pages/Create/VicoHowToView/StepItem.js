@@ -8,9 +8,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     textAlign: "center"
   },
-  iconWrapper: {
-    marginRight: 20
-  },
+  iconWrapper: {},
   icon: {
     width: 80,
     [theme.breakpoints.down("md")]: {

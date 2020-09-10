@@ -8,7 +8,15 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#f59100",
     minHeight: "98vh",
     height: "98vh",
-    position: "relative"
+    position: "relative",
+    backgroundImage: `url(https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/BT4S-backgroundCreate.png)`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "bottom",
+    backgroundAttachment: "fixed",
+    [theme.breakpoints.down("xs")]: {
+      backgroundImage: "none"
+    }
   },
   welcomeViewContent: {
     width: 300,
@@ -17,18 +25,29 @@ const useStyles = makeStyles((theme) => ({
       paddingLeft: 20,
       paddingRight: 20
     },
+
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     position: "absolute",
     left: "50%",
     transform: "translateX(-50%)",
-    top: "30%"
+    top: "20%"
+  },
+  logo: {
+    width: 340,
+    [theme.breakpoints.down("xs")]: {
+      width: 260
+    }
   },
   welcomeText: {
     fontWeight: "bold",
     fontSize: 36,
-    color: "#ffffff"
+    color: "#ffffff",
+    marginTop: 20,
+    [theme.breakpoints.down("xs")]: {
+      marginTop: 60
+    }
   },
   welcomeDescription: {
     fontSize: 25,
@@ -51,9 +70,15 @@ const CreateWelcomeView = () => {
   return (
     <div className={classes.welcomeViewWrapper}>
       <div className={classes.welcomeViewContent}>
+        <img
+          className={classes.logo}
+          src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Ksur-vicoLogo.png"
+          alt="logo"
+        />
         <span className={classes.welcomeText}>Bienvenidos</span>
         <p className={classes.welcomeDescription}>
-          Cambiamos la forma como nuestro mundo vive
+          Cambiamos la forma como <br />
+          nuestro mundo vive
         </p>
         <VICOButton
           component={RouterLink}
