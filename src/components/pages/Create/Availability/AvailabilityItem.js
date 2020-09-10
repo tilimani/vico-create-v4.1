@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core";
 
-import VICOSquareBtn from "../../../atoms/VICOSquareBtn";
+import VICORadioButton from "../../../atoms/VICORadioButton";
 
 const useStyles = makeStyles((theme) => ({
   availabilityItemWrapper: {
@@ -13,7 +13,9 @@ const useStyles = makeStyles((theme) => ({
   description: {
     fontSize: 16,
     color: theme.palette.secondary.main,
-    marginTop: 10
+    marginTop: 10,
+    textAlign: "center",
+    width: "50%"
   },
   date: {
     fontSize: 16,
@@ -25,12 +27,18 @@ const useStyles = makeStyles((theme) => ({
 
 const AvailabilityItem = (props) => {
   const classes = useStyles();
-  const { icon, description, date } = props;
+  const { icon, description, date, value, checked, setSelectedItem } = props;
+
   return (
     <div className={classes.availabilityItemWrapper}>
-      <VICOSquareBtn icon={icon} />
+      <VICORadioButton
+        icon={icon}
+        checked={checked}
+        value={value}
+        onChange={props.onChange}
+      />
       <span className={classes.description}>{description}</span>
-      <span className={classes.date}> Lun., 17.08.2020 </span>
+      {date && <span className={classes.date}>{date}</span>}
     </div>
   );
 };
