@@ -25,7 +25,8 @@ class CreateProvider extends Component {
         rooms_quantity: 1,
         baths_quantity: 1
       },
-      createStep: 0
+      createStep: 0,
+      mobileProgressIndicator: 0
     };
     this.changeState = this.changeState.bind(this);
   }

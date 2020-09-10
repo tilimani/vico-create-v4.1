@@ -4,6 +4,7 @@ import { makeStyles, TextField } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import VICOButton from "../../../atoms/VICOButton";
+import VICOCodeInput from "../../../atoms/VICOCodeInput";
 
 // import "./VerifNumberDialogFrom.css";
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +41,8 @@ const VerifNumberDialogFrom = (props) => {
   return (
     <div className={`${classes.formWrapper} formWrapper`}>
       <div className={classes.textFieldWrapper}>
-        <TextField label="Código" className={classes.textField} />
+        <VICOCodeInput />
+        {/* <TextField label="Código" className={classes.textField} /> */}
         <p className={classes.note}>Reenviar en 30 segundos</p>
       </div>
 

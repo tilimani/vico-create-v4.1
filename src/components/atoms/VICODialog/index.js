@@ -65,7 +65,7 @@ function VICODialog(props) {
             {(state) => {
               return (
                 <div className={classes.mobileHeader}>
-                  <VICOMobileLinearProgress step={state.createStep} />
+                  <VICOMobileLinearProgress step={props.progress * 4} />
                   <VICOReturnButton
                     action={() => {
                       props.backAction();

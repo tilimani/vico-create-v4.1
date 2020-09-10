@@ -1,11 +1,10 @@
 import React from "react";
-
 import { makeStyles, TextField } from "@material-ui/core";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import VICOButton from "../../../atoms/VICOButton";
 
 import "./ContactNumberDialogContent.css";
+
 const useStyles = makeStyles((theme) => ({
   formWrapper: {
     display: "flex",
@@ -28,8 +27,6 @@ const useStyles = makeStyles((theme) => ({
 
 const ContactNumberDialogContent = (props) => {
   const classes = useStyles();
-  const isMediumScreen = useMediaQuery("(max-width:960px)");
-  const buttonWidth = isMediumScreen ? "100%" : 267;
   return (
     <div className={`${classes.formWrapper} formWrapper`}>
       <TextField label="Número de WhatsApp" className={classes.textField} />
