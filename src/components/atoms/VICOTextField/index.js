@@ -10,10 +10,12 @@ const useStylesVICO = makeStyles((theme) => ({
   root: {
     border: "1px solid #e2e2e1",
     overflow: "hidden",
-    borderRadius: 4,
-    backgroundColor: "#fcfcfb",
     paddingLeft: 20,
-    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
+    background: "#FFFFFF",
+    boxShadow: "0px 2px 4px #C4C4C4",
+    borderRadius: 6,
+    height: 58,
+    width: 406,
     transition: theme.transitions.create(["border-color", "box-shadow"]),
     "&.MuiInputBase-multiline": {
       paddingLeft: theme.spacing(1.5),

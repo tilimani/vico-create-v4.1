@@ -1,6 +1,7 @@
 import React from "react";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles, Dialog, DialogContent } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 
 import "./index.css";
 
@@ -47,6 +48,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const CustomDialog = withStyles((theme) => ({
+  paperWidthSm: {
+    borderRadius: 8
+  }
+}))(Dialog);
+
 function VICODialog(props) {
   const handleClose = () => {
     props.setDialogOpened(false);
@@ -54,7 +61,7 @@ function VICODialog(props) {
   const classes = useStyles();
   const isMobileScreen = useMediaQuery("(max-width:600px)");
   return (
-    <Dialog
+    <CustomDialog
       open={props.dialogOpened}
       onClose={handleClose}
       className="dialogWrapper"
@@ -65,7 +72,7 @@ function VICODialog(props) {
             {(state) => {
               return (
                 <div className={classes.mobileHeader}>
-                  <VICOMobileLinearProgress step={props.progress * 4} />
+                  <VICOMobileLinearProgress step={props.progress} />
                   <VICOReturnButton
                     action={() => {
                       props.backAction();
@@ -95,7 +102,7 @@ function VICODialog(props) {
         </div>
         {props.form}
       </DialogContent>
-    </Dialog>
+    </CustomDialog>
   );
 }
 

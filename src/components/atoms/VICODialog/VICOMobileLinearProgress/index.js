@@ -19,7 +19,7 @@ const CustomLinearProgress = withStyles((theme) => ({
 const VICOMobileLinearProgress = (props) => {
   return (
     <div>
-      <CustomLinearProgress variant="determinate" value={props.step} />
+      <CustomLinearProgress variant="determinate" value={props.step * 4} />
     </div>
   );
 };

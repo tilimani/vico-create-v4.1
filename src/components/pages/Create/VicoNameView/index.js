@@ -92,18 +92,16 @@ const VicoNameView = (props) => {
           {(state) => {
             return (
               <div>
-                <VICOMobileLinearProgress step={state.createStep} />
+                <VICOMobileLinearProgress step={4} />
                 <div className={classes.actionsWrapper}>
                   <VICOReturnButton
                     action={() => {
                       props.history.push("/create/type");
-                      state.changeState("createStep", 4);
                     }}
                   />
                   <VICOSaveButton
                     action={() => {
                       props.history.push("/create/address");
-                      state.changeState("createStep", 6);
                       state.changeState("house", {
                         ...state.house,
                         name: VICOName
@@ -155,7 +153,6 @@ const VicoNameView = (props) => {
                 <VICOButton
                   onClick={() => {
                     props.history.push("/create/address");
-                    state.changeState("createStep", 6);
                     state.changeState("house", {
                       ...state.house,
                       name: VICOName

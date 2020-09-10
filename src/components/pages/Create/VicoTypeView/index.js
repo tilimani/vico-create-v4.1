@@ -33,9 +33,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    [theme.breakpoints.down("md")]: { margin: "auto" },
     [theme.breakpoints.down("sm")]: {
       boxShadow: "none",
-      margin: "auto",
+
       display: "block",
       padding: 0
     }
@@ -55,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   gridContainer: {
-    marginTop: 40,
+    marginTop: -20,
     [theme.breakpoints.down("sm")]: {
       width: "auto",
       margin: "auto"
@@ -76,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 40,
     cursor: "pointer",
     position: "relative",
     marginBottom: 20
@@ -113,29 +114,21 @@ const vicoTypeView = (props) => {
     <div className={classes.vicoTypeViewWrapper}>
       <div className={classes.vicoTypeViewContent}>
         {isMediumScreen && (
-          <CreateConsumer>
-            {(state) => {
-              return (
-                <div>
-                  <VICOMobileLinearProgress step={state.createStep} />
-                  <div className={classes.actionsWrapper}>
-                    <VICOReturnButton
-                      action={() => {
-                        props.history.push("/create/howto");
-                        state.changeState("createStep", 0);
-                      }}
-                    />
-                    <VICOSaveButton
-                      action={() => {
-                        props.history.push("/create/name");
-                        state.changeState("createStep", 5);
-                      }}
-                    />
-                  </div>
-                </div>
-              );
-            }}
-          </CreateConsumer>
+          <div>
+            <VICOMobileLinearProgress step={3} />
+            <div className={classes.actionsWrapper}>
+              <VICOReturnButton
+                action={() => {
+                  props.history.push("/create/howto");
+                }}
+              />
+              <VICOSaveButton
+                action={() => {
+                  props.history.push("/create/name");
+                }}
+              />
+            </div>
+          </div>
         )}
         <div className={classes.innerContent}>
           <span className={classes.vicoTypeViewTitle}>CREA TU VICO</span>

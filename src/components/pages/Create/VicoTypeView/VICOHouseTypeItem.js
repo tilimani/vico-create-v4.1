@@ -12,19 +12,16 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 6,
     padding: 20,
     cursor: "pointer",
+    position: "relative",
+    height: "80%",
     "&:hover": {
       boxShadow: "0px 2px 4px #EF8E01"
     },
     [theme.breakpoints.down("sm")]: {
-      padding: 16,
+      paddingTop: 14,
+      paddingBottom: 14,
       marginTop: 20
     }
-    // "&:active": {
-    //   boxShadow: "0px 2px 4px #EF8E01"
-    // },
-    // "&:focus": {
-    //   boxShadow: "0px 2px 4px #EF8E01"
-    // }
   },
   activeItem: {
     boxShadow: "0px 2px 4px #EF8E01"
@@ -43,7 +40,9 @@ const useStyles = makeStyles((theme) => ({
   },
   subtitle: {
     fontSize: 16,
-    color: "rgba(0, 0, 0, 0.57)"
+    color: "rgba(0, 0, 0, 0.57)",
+    marginBottom: 0,
+    marginTop: 12
   }
 }));
 
@@ -67,7 +66,6 @@ const VICOHouseTypeItem = (props) => {
               });
               if (isDesktop) {
                 props.history.push("/create/name");
-                state.changeState("createStep", 5);
               }
             }}
           >

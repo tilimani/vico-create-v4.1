@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { makeStyles } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { CreateConsumer } from "../../../../common/context";
 import VICOMobileLinearProgress from "../../../atoms/VICOMobileLinearProgress";
 import VICOSaveButton from "../../../atoms/VICOSaveButton";
 import VICOReturnButton from "../../../atoms/VICOReturnButton";
@@ -48,7 +47,8 @@ const useStyles = makeStyles((theme) => ({
   },
   inputsWrapper: {
     position: "relative",
-    width: "50%",
+    width: "70%",
+    margin: "auto",
     [theme.breakpoints.down("sm")]: {
       marginTop: 40,
       width: "auto"
@@ -119,56 +119,39 @@ const AddressView = (props) => {
   const [VICOAddress, setVICOAddress] = useState("");
   const [VICOAdditionalInfo, setVICOAdditionalInfo] = useState("");
 
-  console.log(VICOAdditionalInfo, "----");
   return (
     <div>
       {isMediumScreen && (
-        <CreateConsumer>
-          {(state) => {
-            return (
-              <div>
-                <VICOMobileLinearProgress step={state.createStep} />
-                <div className={classes.actionsWrapper}>
-                  <VICOReturnButton
-                    action={() => {
-                      props.history.push("/create/name");
-                      state.changeState("createStep", 5);
-                    }}
-                  />
-                  <VICOSaveButton
-                    action={() => {
-                      props.history.push("/create/basic");
-                      state.changeState("createStep", 7);
-                    }}
-                  />
-                </div>
-              </div>
-            );
-          }}
-        </CreateConsumer>
+        <div>
+          <VICOMobileLinearProgress step={5} />
+          <div className={classes.actionsWrapper}>
+            <VICOReturnButton
+              action={() => {
+                props.history.push("/create/name");
+              }}
+            />
+            <VICOSaveButton
+              action={() => {
+                props.history.push("/create/basic");
+              }}
+            />
+          </div>
+        </div>
       )}
       <div className={classes.vicoNameViewContent}>
         {!isMediumScreen && (
-          <CreateConsumer>
-            {(state) => {
-              return (
-                <div className={classes.actionsWrapper}>
-                  <VICOReturnButton
-                    action={() => {
-                      props.history.push("/create/name");
-                      state.changeState("createStep", 5);
-                    }}
-                  />
-                  <VICOSaveButton
-                    action={() => {
-                      props.history.push("/create/basic");
-                      state.changeState("createStep", 7);
-                    }}
-                  />
-                </div>
-              );
-            }}
-          </CreateConsumer>
+          <div className={classes.actionsWrapper}>
+            <VICOReturnButton
+              action={() => {
+                props.history.push("/create/name");
+              }}
+            />
+            <VICOSaveButton
+              action={() => {
+                props.history.push("/create/basic");
+              }}
+            />
+          </div>
         )}
         <div className={`${classes.formWrapper}`}>
           <div className={VICOAddress && classes.withMapWarpper}>
@@ -214,25 +197,18 @@ const AddressView = (props) => {
             )}
           </div>
 
-          <CreateConsumer>
-            {(state) => {
-              return (
-                <VICOButton
-                  onClick={() => {
-                    props.history.push("/create/basic");
-                    state.changeState("createStep", 7);
-                  }}
-                  variant="contained"
-                  color="primary"
-                  text="Continuar"
-                  style={{
-                    width: 267,
-                    marginTop: 46
-                  }}
-                />
-              );
+          <VICOButton
+            onClick={() => {
+              props.history.push("/create/basic");
             }}
-          </CreateConsumer>
+            variant="contained"
+            color="primary"
+            text="Continuar"
+            style={{
+              width: 267,
+              marginTop: 46
+            }}
+          />
         </div>
       </div>
     </div>
