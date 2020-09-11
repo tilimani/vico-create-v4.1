@@ -51,31 +51,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CustomTextField = withStyles((theme) => ({
-  root: {
-    height: 81,
-    width: 406,
-    borderRadius: 6,
-    boxShadow: "0px 2px 4px rgba(239, 142, 5, 0.53)"
-  }
-}))(TextField);
-
 const Gallery = (props) => {
   const classes = useStyles();
 
-  const { images, setImages, tutorial } = props;
+  const { joyrideId, title, subtitle, images, setImages, action } = props;
   return (
-    <div id="room_edit_gallery">
-      <span className={classes.title}>Galeria habitación 1</span>
-      <p className={classes.subtitle}>Sube mínimo 3 fotos de la habitación.</p>
+    <div id={joyrideId}>
+      <span className={classes.title}>{title}</span>
+      <p className={classes.subtitle}>{subtitle}</p>
 
       <VICODropZone images={images} setImages={setImages} />
       {images.length !== 0 && (
         <div className={classes.saveBtnWrapper}>
           <VICOButton
-            // component={RouterLink}
-            // to="/create/dashboard/1"
-            onClick={() => tutorial.next()}
+            onClick={action}
             variant="contained"
             color="primary"
             text="Guardar"

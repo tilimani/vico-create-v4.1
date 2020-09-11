@@ -1,21 +1,20 @@
 import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core";
-import { Link as RouterLink } from "react-router-dom";
 import { CreateContext } from "../../../../../common/context";
 
 import RightDrawerScaffold from "../RightDrawerScaffold";
 import VICOButton from "../../../../atoms/VICOButton";
 
-import "./RoomCommonAreas.css";
-
-import VICOTag from "../../../../atoms/VICOTag";
 import VICOSquareBtn from "../../../../atoms/VICOSquareBtn";
 import VICORadioButton from "../../../../atoms/VICORadioButton";
 
-import Gallery from "./Gallery";
 import Availability from "../SharedComponents/Availability";
 import VICOTextField from "../../../../atoms/VICOTextField";
 import MonthlyRent from "../SharedComponents/MonthlyRent";
+import Gallery from "../SharedComponents/Gallery";
+import CameraType from "../SharedComponents/CameraType";
+import BathType from "../SharedComponents/BathType";
+import WindowDirection from "../SharedComponents/WindowDirection";
 
 const useStyles = makeStyles((theme) => ({
   drawerContent: {
@@ -63,14 +62,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-between"
-  },
-  cameraTypeResponse: {
-    display: "flex",
-    justifyContent: "space-between"
-  },
-  bathTypeResponse: {
-    display: "flex",
-    justifyContent: "space-around"
   },
   continueBtnWrapper: {
     textAlign: "center"
@@ -121,13 +112,17 @@ const RoomEdit = ({ tutorial, history }) => {
         ) : (
           <div className={classes.drawerContent}>
             <Gallery
+              joyrideId="room_edit_gallery"
+              title="Galeria habitación 1"
+              subtitle="Sube mínimo 3 fotos de la habitación."
               images={images}
               setImages={setImages}
-              tutorial={tutorial}
+              action={() => tutorial.next()}
             />
+
             <div id="room_edit_info" className={classes.additionalContent}>
               {house.type === "shared" && (
-                <div className={classes.question} style={{ paddingTop: 20 }}>
+                <div className={classes.question}>
                   <span className={classes.questionTitle}>
                     ¿Cómo reconoces esta habitación?
                   </span>
@@ -144,129 +139,35 @@ const RoomEdit = ({ tutorial, history }) => {
 
               {(house.type === "shared" || house.type === "private") && (
                 <>
-                  <div className={classes.question}>
-                    <span className={classes.questionTitle}>Tipo de cama</span>
-                    <div className={classes.cameraTypeResponse}>
-                      {[
-                        {
-                          icon:
-                            "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/qKoY-sencilla.png",
-                          text: "Sencilla"
-                        },
-                        {
-                          icon:
-                            "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/YxsV-semidouble.png",
-                          text: "Semi-doble"
-                        },
-                        {
-                          icon:
-                            "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/YxsV-doble.png",
-                          text: "Doble"
-                        }
-                      ].map((item, index) => (
-                        <div className={classes.response}>
-                          <VICORadioButton
-                            icon={item.icon}
-                            value={item.text}
-                            checked={information.cameraType === item.text}
-                            onChange={(event) => {
-                              setInformation({
-                                ...information,
-                                cameraType: event.target.value
-                              });
-                            }}
-                          />
-                          <span className={classes.squareBtnDesc}>
-                            {item.text}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <CameraType
+                    cameraType={information.cameraType}
+                    onChange={(event) => {
+                      setInformation({
+                        ...information,
+                        cameraType: event.target.value
+                      });
+                    }}
+                  />
 
-                  <div className={classes.question}>
-                    <span className={classes.questionTitle}>
-                      Tipo de baño al que tiene acceso
-                    </span>
-                    <div className={classes.bathTypeResponse}>
-                      {[
-                        {
-                          icon:
-                            "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/rsnv-privatebath.png",
-                          text: "Baño privado"
-                        },
-                        {
-                          icon:
-                            "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/KN8H-sharedbath.png",
-                          text: "Baño compartido"
-                        }
-                      ].map((item, index) => (
-                        <div className={classes.response}>
-                          <VICORadioButton
-                            icon={item.icon}
-                            value={item.text}
-                            checked={information.bathType === item.text}
-                            onChange={(event) => {
-                              setInformation({
-                                ...information,
-                                bathType: event.target.value
-                              });
-                            }}
-                          />
-                          <span className={classes.squareBtnDesc}>
-                            {item.text}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <BathType
+                    bathType={information.bathType}
+                    onChange={(event) => {
+                      setInformation({
+                        ...information,
+                        bathType: event.target.value
+                      });
+                    }}
+                  />
 
-                  <div className={classes.question}>
-                    <span className={classes.questionTitle}>
-                      ¿Hacia dónde mira la ventana?
-                    </span>
-                    <div className={classes.squareBtnsWrapper}>
-                      {[
-                        {
-                          icon:
-                            "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/irNV-nowindow.png",
-                          text: "Sin ventana"
-                        },
-                        {
-                          icon:
-                            "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/87wV-inside.png",
-                          text: "Hacia dentro"
-                        },
-                        {
-                          icon:
-                            "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/S97j-tothepatio.png",
-                          text: "Hacia el patio"
-                        },
-                        {
-                          icon:
-                            "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Vkzl-outside.png",
-                          text: "Hacia afuera"
-                        }
-                      ].map((item, index) => (
-                        <div key={index} className={classes.response}>
-                          <VICORadioButton
-                            icon={item.icon}
-                            value={item.text}
-                            checked={information.windowLook === item.text}
-                            onChange={(event) => {
-                              setInformation({
-                                ...information,
-                                windowLook: event.target.value
-                              });
-                            }}
-                          />
-                          <span className={classes.squareBtnDesc}>
-                            {item.text}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <WindowDirection
+                    windowLook={information.windowLook}
+                    onChange={(event) => {
+                      setInformation({
+                        ...information,
+                        windowLook: event.target.value
+                      });
+                    }}
+                  />
                 </>
               )}
               <div className={classes.question}>
@@ -302,10 +203,6 @@ const RoomEdit = ({ tutorial, history }) => {
                       icon:
                         "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/x1dW-nevara.png",
                       title: "Aire"
-                    },
-                    {
-                      id: 5,
-                      text: "Otro"
                     }
                   ].map((item) => (
                     <div key={item.id} className={classes.response}>
@@ -339,7 +236,19 @@ const RoomEdit = ({ tutorial, history }) => {
                       </span>
                     </div>
                   ))}
-                  <div style={{ visibility: "hidden" }}>
+                  <div className={classes.response}>
+                    <VICOSquareBtn text="Otro" />
+                    <span
+                      className={classes.squareBtnDesc}
+                      style={{ visibility: "hidden" }}
+                    >
+                      Otro
+                    </span>
+                  </div>
+                  <div
+                    className={classes.response}
+                    style={{ visibility: "hidden" }}
+                  >
                     <VICOSquareBtn />
                   </div>
                 </div>
@@ -390,28 +299,3 @@ const RoomEdit = ({ tutorial, history }) => {
 };
 
 export default RoomEdit;
-
-/* <>
-<Grid container style={{ margin: "4rem", backgroundColor: "#dadada" }}>
-  <Grid item xs={8}>
-    <p>Room Edit</p>
-    <Button
-      component={RouterLink}
-      to="/create/dashboard/1"
-      variant="contained"
-      color="secondary"
-    >
-      Close Rooms
-    </Button>
-    <Button
-      component={RouterLink}
-      to="/create/dashboard/1"
-      variant="contained"
-      color="secondary"
-      onClick={handleClick}
-    >
-      Continue
-    </Button>
-  </Grid>
-</Grid>
-</> */

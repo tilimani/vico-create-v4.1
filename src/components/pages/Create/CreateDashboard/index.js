@@ -26,7 +26,6 @@ import CommonAreas from "./CommonAreas";
 import Room from "./Room";
 import VerificationDateDialog from "./VerificationDateDialog";
 import ScheduledDialog from "./ScheduledDialog";
-import RoomCommonAreas from "./RoomEdit/RoomCommonAreas";
 import AvailibilityDate from "./JoyrideCustomContents/AvailibilityDate";
 import RoomEdit from "./RoomEdit";
 import RoomEditGallery from "./JoyrideCustomContents/RoomEditGallery";
