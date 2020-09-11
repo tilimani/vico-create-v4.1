@@ -26,7 +26,11 @@ import CommonAreas from "./CommonAreas";
 import Room from "./Room";
 import VerificationDateDialog from "./VerificationDateDialog";
 import ScheduledDialog from "./ScheduledDialog";
-import Availability from "./RoomEdit/Availability";
+import RoomCommonAreas from "./RoomEdit/RoomCommonAreas";
+import AvailibilityDate from "./JoyrideCustomContents/AvailibilityDate";
+import RoomEdit from "./RoomEdit";
+import RoomEditGallery from "./JoyrideCustomContents/RoomEditGallery";
+import RoomEditInfo from "./JoyrideCustomContents/RoomEditInfo";
 
 const useStyles = makeStyles((theme) => ({
   leftMenu: { position: "relative" },
@@ -79,6 +83,7 @@ const CreateDashboard = (props) => {
   const [tutorialThree, setTutorialThree] = useState({});
   const [tutorialFour, setTutorialFour] = useState({});
 
+  console.log(createStep, "******************");
   const nextStep = () => {
     if (hasRooms) {
       changeState("createStep", 4);
@@ -253,6 +258,51 @@ const CreateDashboard = (props) => {
             display: "none"
           }
         }
+      },
+      {
+        target: "#room_availibility",
+        content: <AvailibilityDate />,
+        placement: "left",
+        disableBeacon: true,
+        styles: {
+          buttonNext: {
+            display: "none"
+          }
+        }
+      },
+      {
+        target: "#room_edit_gallery",
+        content: <RoomEditGallery />,
+        disableBeacon: true,
+        placement: "left",
+        locale: { next: "Omitir", last: "Continue" },
+        styles: {
+          buttonNext: {
+            height: "auto",
+            border: "none",
+            backgroundColor: "transparent",
+            marginRight: 40,
+            marginLeft: 40,
+            width: 273,
+            borderRadius: 12,
+            fontFamily: `"Nunito", sans-serif`,
+            fontWeight: "bold",
+            marginBottom: 10,
+            outline: "none",
+            color: "#2A3C44"
+          }
+        }
+      },
+      {
+        target: "#room_edit_info",
+        content: <RoomEditInfo />,
+        disableBeacon: true,
+        placement: "left",
+        styles: {
+          buttonNext: {
+            display: "none"
+          }
+        }
       }
     ]
   });
@@ -328,10 +378,11 @@ const CreateDashboard = (props) => {
                   className={classes.rulesButton}
                   onClick={() => {
                     if (house.type === "shared") {
-                      tutorialFour.close();
-                      props.history.push(
-                        "/create/dashboard/1/room/availability"
-                      );
+                      setTimeout(() => {
+                        tutorialFour.next();
+                      }, 300);
+
+                      props.history.push("/create/dashboard/1/roomedit");
                     }
                   }}
                 >
@@ -406,10 +457,9 @@ const CreateDashboard = (props) => {
         <CommonAreas tutorial={tutorialTwo} history={props.history} />
       </Route>
 
-      <Route
-        path="/create/dashboard/:houseId/room/availability"
-        component={Availability}
-      />
+      <Route path="/create/dashboard/:houseId/roomEdit">
+        <RoomEdit tutorial={tutorialFour} history={props.history} />
+      </Route>
 
       {/** Datepicker dialog */}
       <VerificationDateDialog

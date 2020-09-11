@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
 const CustomDrawer = withStyles((theme) => ({
   root: {
     zIndex: "80 !important"
+  },
+  paper: {
+    overflowY: "auto !important"
   }
 }))(Drawer);
 
