@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
 
 const RoomEdit = ({ tutorial, history }) => {
   const classes = useStyles();
-  const { house, changeState } = useContext(CreateContext);
+  const { house } = useContext(CreateContext);
   const [currentComponent, setCurrentComponent] = useState(
     house.type === "shared" ? "availibility" : "galleryAndInfo"
     //"galleryAndInfo"
@@ -87,7 +87,10 @@ const RoomEdit = ({ tutorial, history }) => {
     smartPriceActive: true
   });
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    history.push("/create/dashboard/1");
+    tutorial.next();
+  };
   return (
     <RightDrawerScaffold
       close={() => {

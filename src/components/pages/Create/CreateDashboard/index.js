@@ -18,6 +18,7 @@ import CommonAreasGallery from "./JoyrideCustomContents/CommonAreasGallery";
 import CommonAreasInfo from "./JoyrideCustomContents/CommonAreasInfo";
 import EditRoom from "./JoyrideCustomContents/EditRoom";
 import SuccessfulCreatedCommonAreas from "./JoyrideCustomContents/SuccessfulCreatedCommonAreas";
+import SuccessfulRoomEdit from "./JoyrideCustomContents/SuccessfulRoomEdit";
 import { CreateContext } from "../../../../common/context";
 
 import Rules from "./Rules";
@@ -82,7 +83,6 @@ const CreateDashboard = (props) => {
   const [tutorialThree, setTutorialThree] = useState({});
   const [tutorialFour, setTutorialFour] = useState({});
 
-  console.log(createStep, "******************");
   const nextStep = () => {
     if (hasRooms) {
       changeState("createStep", 4);
@@ -297,6 +297,31 @@ const CreateDashboard = (props) => {
         content: <RoomEditInfo />,
         disableBeacon: true,
         placement: "left",
+        styles: {
+          buttonNext: {
+            display: "none"
+          }
+        }
+      },
+      {
+        target: "#room_button",
+        content: (
+          <>
+            <SuccessfulRoomEdit />
+            <VICOButton
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                changeState("createStep", 6);
+                setOpenDatepicker(true);
+              }}
+              text="Continuar"
+              style={{ marginBottom: 0, marginTop: 10, height: 50 }}
+            />
+          </>
+        ),
+        placement: "bottom",
+        disableBeacon: true,
         styles: {
           buttonNext: {
             display: "none"
