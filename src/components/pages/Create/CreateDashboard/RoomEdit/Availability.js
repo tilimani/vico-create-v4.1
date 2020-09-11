@@ -2,10 +2,11 @@ import React from "react";
 import clsx from "clsx";
 
 import { makeStyles } from "@material-ui/core";
-
+import RadioGroup from "@material-ui/core/RadioGroup";
+import Grid from "@material-ui/core/Grid";
 import { CreateContext } from "../../../../../common/context";
-
 import RightDrawerScaffold from "../RightDrawerScaffold";
+
 import VICORadioButton from "../../../../atoms/VICORadioButton";
 import VICOSlider from "../../../../atoms/VICOSlider";
 import VICOTextField from "../../../../atoms/VICOTextField";
@@ -25,68 +26,29 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.main,
     fontWeight: "bold"
   },
-  question: {
-    marginTop: 40
+  continueBtnWrapper: {
+    textAlign: "center"
   },
-  questionTitle: {
+  description: {
     fontSize: 16,
     color: theme.palette.secondary.main,
-    fontWeight: "bold"
+    marginTop: 10,
+    textAlign: "center",
+    width: "50%"
   },
-  questionDescription: {
-    fontSize: 16,
-    color: theme.palette.secondary.main
-  },
-  responseWrapper: {
-    display: "flex",
+  availableDates: {
     marginTop: 20
   },
-  response: {
-    marginRight: 20
-  },
-  sliderResponseWrapper: {
-    marginTop: 50
-  },
-  yesNoResponseWrapper: {
-    marginTop: 40,
+  grid: {
     display: "flex",
-    justifyContent: "space-around"
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
   },
-  TextAreaResponseWrapper: {
-    marginTop: 20
-  },
-  additionalDescription: {
-    display: "flex",
-    flexDirection: "column"
-  },
-  infoItem: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginTop: 20
-  },
-  receivedAmount: {
+  date: {
     fontSize: 16,
-    color: "rgba(0, 0, 0, 0.53)",
-    fontWeight: "bold"
-  },
-  commission: {
-    fontSize: 16,
-    color: "rgba(0, 0, 0, 0.53)"
-  },
-  commissionDescription: {
-    fontSize: 13,
-    color: "rgba(0, 0, 0, 0.53)",
-    marginTop: 30
-  },
-  titleWithSwitch: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between"
-  },
-  secondTitle: {
-    marginTop: 100
-  },
-  continueBtnWrapper: {
+    color: theme.palette.secondary.light,
+    marginTop: 4,
     textAlign: "center"
   }
 }));
@@ -109,13 +71,8 @@ const Availability = (props) => {
   });
 
   const isSharedHouse = house.type === "shared";
-  const isContinueBtnDisabled =
-    !rules.minimumStay ||
-    !rules.costGuestPerNight ||
-    !rules.depositDiscount ||
-    !rules.cleaningIncluded ||
-    (!isSharedHouse && !rules.monthlyRentCost) ||
-    (!isSharedHouse && !rules.couplePrice);
+
+  const [selectedItem, setSelectedItem] = React.useState("a_patir_de_hoy");
   return (
     <RightDrawerScaffold
       close={() => {
@@ -126,7 +83,86 @@ const Availability = (props) => {
       }}
     >
       <div className={classes.drawerContent}>
-        <Availability />
+        <span className={classes.title}>
+          ¿A partir de cuándo está disponible este apartaestudio?
+        </span>
+        <RadioGroup
+          name="availability"
+          value={selectedItem}
+          onChange={(event) => {
+            setSelectedItem(event.target.value);
+          }}
+        >
+          <Grid container spacing={3} className={classes.availableDates}>
+            <Grid item xs={6} className={classes.grid}>
+              <VICORadioButton
+                icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Vkzl-today.png"
+                value="a_patir_de_hoy"
+                checked={selectedItem == "a_patir_de_hoy"}
+              />
+              <span className={classes.description}>A patir de hoy</span>
+              <span className={classes.date}>Lun., 17.08.2020</span>
+            </Grid>
+            <Grid item xs={6} className={classes.grid}>
+              <VICORadioButton
+                icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/yHeP-nextWeek.png"
+                value="próxima_semana"
+                checked={selectedItem == "próxima_semana"}
+              />
+              <span className={classes.description}>Próxima semana</span>
+              <span className={classes.date}>Lun., 17.08.2020</span>
+            </Grid>
+            <Grid item xs={6} className={classes.grid}>
+              <VICORadioButton
+                icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/8rnN-nextMonth.png"
+                value="proximo_mes"
+                checked={selectedItem == "proximo_mes"}
+              />
+              <span className={classes.description}>Proximo mes</span>
+              <span className={classes.date}>Lun., 17.08.2020</span>
+            </Grid>
+            <Grid item xs={6} className={classes.grid}>
+              <VICORadioButton
+                icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/k50S-nextYear.png"
+                value="proximo_año"
+                checked={selectedItem == "proximo_año"}
+              />
+              <span className={classes.description}>Proximo año</span>
+              <span className={classes.date}>Lun., 17.08.2020</span>
+            </Grid>
+            <Grid item xs={6} className={classes.grid}>
+              <VICORadioButton
+                icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Oz3g-specificDate.png"
+                value="fecha_especifica"
+                checked={selectedItem == "fecha_especifica"}
+              />
+              <span className={classes.description}>Fecha especifica</span>
+            </Grid>
+            <Grid item xs={6} className={classes.grid}>
+              <VICORadioButton
+                icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/ffIJ-none.png"
+                value="nunca"
+                checked={selectedItem == "nunca"}
+              />
+              <span className={classes.description}>Nunca</span>
+            </Grid>
+          </Grid>
+        </RadioGroup>
+        <div className={classes.continueBtnWrapper}>
+          <VICOButton
+            // onClick={() => props.history.push("/create/dashboard/1/services")}
+            disabled
+            variant="contained"
+            color="primary"
+            text="Continuar"
+            style={{
+              width: 267,
+              marginTop: 46,
+              marginBottom: 40,
+              color: "white"
+            }}
+          />
+        </div>
       </div>
     </RightDrawerScaffold>
   );

@@ -50,7 +50,10 @@ const useStyles = makeStyles((theme) => ({
 
 const CustomDialog = withStyles((theme) => ({
   paperWidthSm: {
-    borderRadius: 8
+    borderRadius: 8,
+    [theme.breakpoints.down("xs")]: {
+      borderRadius: 0
+    }
   }
 }))(Dialog);
 

@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     [theme.breakpoints.down("sm")]: {
       marginTop: 40,
-      width: "auto"
+      width: "100%"
     }
   },
   tips: {

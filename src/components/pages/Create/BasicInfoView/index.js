@@ -39,6 +39,8 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "flex-start",
     padding: 20,
     marginTop: 20,
+    width: "100%",
+    paddingLeft: 60,
     [theme.breakpoints.down("sm")]: {
       marginTop: 0,
       padding: 0
@@ -59,12 +61,7 @@ const BasicInfoView = (props) => {
   const classes = useStyles();
   const isMediumScreen = useMediaQuery("(max-width:960px)");
 
-  const { house, changeState, createStep } = React.useContext(CreateContext);
-
-  const [isManagerInHouse, setIsManagerInHouse] = useState(null);
-  const [bathsQuantity, setBathsQuantity] = useState(1);
-  const [capacity, setCapacity] = useState(1);
-  const [roomsQuantity, setRoomsQuantity] = useState(1);
+  const { house, changeState } = React.useContext(CreateContext);
 
   return (
     <div>
@@ -73,19 +70,17 @@ const BasicInfoView = (props) => {
           {(state) => {
             return (
               <div>
-                <VICOMobileLinearProgress step={state.createStep} />
+                <VICOMobileLinearProgress step={6} />
                 <div className={classes.actionsWrapper}>
                   <VICOReturnButton
                     action={() => {
                       props.history.push("/create/address");
-                      // state.changeState("createStep", 6);
                     }}
                   />
                   <VICOSaveButton
                     action={() => {
                       if (house.type === "shared") {
                         props.history.push(`/create/dashboard/${house.id}`);
-                        // state.changeState("createStep", 1);
                       } else {
                         props.history.push("/create/availability");
                       }
@@ -106,7 +101,6 @@ const BasicInfoView = (props) => {
                   <VICOReturnButton
                     action={() => {
                       props.history.push("/create/address");
-                      // state.changeState("createStep", 6);
                     }}
                   />
                   <VICOSaveButton
@@ -116,7 +110,6 @@ const BasicInfoView = (props) => {
                       } else {
                         props.history.push("/create/availability");
                       }
-                      // state.changeState("createStep", 8);
                     }}
                   />
                 </div>
@@ -255,8 +248,6 @@ const BasicInfoView = (props) => {
             } else {
               props.history.push("/create/availability");
             }
-
-            // changeState("createStep", 8);
           }}
           variant="contained"
           color="primary"
@@ -272,36 +263,3 @@ const BasicInfoView = (props) => {
 };
 
 export default BasicInfoView;
-
-// const BasicInfoView = () => {
-//   const { house, changeState, createStep } = React.useContext(CreateContext);
-//   const handleClick = () => {
-//     changeState("createStep", createStep + 1);
-//   };
-//   return (
-
-/* <>
-      BasicInfo
-      {house.type === "shared" ? (
-        <VICOButton
-          component={RouterLink}
-          to={`/create/dashboard/${house.id}`}
-          variant="contained"
-          color="primary"
-          onClick={handleClick}
-          text="Continue"
-        />
-      ) : (
-        <VICOButton
-          component={RouterLink}
-          to={`/create/availability`}
-          variant="contained"
-          color="primary"
-          onClick={handleClick}
-          text="Continue"
-        />
-      )}
-    </> */
-
-//   );
-// };

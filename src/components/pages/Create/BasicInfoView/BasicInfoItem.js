@@ -31,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    margin: "auto"
+    margin: "auto",
+    marginTop: 40
   }
 }));
 

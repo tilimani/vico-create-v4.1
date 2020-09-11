@@ -16,6 +16,9 @@ const useStylesVICO = makeStyles((theme) => ({
     borderRadius: 6,
     height: 58,
     width: 406,
+    [theme.breakpoints.down("xs")]: {
+      width: "100%"
+    },
     transition: theme.transitions.create(["border-color", "box-shadow"]),
     "&.MuiInputBase-multiline": {
       paddingLeft: theme.spacing(1.5),

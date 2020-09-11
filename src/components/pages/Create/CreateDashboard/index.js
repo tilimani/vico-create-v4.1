@@ -26,6 +26,7 @@ import CommonAreas from "./CommonAreas";
 import Room from "./Room";
 import VerificationDateDialog from "./VerificationDateDialog";
 import ScheduledDialog from "./ScheduledDialog";
+import Availability from "./RoomEdit/Availability";
 
 const useStyles = makeStyles((theme) => ({
   leftMenu: { position: "relative" },
@@ -326,8 +327,12 @@ const CreateDashboard = (props) => {
                   id="room_button"
                   className={classes.rulesButton}
                   onClick={() => {
-                    // tutorialOne.close();
-                    // props.history.push("/create/dashboard/1/rules");
+                    if (house.type === "shared") {
+                      tutorialFour.close();
+                      props.history.push(
+                        "/create/dashboard/1/room/availability"
+                      );
+                    }
                   }}
                 >
                   <Room key={index} roomNumber={index + 1} />
@@ -394,12 +399,17 @@ const CreateDashboard = (props) => {
       />
 
       {/** Routes */}
-      {/** Rules */}
+
       <Route path="/create/dashboard/:houseId/rules" component={Rules} />
       <Route path="/create/dashboard/:houseId/services" component={Services} />
       <Route path="/create/dashboard/:houseId/commonareas">
         <CommonAreas tutorial={tutorialTwo} history={props.history} />
       </Route>
+
+      <Route
+        path="/create/dashboard/:houseId/room/availability"
+        component={Availability}
+      />
 
       {/** Datepicker dialog */}
       <VerificationDateDialog
