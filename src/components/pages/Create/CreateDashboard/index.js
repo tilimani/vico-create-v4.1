@@ -29,7 +29,7 @@ import VerificationDateDialog from "./VerificationDateDialog";
 import ScheduledDialog from "./ScheduledDialog";
 import AvailibilityDate from "./JoyrideCustomContents/AvailibilityDate";
 import RoomEdit from "./RoomEdit";
-import RoomEditGallery from "./JoyrideCustomContents/RoomEditGallery";
+
 import RoomEditInfo from "./JoyrideCustomContents/RoomEditInfo";
 
 const useStyles = makeStyles((theme) => ({
@@ -82,6 +82,7 @@ const CreateDashboard = (props) => {
   const [tutorialTwo, setTutorialTwo] = useState({});
   const [tutorialThree, setTutorialThree] = useState({});
   const [tutorialFour, setTutorialFour] = useState({});
+  const [tutorialFive, setTutorialFive] = useState({});
 
   const nextStep = () => {
     if (hasRooms) {
@@ -257,52 +258,49 @@ const CreateDashboard = (props) => {
             display: "none"
           }
         }
-      },
-      {
-        target: "#room_availibility",
-        content: <AvailibilityDate />,
-        placement: "left",
-        disableBeacon: true,
-        styles: {
-          buttonNext: {
-            display: "none"
-          }
-        }
-      },
-      {
-        target: "#room_edit_gallery",
-        content: <RoomEditGallery />,
-        disableBeacon: true,
-        placement: "left",
-        locale: { next: "Omitir", last: "Continue" },
-        styles: {
-          buttonNext: {
-            height: "auto",
-            border: "none",
-            backgroundColor: "transparent",
-            marginRight: 40,
-            marginLeft: 40,
-            width: 273,
-            borderRadius: 12,
-            fontFamily: `"Nunito", sans-serif`,
-            fontWeight: "bold",
-            marginBottom: 10,
-            outline: "none",
-            color: "#2A3C44"
-          }
-        }
-      },
-      {
-        target: "#room_edit_info",
-        content: <RoomEditInfo />,
-        disableBeacon: true,
-        placement: "left",
-        styles: {
-          buttonNext: {
-            display: "none"
-          }
-        }
-      },
+      }
+      // {
+      //   target: "#room_availibility",
+      //   content: <AvailibilityDate />,
+      //   placement: "left",
+      //   disableBeacon: true,
+      //   styles: {
+      //     buttonNext: {
+      //       display: "none"
+      //     }
+      //   }
+      // },
+      // {
+
+      //******** */
+
+      // {
+      //   target: "#room_button",
+      //   content: (
+      //     <>
+      //       <SuccessfulRoomEdit />
+      //       <VICOButton
+      //         variant="contained"
+      //         color="primary"
+      //         onClick={() => {
+      //           changeState("createStep", 6);
+      //           setOpenDatepicker(true);
+      //         }}
+      //         text="Continuar"
+      //         style={{ marginBottom: 0, marginTop: 10, height: 50 }}
+      //       />
+      //     </>
+      //   ),
+      //   placement: "bottom",
+      //   disableBeacon: true,
+      //   styles: {
+      //     buttonNext: {
+      //       display: "none"
+      //     }
+      //   }
+      // }
+    ],
+    five: [
       {
         target: "#room_button",
         content: (
@@ -349,7 +347,7 @@ const CreateDashboard = (props) => {
               }}
             >
               <TutorialStep
-                done={false}
+                done={createStep >= 2}
                 image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/8z2E-rules.png"
                 text="Normas de la VICO"
               />
@@ -365,7 +363,7 @@ const CreateDashboard = (props) => {
               }}
             >
               <TutorialStep
-                done={false}
+                done={createStep >= 3}
                 image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/oAv_-socialZones.png"
                 text="Zonas sociales"
               />
@@ -402,14 +400,18 @@ const CreateDashboard = (props) => {
                   className={classes.rulesButton}
                   onClick={() => {
                     if (house.type === "shared") {
-                      setTimeout(() => {
-                        tutorialFour.next();
-                      }, 300);
+                      // setTimeout(() => {
+                      //   tutorialFour.next();
+                      // }, 300);
                     } else if (house.type === "private") {
                       // setTimeout(() => {
                       //   tutorialFour.next();
                       // }, 300);
                     }
+                    setTimeout(() => {
+                      tutorialFour.close();
+                    }, 300);
+
                     props.history.push("/create/dashboard/1/roomedit");
                   }}
                 >
@@ -472,6 +474,16 @@ const CreateDashboard = (props) => {
         run={createStep === 4}
         getHelpers={(helpers) => {
           setTutorialFour(helpers);
+        }}
+        {...joyrideSettings}
+      />
+
+      <Joyride
+        key={"four-tutorial"}
+        steps={tutorialSteps.five}
+        run={createStep === 5}
+        getHelpers={(helpers) => {
+          setTutorialFive(helpers);
         }}
         {...joyrideSettings}
       />

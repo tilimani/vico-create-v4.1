@@ -98,7 +98,7 @@ const CustomTextField = withStyles((theme) => ({
 
 const WhoOccupiesRoom = (props) => {
   const classes = useStyles();
-  const { guest, setGuest } = props;
+  const { guest, setGuest, handleContinue, handleSkip } = props;
   const { name, gender, nationality } = guest;
 
   return (
@@ -174,7 +174,7 @@ const WhoOccupiesRoom = (props) => {
       </div>
       <div className={classes.actions}>
         <VICOButton
-          //onClick={() => {}}
+          onClick={() => handleContinue()}
           variant="contained"
           color="primary"
           text="Continuar"
@@ -199,7 +199,7 @@ const WhoOccupiesRoom = (props) => {
           variant="outlined"
           color="default"
           text="Omitir"
-          onClick={() => {}}
+          onClick={() => handleSkip()}
           style={{
             width: 267,
             height: "auto",

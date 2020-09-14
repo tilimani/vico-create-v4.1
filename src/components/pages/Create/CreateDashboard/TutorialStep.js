@@ -15,7 +15,12 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.25)"
   },
   doneStatus: {
-    color: "#07A529"
+    color: "#07A529",
+    position: "absolute",
+    right: -10,
+    top: -10,
+    height: 28,
+    width: 28
   },
   notDoneStatus: {
     color: "#C4C4C4",

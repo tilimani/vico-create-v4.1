@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import Joyride from "react-joyride";
 import { makeStyles } from "@material-ui/core";
 import { CreateContext } from "../../../../../common/context";
 
@@ -6,7 +7,6 @@ import RightDrawerScaffold from "../RightDrawerScaffold";
 import VICOButton from "../../../../atoms/VICOButton";
 
 import VICOSquareBtn from "../../../../atoms/VICOSquareBtn";
-import VICORadioButton from "../../../../atoms/VICORadioButton";
 
 import Availability from "../SharedComponents/Availability";
 import VICOTextField from "../../../../atoms/VICOTextField";
@@ -18,6 +18,24 @@ import WindowDirection from "../SharedComponents/WindowDirection";
 import WhoOccupiesRoom from "./WhoOccupiesRoom";
 import Calendar from "./Calendar";
 import { diffDate } from "../../../../../common/helper";
+import RoomEditGallery from "../JoyrideCustomContents/RoomEditGallery";
+import RoomEditInfo from "../JoyrideCustomContents/RoomEditInfo";
+
+const joyrideSettings = {
+  continuous: true,
+  locale: { next: "Continuar", last: "Continue" },
+  disableOverlayClose: true,
+  spotlightClicks: true,
+  styles: {
+    options: { width: 360, height: 270 },
+    buttonClose: {
+      display: "none"
+    },
+    buttonBack: {
+      display: "none"
+    }
+  }
+};
 
 const useStyles = makeStyles((theme) => ({
   drawerContent: {
@@ -72,8 +90,49 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RoomEdit = ({ tutorial, history }) => {
+  /** Joyride steps */
+  const [tutorialSteps] = useState({
+    eight: [
+      {
+        target: "#room_edit_gallery",
+        content: <RoomEditGallery />,
+        disableBeacon: true,
+        placement: "left",
+        locale: { next: "Omitir", last: "Continue" },
+        styles: {
+          buttonNext: {
+            height: "auto",
+            border: "none",
+            backgroundColor: "transparent",
+            marginRight: 40,
+            marginLeft: 40,
+            width: 273,
+            borderRadius: 12,
+            fontFamily: `"Nunito", sans-serif`,
+            fontWeight: "bold",
+            marginBottom: 10,
+            outline: "none",
+            color: "#2A3C44"
+          }
+        }
+      },
+      {
+        target: "#room_edit_info",
+        content: <RoomEditInfo />,
+        disableBeacon: true,
+        placement: "left",
+        styles: {
+          buttonNext: {
+            display: "none"
+          }
+        }
+      }
+    ]
+  });
+  const [tutorialEight, setTutorialEight] = useState({});
+
   const classes = useStyles();
-  const { house } = useContext(CreateContext);
+  const { house, changeState, createStep } = useContext(CreateContext);
   const [currentComponent, setCurrentComponent] = useState(
     house.type === "shared" ? "availibility" : "galleryAndInfo"
     //"galleryAndInfo"
@@ -100,7 +159,7 @@ const RoomEdit = ({ tutorial, history }) => {
 
   const handleInfoClick = () => {
     history.push("/create/dashboard/1");
-    tutorial.next();
+    changeState("createStep", 5);
   };
   return (
     <RightDrawerScaffold
@@ -124,6 +183,7 @@ const RoomEdit = ({ tutorial, history }) => {
               } else if (selectedItem === "fecha_especifica") {
                 setCurrentComponent("calendar");
               } else {
+                changeState("createStep", 8);
                 setCurrentComponent("galleryAndInfo");
               }
             }}
@@ -315,14 +375,19 @@ const RoomEdit = ({ tutorial, history }) => {
         )}
 
         {currentComponent === "whoOccupiesRoom" && (
-          <WhoOccupiesRoom guest={guest} setGuest={setGuest} />
+          <WhoOccupiesRoom
+            guest={guest}
+            setGuest={setGuest}
+            handleContinue={() => setCurrentComponent("galleryAndInfo")}
+            handleSkip={() => setCurrentComponent("availibility")}
+          />
         )}
 
         {currentComponent === "calendar" && (
           <Calendar
             date={specificDate}
             setDate={setSpecificDate}
-            handleClick={() => {
+            handleContinue={() => {
               if (specificDate) {
                 const differanceOfDays = diffDate(
                   new Date(),
@@ -337,9 +402,21 @@ const RoomEdit = ({ tutorial, history }) => {
                 }
               }
             }}
+            handleSkip={() => setCurrentComponent("availibility")}
           />
         )}
       </div>
+
+      {/** Joyrides */}
+      <Joyride
+        key={"eight-tutorial"}
+        steps={tutorialSteps.eight}
+        run={createStep === 8}
+        getHelpers={(helpers) => {
+          setTutorialEight(helpers);
+        }}
+        {...joyrideSettings}
+      />
     </RightDrawerScaffold>
   );
 };

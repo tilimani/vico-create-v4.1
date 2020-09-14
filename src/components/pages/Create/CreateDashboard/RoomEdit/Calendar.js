@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Calendar = (props) => {
   const classes = useStyles();
-  const { date, setDate, handleClick } = props;
+  const { date, setDate, handleContinue, handleSkip } = props;
   return (
     <div className={classes.drawerContent}>
       <div className={classes.question}>
@@ -59,7 +59,7 @@ const Calendar = (props) => {
       </div>
       <div className={classes.actions}>
         <VICOButton
-          onClick={() => props.handleClick()}
+          onClick={() => handleContinue()}
           variant="contained"
           color="primary"
           text="Continuar"
@@ -73,7 +73,7 @@ const Calendar = (props) => {
           variant="outlined"
           color="default"
           text="Omitir"
-          onClick={() => {}}
+          onClick={() => handleSkip()}
           style={{
             width: 267,
             height: "auto",
