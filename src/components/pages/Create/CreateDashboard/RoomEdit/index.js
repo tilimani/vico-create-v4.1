@@ -15,6 +15,9 @@ import Gallery from "../SharedComponents/Gallery";
 import CameraType from "../SharedComponents/CameraType";
 import BathType from "../SharedComponents/BathType";
 import WindowDirection from "../SharedComponents/WindowDirection";
+import WhoOccupiesRoom from "./WhoOccupiesRoom";
+import Calendar from "./Calendar";
+import { diffDate } from "../../../../../common/helper";
 
 const useStyles = makeStyles((theme) => ({
   drawerContent: {
@@ -87,7 +90,15 @@ const RoomEdit = ({ tutorial, history }) => {
     smartPriceActive: true
   });
 
-  const handleClick = () => {
+  const [guest, setGuest] = useState({
+    name: "",
+    gender: null,
+    nationality: ""
+  });
+
+  const [specificDate, setSpecificDate] = useState(null);
+
+  const handleInfoClick = () => {
     history.push("/create/dashboard/1");
     tutorial.next();
   };
@@ -102,17 +113,23 @@ const RoomEdit = ({ tutorial, history }) => {
       }}
     >
       <div>
-        {currentComponent === "availibility" ? (
+        {currentComponent === "availibility" && (
           <Availability
-            handleClick={() => {
+            handleClick={(selectedItem) => {
               setTimeout(() => {
                 tutorial.next();
               }, 300);
-
-              setCurrentComponent("galleryAndInfo");
+              if (selectedItem === "proximo_año" || selectedItem === "nunca") {
+                setCurrentComponent("whoOccupiesRoom");
+              } else if (selectedItem === "fecha_especifica") {
+                setCurrentComponent("calendar");
+              } else {
+                setCurrentComponent("galleryAndInfo");
+              }
             }}
           />
-        ) : (
+        )}
+        {currentComponent === "galleryAndInfo" && (
           <div className={classes.drawerContent}>
             <Gallery
               joyrideId="room_edit_gallery"
@@ -283,7 +300,7 @@ const RoomEdit = ({ tutorial, history }) => {
               )}
               <div className={classes.continueBtnWrapper}>
                 <VICOButton
-                  onClick={handleClick}
+                  onClick={handleInfoClick}
                   variant="contained"
                   color="primary"
                   text="Continuar"
@@ -295,6 +312,32 @@ const RoomEdit = ({ tutorial, history }) => {
               </div>
             </div>
           </div>
+        )}
+
+        {currentComponent === "whoOccupiesRoom" && (
+          <WhoOccupiesRoom guest={guest} setGuest={setGuest} />
+        )}
+
+        {currentComponent === "calendar" && (
+          <Calendar
+            date={specificDate}
+            setDate={setSpecificDate}
+            handleClick={() => {
+              if (specificDate) {
+                const differanceOfDays = diffDate(
+                  new Date(),
+                  new Date(specificDate)
+                );
+                if (differanceOfDays <= 0) {
+                  // Alert message: please select a future date
+                } else if (differanceOfDays > 30) {
+                  setCurrentComponent("galleryAndInfo");
+                } else {
+                  setCurrentComponent("whoOccupiesRoom");
+                }
+              }
+            }}
+          />
         )}
       </div>
     </RightDrawerScaffold>

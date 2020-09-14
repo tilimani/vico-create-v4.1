@@ -405,9 +405,12 @@ const CreateDashboard = (props) => {
                       setTimeout(() => {
                         tutorialFour.next();
                       }, 300);
-
-                      props.history.push("/create/dashboard/1/roomedit");
+                    } else if (house.type === "private") {
+                      // setTimeout(() => {
+                      //   tutorialFour.next();
+                      // }, 300);
                     }
+                    props.history.push("/create/dashboard/1/roomedit");
                   }}
                 >
                   <Room key={index} roomNumber={index + 1} />

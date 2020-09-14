@@ -1,5 +1,4 @@
 import React from "react";
-import clsx from "clsx";
 
 import { makeStyles } from "@material-ui/core";
 
@@ -320,6 +319,7 @@ const Rules = (props) => {
           </div>
         </div>
         {(house.type === "private" || house.type === "studio") && (
+          /** MonthlyRentComponent */
           <>
             <div className={classes.secondTitle}>
               <span className={classes.title}>Alquiler mensual</span>

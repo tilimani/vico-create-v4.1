@@ -132,21 +132,18 @@ const VICOImageCheckbox = (props) => {
                   alignItems="center"
                   container
                   className={clsx([classes.container], {
-                    [classes.fullWidth]: props.fullWidth,
-                    [classes.iconButton]: props.icon
+                    [classes.fullWidth]: props.fullWidth
+                    // [classes.iconButton]: props.icon
                   })}
                 >
                   {props.icon ? (
                     <>
-                      <Grid item xs={3}>
-                        <Grid container alignItems="center" justify="center">
-                          <img
-                            src={props.icon}
-                            alt=""
-                            className={props.checked ? "active" : null}
-                          />
-                        </Grid>
-                      </Grid>
+                      <img
+                        src={props.icon}
+                        alt=""
+                        className={props.checked ? "active" : null}
+                      />
+
                       {/* <Grid item xs={9} className={classes.text}>
                         <div className={classes.header}>{props.label}</div>
                         {props.subtitle && (

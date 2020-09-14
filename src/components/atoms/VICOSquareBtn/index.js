@@ -8,7 +8,7 @@ const useStyles = makeStyles(() => ({
   active: {
     backgroundColor: "#EF8E01 !important",
     boxShadow: `0px 2px 4px ${theme.palette.primary.main} !important`,
-    color: theme.palette.primary.main
+    color: "white"
   },
   primary: {
     backgroundColor: theme.palette.primary.main
