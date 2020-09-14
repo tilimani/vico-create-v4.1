@@ -378,7 +378,10 @@ const RoomEdit = ({ tutorial, history }) => {
           <WhoOccupiesRoom
             guest={guest}
             setGuest={setGuest}
-            handleContinue={() => setCurrentComponent("galleryAndInfo")}
+            handleContinue={() => {
+              changeState("createStep", 8);
+              setCurrentComponent("galleryAndInfo");
+            }}
             handleSkip={() => setCurrentComponent("availibility")}
           />
         )}
@@ -397,6 +400,7 @@ const RoomEdit = ({ tutorial, history }) => {
                   // Alert message: please select a future date
                 } else if (differanceOfDays > 30) {
                   setCurrentComponent("galleryAndInfo");
+                  changeState("createStep", 8);
                 } else {
                   setCurrentComponent("whoOccupiesRoom");
                 }

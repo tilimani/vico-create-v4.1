@@ -134,7 +134,7 @@ const WhoOccupiesRoom = (props) => {
           {[
             {
               icon:
-                "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/wUDm-woman2.png",
+                "https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Roem-male.png",
               text: "Hombre"
             },
             {

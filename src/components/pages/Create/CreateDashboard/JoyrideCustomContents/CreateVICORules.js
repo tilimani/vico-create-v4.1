@@ -1,8 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 
-import ruleJoyride from "../../../../../assets/ruleJoyride.png";
-
 const useStyles = makeStyles((theme) => ({
   innerContent: {
     display: "flex",
@@ -36,7 +34,11 @@ const CreateVICORules = (props) => {
 
   return (
     <div className={classes.innerContent}>
-      <img src={ruleJoyride} alt="" className={classes.joyrideImg} />
+      <img
+        src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/kO2J-ruleJoyride.png"
+        alt=""
+        className={classes.joyrideImg}
+      />
       <span className={classes.title}>Normas de la VICO</span>
       <p className={classes.description}>
         Define tus condiciones, así los interesados podrán verlos antes de

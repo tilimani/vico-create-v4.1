@@ -2,8 +2,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core";
 import VICOButton from "../../../../atoms/VICOButton";
 
-import attention from "../../../../../assets/attention.png";
-
 const useStyles = makeStyles((theme) => ({
   innerContent: {
     display: "flex",
@@ -38,7 +36,11 @@ const CommonAreasGallery = (props) => {
           Haz clic para subir fotos de tus zonas sociales y las habitaciones.
         </p>
       </div>
-      <img src={attention} alt="" className={classes.joyrideImg} />
+      <img
+        src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/x9Ay-attention.png"
+        alt=""
+        className={classes.joyrideImg}
+      />
       <span className={classes.title}>¡ATENCIÓN!</span>
       <p className={classes.description}>
         Recuerda subir fotos de las zonas sociales, habitación y baño de tu

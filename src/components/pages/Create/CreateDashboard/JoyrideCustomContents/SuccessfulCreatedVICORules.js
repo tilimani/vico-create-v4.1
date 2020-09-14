@@ -1,8 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 
-import rulesCreated from "../../../../../assets/rulesCreated.png";
-
 const useStyles = makeStyles((theme) => ({
   innerContent: {
     display: "flex",
@@ -38,7 +36,11 @@ const SuccessfulCreatedVICORules = (props) => {
 
   return (
     <div className={classes.innerContent}>
-      <img src={rulesCreated} alt="" className={classes.joyrideImg} />
+      <img
+        src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/ppKr-rulesCreated.png"
+        alt=""
+        className={classes.joyrideImg}
+      />
       <span className={classes.title}>¡Gracias por crear tus condiciones!</span>
       <p className={classes.description}>
         Puedes entrar en cualquier momento y editar las opciones.

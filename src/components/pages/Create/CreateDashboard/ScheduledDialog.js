@@ -11,9 +11,6 @@ import {
 } from "@material-ui/core";
 import VICOButton from "../../../atoms/VICOButton";
 
-import VICOCalendar from "../../../atoms/VICOCalendar.js";
-import finalimg from "../../../../assets/finalimg.png";
-
 import CheckIcon from "@material-ui/icons/Check";
 
 const useStyles = makeStyles((theme) => ({
@@ -137,7 +134,11 @@ const ScheduledDialog = (props) => {
             </div>
           </div>
           <div className={classes.imageWarpper}>
-            <img src={finalimg} alt="" className={classes.image} />
+            <img
+              src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/WPT6-finalimg.png"
+              alt=""
+              className={classes.image}
+            />
           </div>
         </div>
       </DialogContent>
