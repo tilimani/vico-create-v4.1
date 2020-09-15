@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link as RouterLink, Route, withRouter } from "react-router-dom";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles, Grid } from "@material-ui/core";
 
 import Joyride from "react-joyride";
@@ -27,13 +28,18 @@ import CommonAreas from "./CommonAreas";
 import Room from "./Room";
 import VerificationDateDialog from "./VerificationDateDialog";
 import ScheduledDialog from "./ScheduledDialog";
-import AvailibilityDate from "./JoyrideCustomContents/AvailibilityDate";
 import RoomEdit from "./RoomEdit";
+import VICOMobileLinearProgress from "../../../atoms/VICOMobileLinearProgress";
 
-import RoomEditInfo from "./JoyrideCustomContents/RoomEditInfo";
+import "./index.css";
 
 const useStyles = makeStyles((theme) => ({
-  leftMenu: { position: "relative" },
+  leftMenu: {
+    position: "relative",
+    [theme.breakpoints.down("md")]: {
+      display: "none"
+    }
+  },
   dashboardContent: {
     backgroundColor: "#ffffff",
     position: "relative"
@@ -44,12 +50,20 @@ const useStyles = makeStyles((theme) => ({
   tutoStepsWrapper: {
     padding: "70px 100px",
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    [theme.breakpoints.down("sm")]: {
+      padding: "10px 0px 70px 0px",
+      justifyContent: "center"
+    }
   },
   roomsWrapper: {
     padding: "30px 100px",
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    [theme.breakpoints.down("sm")]: {
+      padding: 0,
+      justifyContent: "center"
+    }
   },
   tutorialStepGridItem: {
     display: "flex",
@@ -60,13 +74,20 @@ const useStyles = makeStyles((theme) => ({
   rulesButton: {
     cursor: "pointer",
     marginRight: 40,
-    marginTop: 40
+    marginTop: 40,
+    [theme.breakpoints.down("sm")]: {
+      marginRight: 8,
+      marginLeft: 8
+    }
   },
   sectionTitle: {
     fontSize: 22,
     color: theme.palette.secondary.main,
     fontWeight: "bold",
-    padding: "70px 100px 20px"
+    padding: "70px 100px 20px",
+    [theme.breakpoints.down("sm")]: {
+      padding: "0px 0px 0px 20px"
+    }
   }
 }));
 
@@ -259,46 +280,6 @@ const CreateDashboard = (props) => {
           }
         }
       }
-      // {
-      //   target: "#room_availibility",
-      //   content: <AvailibilityDate />,
-      //   placement: "left",
-      //   disableBeacon: true,
-      //   styles: {
-      //     buttonNext: {
-      //       display: "none"
-      //     }
-      //   }
-      // },
-      // {
-
-      //******** */
-
-      // {
-      //   target: "#room_button",
-      //   content: (
-      //     <>
-      //       <SuccessfulRoomEdit />
-      //       <VICOButton
-      //         variant="contained"
-      //         color="primary"
-      //         onClick={() => {
-      //           changeState("createStep", 6);
-      //           setOpenDatepicker(true);
-      //         }}
-      //         text="Continuar"
-      //         style={{ marginBottom: 0, marginTop: 10, height: 50 }}
-      //       />
-      //     </>
-      //   ),
-      //   placement: "bottom",
-      //   disableBeacon: true,
-      //   styles: {
-      //     buttonNext: {
-      //       display: "none"
-      //     }
-      //   }
-      // }
     ],
     five: [
       {
@@ -328,14 +309,15 @@ const CreateDashboard = (props) => {
       }
     ]
   });
-
+  const isMediumScreen = useMediaQuery("(max-width:960px)");
   return (
     <>
+      {isMediumScreen && <VICOMobileLinearProgress step={7} />}
       <Grid container spacing={0} className={classes.dashboardWrapper}>
-        <Grid item xs={3} className={classes.leftMenu}>
+        <Grid item xs={0} md={3} className={classes.leftMenu}>
           <LeftMenu />
         </Grid>
-        <Grid item xs={9} className={classes.dashboardContent}>
+        <Grid item xs={12} md={9} className={classes.dashboardContent}>
           <Cover vicoType="Apartaestudio" />
           <div className={classes.tutoStepsWrapper}>
             <div
@@ -399,15 +381,6 @@ const CreateDashboard = (props) => {
                   id="room_button"
                   className={classes.rulesButton}
                   onClick={() => {
-                    if (house.type === "shared") {
-                      // setTimeout(() => {
-                      //   tutorialFour.next();
-                      // }, 300);
-                    } else if (house.type === "private") {
-                      // setTimeout(() => {
-                      //   tutorialFour.next();
-                      // }, 300);
-                    }
                     setTimeout(() => {
                       tutorialFour.close();
                     }, 300);
@@ -422,22 +395,6 @@ const CreateDashboard = (props) => {
           </div>
         </Grid>
       </Grid>
-
-      {/* Map for each room */}
-      {/* {hasRooms && (
-        <Button
-          component={RouterLink}
-          to="/create/dashboard/1/room/1"
-          variant="contained"
-          color="secondary"
-          id="room_button"
-          onClick={() => {
-            tutorialFour.close();
-          }}
-        >
-          Room 1
-        </Button>
-      )} */}
 
       {/** Joyrides */}
       <Joyride
@@ -479,7 +436,7 @@ const CreateDashboard = (props) => {
       />
 
       <Joyride
-        key={"four-tutorial"}
+        key={"five-tutorial"}
         steps={tutorialSteps.five}
         run={createStep === 5}
         getHelpers={(helpers) => {

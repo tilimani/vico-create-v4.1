@@ -14,7 +14,6 @@ const useStylesVICO = makeStyles((theme) => ({
     background: "#FFFFFF",
     boxShadow: "0px 2px 4px #C4C4C4",
     borderRadius: 6,
-    height: 58,
     width: 406,
     [theme.breakpoints.down("xs")]: {
       width: "100%"

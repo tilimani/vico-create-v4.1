@@ -5,6 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import VICOYesNoBtn from "../../../atoms/VICOYesNoBtn";
+import VICORadioButton from "../../../atoms/VICORadioButton";
 import theme from "../../../../common/theme";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,7 +23,10 @@ const useStyles = makeStyles((theme) => ({
     width: "50%",
     display: "flex",
     justifyContent: "space-between",
-    margin: "auto"
+    margin: "auto",
+    [theme.breakpoints.down("sm")]: {
+      width: "80%"
+    }
   },
   numericValue: { fontSize: 16, color: theme.palette.secondary.main },
   handleNumericValueWrapper: {
@@ -60,15 +64,25 @@ const PlusButton = withStyles({
 
 const BasicInfoItem = (props) => {
   const classes = useStyles();
-  const { title, subtitle, numericValue, action, yesNoQuestion } = props;
+  const { title, subtitle, numericValue, action, yesNoQuestion, value } = props;
   return (
     <div>
       <span className={classes.title}>{title}</span>
       <p className={classes.subtitle}>{subtitle}</p>
       {yesNoQuestion ? (
         <div className={classes.yesNoBtnsWrapper}>
-          <VICOYesNoBtn text="Si" active={props.value} />
-          <VICOYesNoBtn text="No" active={!props.value} />
+          <VICORadioButton
+            label="Si"
+            value="Si"
+            checked={value === true}
+            onChange={() => action(true)}
+          />
+          <VICORadioButton
+            label="No"
+            value="No"
+            checked={value === false}
+            onChange={() => action(false)}
+          />
         </div>
       ) : (
         <div className={classes.handleNumericValueWrapper}>

@@ -17,7 +17,14 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
     marginLeft: 160,
     marginRight: 160,
-    marginTop: 50
+    marginTop: 50,
+    [theme.breakpoints.down("md")]: {
+      width: "auto",
+      margin: "30px 70px"
+    },
+    [theme.breakpoints.down("sm")]: {
+      margin: "30px 20px"
+    }
   },
   title: {
     fontSize: 20,
@@ -38,13 +45,18 @@ const useStyles = makeStyles((theme) => ({
   },
   responseWrapper: {
     display: "flex",
-    marginTop: 20
+    marginTop: 20,
+    flexWrap: "wrap"
   },
   response: {
-    marginRight: 20
+    marginRight: 20,
+    marginTop: 20
   },
   sliderResponseWrapper: {
-    marginTop: 50
+    marginTop: 50,
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "center"
+    }
   },
   yesNoResponseWrapper: {
     marginTop: 40,

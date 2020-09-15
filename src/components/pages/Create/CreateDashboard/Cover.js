@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import VICOTransparentIconBtn from "../../../atoms/VICOTransparentIconBtn";
 
 const useStyles = makeStyles((theme) => ({
@@ -66,7 +67,10 @@ const useStyles = makeStyles((theme) => ({
   },
   editIconWrapper: {
     position: "relative",
-    height: "100%"
+    height: "100%",
+    [theme.breakpoints.down("md")]: {
+      display: "none"
+    }
   },
   coverTitleWrapper: {
     position: "relative",
@@ -74,13 +78,17 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-end",
-    width: "24%"
+    width: "24%",
+    [theme.breakpoints.down("md")]: {
+      width: "auto"
+    }
   }
 }));
 
 const Cover = (props) => {
   const classes = useStyles();
   const { vicoType } = props;
+  const isMediumScreen = useMediaQuery("(max-width:960px)");
   return (
     <div className={classes.coverWrapper}>
       <div className={classes.cover}>
@@ -104,10 +112,12 @@ const Cover = (props) => {
           </div>
         </div>
       </div>
-      <div className={classes.topBarStatus}>
-        <span className={classes.currentStatusText}>Status Online</span>
-        <span className={classes.changeStatusText}>Cambiar status</span>
-      </div>
+      {!isMediumScreen && (
+        <div className={classes.topBarStatus}>
+          <span className={classes.currentStatusText}>Status Online</span>
+          <span className={classes.changeStatusText}>Cambiar status</span>
+        </div>
+      )}
     </div>
   );
 };

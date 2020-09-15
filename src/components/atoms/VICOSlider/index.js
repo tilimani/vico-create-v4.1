@@ -1,10 +1,13 @@
 import React from "react";
 import { Slider, withStyles } from "@material-ui/core";
 
-const PrettoSlider = withStyles({
+const PrettoSlider = withStyles((theme) => ({
   root: {
     color: "#07A529",
-    height: 8
+    height: 8,
+    [theme.breakpoints.down("sm")]: {
+      width: "80%"
+    }
   },
   thumb: {
     height: 17,
@@ -36,7 +39,7 @@ const PrettoSlider = withStyles({
     // left: "auto !important"
     display: "none"
   }
-})(Slider);
+}))(Slider);
 
 function valueLabelFormat(value) {
   return `${value}%`;

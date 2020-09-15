@@ -6,7 +6,8 @@ import "./index.css";
 
 const CustomLinearProgress = withStyles((theme) => ({
   root: {
-    height: 20
+    height: 20,
+    zIndex: 999
   },
   colorPrimary: {
     backgroundColor: "rgba(196, 196, 196, 0.51)"

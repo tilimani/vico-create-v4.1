@@ -18,10 +18,18 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 20
   },
   headerLeftBtn: {
-    paddingLeft: 80
+    paddingLeft: 80,
+    [theme.breakpoints.down("sm")]: {
+      paddingLeft: 0,
+      paddingTop: 10
+    }
   },
   headerRightBtn: {
-    paddingRight: 80
+    paddingRight: 80,
+    [theme.breakpoints.down("sm")]: {
+      paddingRight: 0,
+      paddingTop: 10
+    }
   }
 }));
 
@@ -30,7 +38,10 @@ const CustomDrawer = withStyles((theme) => ({
     zIndex: "80 !important"
   },
   paper: {
-    overflowY: "auto !important"
+    overflowY: "auto !important",
+    [theme.breakpoints.down("sm")]: {
+      position: "relative !important"
+    }
   }
 }))(Drawer);
 
