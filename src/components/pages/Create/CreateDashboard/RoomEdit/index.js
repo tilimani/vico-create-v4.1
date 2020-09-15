@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import Joyride from "react-joyride";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, useMediaQuery } from "@material-ui/core";
 import { CreateContext } from "../../../../../common/context";
 
 import RightDrawerScaffold from "../RightDrawerScaffold";
@@ -43,7 +43,14 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
     marginLeft: 160,
     marginRight: 160,
-    marginTop: 40
+    marginTop: 40,
+    [theme.breakpoints.down("md")]: {
+      width: "auto",
+      margin: "30px 70px"
+    },
+    [theme.breakpoints.down("sm")]: {
+      margin: "30px 20px"
+    }
   },
   additionalContent: {
     marginTop: 40
@@ -90,14 +97,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RoomEdit = ({ tutorial, history }) => {
+  const isMediumScreen = useMediaQuery("(max-width:960px)");
   /** Joyride steps */
   const [tutorialSteps] = useState({
     eight: [
       {
         target: "#room_edit_gallery",
-        content: <RoomEditGallery />,
+        content: <RoomEditGallery tutorial={tutorial} />,
         disableBeacon: true,
-        placement: "left",
+        placement: isMediumScreen ? "bottom" : "left",
         locale: { next: "Omitir", last: "Continue" },
         styles: {
           buttonNext: {

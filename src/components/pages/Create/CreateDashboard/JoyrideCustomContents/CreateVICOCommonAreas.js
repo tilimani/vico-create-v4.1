@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, useMediaQuery } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   innerContent: {
@@ -31,14 +31,16 @@ const useStyles = makeStyles((theme) => ({
 
 const CreateVICOCommonAreas = (props) => {
   const classes = useStyles();
-
+  const isMediumScreen = useMediaQuery("(max-width:960px)");
   return (
     <div className={classes.innerContent}>
-      <img
-        src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/oAv_-socialZones.png"
-        alt=""
-        className={classes.joyrideImg}
-      />
+      {!isMediumScreen && (
+        <img
+          src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/oAv_-socialZones.png"
+          alt=""
+          className={classes.joyrideImg}
+        />
+      )}
       <span className={classes.title}>Zonas sociales</span>
       <p className={classes.description}>
         Agrega fotos de las zonas sociales y edita la información de tu VICO.

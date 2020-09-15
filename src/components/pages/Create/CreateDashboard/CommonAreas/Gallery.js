@@ -56,7 +56,10 @@ const CustomTextField = withStyles((theme) => ({
     height: 81,
     width: 406,
     borderRadius: 6,
-    boxShadow: "0px 2px 4px rgba(239, 142, 5, 0.53)"
+    boxShadow: "0px 2px 4px rgba(239, 142, 5, 0.53)",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
+    }
   }
 }))(TextField);
 

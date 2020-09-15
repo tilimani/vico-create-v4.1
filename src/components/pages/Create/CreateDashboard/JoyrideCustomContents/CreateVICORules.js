@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, useMediaQuery } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   innerContent: {
@@ -31,14 +31,17 @@ const useStyles = makeStyles((theme) => ({
 
 const CreateVICORules = (props) => {
   const classes = useStyles();
-
+  const isMediumScreen = useMediaQuery("(max-width:960px)");
   return (
     <div className={classes.innerContent}>
-      <img
-        src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/kO2J-ruleJoyride.png"
-        alt=""
-        className={classes.joyrideImg}
-      />
+      {!isMediumScreen && (
+        <img
+          src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/kO2J-ruleJoyride.png"
+          alt=""
+          className={classes.joyrideImg}
+        />
+      )}
+
       <span className={classes.title}>Normas de la VICO</span>
       <p className={classes.description}>
         Define tus condiciones, así los interesados podrán verlos antes de

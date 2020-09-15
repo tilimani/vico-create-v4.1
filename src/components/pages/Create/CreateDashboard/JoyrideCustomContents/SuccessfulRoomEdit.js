@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, useMediaQuery } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   innerContent: {
@@ -27,13 +27,17 @@ const useStyles = makeStyles((theme) => ({
 
 const SuccessfulRoomEdit = (props) => {
   const classes = useStyles();
+  const isMediumScreen = useMediaQuery("(max-width:960px)");
   return (
     <div className={classes.innerContent}>
-      <img
-        src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/0Bpv-roomEdited.png"
-        alt=""
-        className={classes.joyrideImg}
-      />
+      {!isMediumScreen && (
+        <img
+          src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/0Bpv-roomEdited.png"
+          alt=""
+          className={classes.joyrideImg}
+        />
+      )}
+
       <span className={classes.title}>
         ¡Felicitaciones, La habitación 1 ha sido creada!
       </span>

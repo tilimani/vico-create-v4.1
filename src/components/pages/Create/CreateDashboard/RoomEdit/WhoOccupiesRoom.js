@@ -11,7 +11,14 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
     marginLeft: 160,
     marginRight: 160,
-    marginTop: 50
+    marginTop: 50,
+    [theme.breakpoints.down("md")]: {
+      width: "auto",
+      margin: "30px 70px"
+    },
+    [theme.breakpoints.down("sm")]: {
+      margin: "30px 20px"
+    }
   },
   question: {
     marginTop: 40
@@ -66,7 +73,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 20,
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
+    }
   },
   inviteActionIcon: {
     position: "realtive",
@@ -92,7 +102,10 @@ const CustomTextField = withStyles((theme) => ({
     height: 81,
     width: 406,
     borderRadius: 6,
-    boxShadow: "0px 2px 4px rgba(239, 142, 5, 0.53)"
+    boxShadow: "0px 2px 4px rgba(239, 142, 5, 0.53)",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
+    }
   }
 }))(TextField);
 

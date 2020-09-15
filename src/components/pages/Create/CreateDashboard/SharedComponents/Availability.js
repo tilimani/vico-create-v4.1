@@ -15,7 +15,14 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
     marginLeft: 160,
     marginRight: 160,
-    marginTop: 50
+    marginTop: 50,
+    [theme.breakpoints.down("md")]: {
+      width: "auto",
+      margin: "30px 70px"
+    },
+    [theme.breakpoints.down("sm")]: {
+      margin: "30px 20px"
+    }
   },
   title: {
     fontSize: 20,

@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
   },
   cameraTypeResponse: {
     display: "flex",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    flexWrap: "wrap"
   },
   squareBtnDesc: {
     marginTop: 10,

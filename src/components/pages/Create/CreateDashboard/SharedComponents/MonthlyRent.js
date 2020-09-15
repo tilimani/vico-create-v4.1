@@ -26,10 +26,12 @@ const useStyles = makeStyles((theme) => ({
   },
   responseWrapper: {
     display: "flex",
-    marginTop: 20
+    marginTop: 20,
+    flexWrap: "wrap"
   },
   response: {
-    marginRight: 20
+    marginRight: 20,
+    marginTop: 20
   },
 
   TextAreaResponseWrapper: {
