@@ -144,7 +144,6 @@ const CreateDashboard = (props) => {
     }
   };
   const isMediumScreen = useMediaQuery("(max-width:960px)");
-  console.log(isMediumScreen, "000000000000000000000");
 
   const [tutorialSteps] = useState({
     one: [
@@ -214,7 +213,7 @@ const CreateDashboard = (props) => {
       },
       {
         content: <CommonAreasGallery />,
-        placement: isMediumScreen ? "center" : "left",
+        placement: "left",
         target: "#common_areas_gallery",
         locale: { next: "Omitir", last: "Continue" },
         styles: {
@@ -238,8 +237,8 @@ const CreateDashboard = (props) => {
       {
         target: "common_areas_info",
         content: <CommonAreasInfo />,
-        //disableBeacon: true,
-        placement: isMediumScreen ? "center" : "left",
+        disableBeacon: true,
+        placement: "left",
         styles: {
           buttonNext: {
             display: "none"
