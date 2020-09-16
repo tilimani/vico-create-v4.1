@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, useMediaQuery } from "@material-ui/core";
 import VICOButton from "../../../../atoms/VICOButton";
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CommonAreasGallery = (props) => {
   const classes = useStyles();
+  const isMediumScreen = useMediaQuery("(max-width:960px)");
   return (
     <div className={classes.innerContent}>
       <div>
@@ -36,16 +37,21 @@ const CommonAreasGallery = (props) => {
           Haz clic para subir fotos de tus zonas sociales y las habitaciones.
         </p>
       </div>
-      <img
-        src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/x9Ay-attention.png"
-        alt=""
-        className={classes.joyrideImg}
-      />
-      <span className={classes.title}>¡ATENCIÓN!</span>
-      <p className={classes.description}>
-        Recuerda subir fotos de las zonas sociales, habitación y baño de tu
-        VICO.
-      </p>
+      {!isMediumScreen && (
+        <>
+          <img
+            src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/x9Ay-attention.png"
+            alt=""
+            className={classes.joyrideImg}
+          />
+          <span className={classes.title}>¡ATENCIÓN!</span>
+          <p className={classes.description}>
+            Recuerda subir fotos de las zonas sociales, habitación y baño de tu
+            VICO.
+          </p>
+        </>
+      )}
+
       <VICOButton
         variant="contained"
         color="primary"

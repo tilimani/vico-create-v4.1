@@ -143,6 +143,7 @@ const CreateDashboard = (props) => {
       }
     }
   };
+  const isMediumScreen = useMediaQuery("(max-width:960px)");
   const [tutorialSteps] = useState({
     one: [
       {
@@ -213,7 +214,7 @@ const CreateDashboard = (props) => {
         target: "#common_areas_gallery",
         content: <CommonAreasGallery tutorial={tutorialTwo} />,
         disableBeacon: true,
-        placement: "left",
+        placement: isMediumScreen ? "top" : "left",
         locale: { next: "Omitir", last: "Continue" },
         styles: {
           buttonNext: {
@@ -309,7 +310,7 @@ const CreateDashboard = (props) => {
       }
     ]
   });
-  const isMediumScreen = useMediaQuery("(max-width:960px)");
+
   return (
     <>
       {isMediumScreen && <VICOMobileLinearProgress step={7} />}

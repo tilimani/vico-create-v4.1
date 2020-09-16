@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Button, Grid, makeStyles } from "@material-ui/core";
-import { Link as RouterLink } from "react-router-dom";
+import { makeStyles, useMediaQuery } from "@material-ui/core";
 import { CreateContext } from "../../../../../common/context";
 
 import RightDrawerScaffold from "../RightDrawerScaffold";
@@ -33,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
   },
   responseWrapper: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    justifyContent: "center"
   },
   response: {
     display: "flex",
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Services = (props) => {
   const classes = useStyles();
-
+  const isMediumScreen = useMediaQuery("(max-width:960px)");
   const { changeState } = React.useContext(CreateContext);
   const [utilitiesIncluded, setUtilitiesIncluded] = useState(false);
   return (
