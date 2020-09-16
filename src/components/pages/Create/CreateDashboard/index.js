@@ -131,7 +131,7 @@ const CreateDashboard = (props) => {
   const joyrideSettings = {
     continuous: true,
     locale: { next: "Continuar", last: "Continue" },
-    disableOverlayClose: true,
+    disableOverlayClose: false,
     spotlightClicks: true,
     styles: {
       options: { width: 360, height: 270 },
@@ -144,6 +144,8 @@ const CreateDashboard = (props) => {
     }
   };
   const isMediumScreen = useMediaQuery("(max-width:960px)");
+  console.log(isMediumScreen, "000000000000000000000");
+
   const [tutorialSteps] = useState({
     one: [
       {
@@ -211,10 +213,9 @@ const CreateDashboard = (props) => {
         }
       },
       {
+        content: <CommonAreasGallery />,
+        placement: isMediumScreen ? "center" : "left",
         target: "#common_areas_gallery",
-        content: <CommonAreasGallery tutorial={tutorialTwo} />,
-        disableBeacon: true,
-        placement: isMediumScreen ? "top" : "left",
         locale: { next: "Omitir", last: "Continue" },
         styles: {
           buttonNext: {
@@ -233,11 +234,12 @@ const CreateDashboard = (props) => {
           }
         }
       },
+
       {
-        target: "#common_areas_info",
+        target: "common_areas_info",
         content: <CommonAreasInfo />,
-        disableBeacon: true,
-        placement: "left-start",
+        //disableBeacon: true,
+        placement: isMediumScreen ? "center" : "left",
         styles: {
           buttonNext: {
             display: "none"

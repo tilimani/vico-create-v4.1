@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
       margin: "30px 70px"
     },
     [theme.breakpoints.down("sm")]: {
-      margin: "30px 20px"
+      margin: "30px 20px",
     }
   },
   additionalContent: {

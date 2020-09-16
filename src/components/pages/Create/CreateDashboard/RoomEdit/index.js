@@ -104,7 +104,6 @@ const RoomEdit = ({ tutorial, history }) => {
       {
         target: "#room_edit_gallery",
         content: <RoomEditGallery tutorial={tutorial} />,
-        disableBeacon: true,
         placement: isMediumScreen ? "bottom" : "left",
         locale: { next: "Omitir", last: "Continue" },
         styles: {

@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CommonAreasGallery = (props) => {
+const CommonAreasGallery = ({ tutorial }) => {
   const classes = useStyles();
   const isMediumScreen = useMediaQuery("(max-width:960px)");
   return (
@@ -53,6 +53,7 @@ const CommonAreasGallery = (props) => {
       )}
 
       <VICOButton
+        //onClick={() => tutorial.close}
         variant="contained"
         color="primary"
         text="Continuar"
