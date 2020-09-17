@@ -4,7 +4,8 @@ import {
   withStyles,
   Dialog,
   DialogContent,
-  Button
+  Button,
+  useMediaQuery
 } from "@material-ui/core";
 import VICOButton from "../../../atoms/VICOButton";
 
@@ -61,15 +62,9 @@ const CustomDialog = withStyles((theme) => ({
     }
   },
   paperWidthSm: {
-    height: 700,
     width: 569,
-    marginTop: 200,
     maxHeight: "auto",
-    padding: 30,
-    [theme.breakpoints.down("sm")]: {
-      height: "100%",
-      paddingTop: 60
-    }
+    padding: 30
   }
 }))(Dialog);
 
@@ -109,14 +104,14 @@ const VerificationDateDialog = (props) => {
     finalDate.setMinutes(parseInt(time.minutes));
     return finalDate;
   };
-
+  const isMediumScreen = useMediaQuery("(max-width:960px)");
   return (
     <CustomDialog
       maxWidth="sm"
       open={props.openDatepicker}
       onClose={props.handleDatepickerClose}
       aria-labelledby="max-width-dialog-title"
-      style={{ height: 771 }}
+      style={!isMediumScreen ? { height: 771 } : {}}
     >
       <CustomDialogContent>
         <span className={classes.title}>Fecha de verificación</span>
