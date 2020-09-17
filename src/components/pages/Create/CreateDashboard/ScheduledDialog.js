@@ -98,8 +98,7 @@ const CustomDialog = withStyles((theme) => ({
     maxHeight: "auto",
     padding: 30,
     [theme.breakpoints.down("sm")]: {
-      height: "auto",
-      width: "auto"
+      width: 260
     }
   }
 }))(Dialog);

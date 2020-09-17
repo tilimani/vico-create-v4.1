@@ -340,7 +340,11 @@ const CreateDashboard = (props) => {
 
   return (
     <>
-      {isMediumScreen && <VICOMobileLinearProgress step={7} />}
+      {isMediumScreen && (
+        <div className="mobile-progress-wrapper">
+          <VICOMobileLinearProgress step={7} />
+        </div>
+      )}
       <Grid container spacing={0} className={classes.dashboardWrapper}>
         <Grid item xs={0} md={3} className={classes.leftMenu}>
           <LeftMenu />
