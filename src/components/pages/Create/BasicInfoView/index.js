@@ -81,6 +81,7 @@ const BasicInfoView = (props) => {
                     action={() => {
                       if (house.type === "shared") {
                         props.history.push(`/create/dashboard/${house.id}`);
+                        changeState("createStep", 1);
                       } else {
                         props.history.push("/create/availability");
                       }
