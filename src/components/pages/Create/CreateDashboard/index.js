@@ -33,6 +33,7 @@ import VICOMobileLinearProgress from "../../../atoms/VICOMobileLinearProgress";
 
 import "./index.css";
 import Description from "./Description";
+import Interests from "./Interests";
 
 const useStyles = makeStyles((theme) => ({
   leftMenu: {
@@ -402,9 +403,9 @@ const CreateDashboard = (props) => {
             </div>
             <div
               className={classes.rulesButton}
-              //  onClick={() => {
-              //   props.history.push("/create/dashboard/1/interests");
-              // }}
+              onClick={() => {
+                props.history.push("/create/dashboard/1/interests");
+              }}
             >
               <TutorialStep
                 done={false}
@@ -520,6 +521,11 @@ const CreateDashboard = (props) => {
       <Route
         path="/create/dashboard/:houseId/description"
         component={Description}
+      />
+
+      <Route
+        path="/create/dashboard/:houseId/interests"
+        component={Interests}
       />
       {/** Datepicker dialog */}
       <VerificationDateDialog
