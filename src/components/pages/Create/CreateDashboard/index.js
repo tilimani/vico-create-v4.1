@@ -313,8 +313,15 @@ const CreateDashboard = (props) => {
   });
 
   React.useEffect(() => {
-    const placement = window.innerWidth < 960 ? "center" : "left";
-    const target = window.innerWidth < 960 ? "body" : "#common_areas_gallery";
+    const placementCommonAreasGallery =
+      window.innerWidth < 960 ? "center" : "left";
+    const targetCommonAreasGallery =
+      window.innerWidth < 960 ? "body" : "#common_areas_gallery";
+
+    const placementEditedRoomSuccess =
+      window.innerWidth < 960 ? "center" : "bottom";
+    const targetEditedRoomSuccess =
+      window.innerWidth < 960 ? "body" : "#room_button";
     setTutorialSteps({
       ...tutorialSteps,
       two: [
@@ -326,13 +333,23 @@ const CreateDashboard = (props) => {
         },
         {
           content: tutorialSteps.two[2].content,
-          placement: placement,
-          target: target,
+          placement: placementCommonAreasGallery,
+          target: targetCommonAreasGallery,
           locale: tutorialSteps.two[2].locale,
           styles: tutorialSteps.two[2].styles
         },
         {
           ...tutorialSteps.two[3]
+        }
+      ],
+      five: [
+        {
+          ...tutorialSteps.five[0],
+          // content: tutorialSteps.five[0].content,
+          placement: placementEditedRoomSuccess,
+          target: targetEditedRoomSuccess
+          // locale: tutorialSteps.five[0].locale,
+          // styles: tutorialSteps.five[0].styles
         }
       ]
     });

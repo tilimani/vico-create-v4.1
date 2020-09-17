@@ -30,13 +30,11 @@ const SuccessfulRoomEdit = (props) => {
   const isMediumScreen = useMediaQuery("(max-width:960px)");
   return (
     <div className={classes.innerContent}>
-      {!isMediumScreen && (
-        <img
-          src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/0Bpv-roomEdited.png"
-          alt=""
-          className={classes.joyrideImg}
-        />
-      )}
+      <img
+        src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/0Bpv-roomEdited.png"
+        alt=""
+        className={classes.joyrideImg}
+      />
 
       <span className={classes.title}>
         ¡Felicitaciones, La habitación 1 ha sido creada!
