@@ -11,6 +11,10 @@ import VICOButton from "../../../atoms/VICOButton";
 
 import VICOCalendar from "../../../atoms/VICOCalendar.js";
 import VICOTimePicker from "../../../atoms/VICOTimePicker";
+import VICOMobileLinearProgress from "../../../atoms/VICOMobileLinearProgress";
+import VICOReturnButton from "../../../atoms/VICOReturnButton";
+import VICOSaveButton from "../../../atoms/VICOSaveButton";
+
 const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: 30,
@@ -30,10 +34,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 20,
     fontWeight: "bold",
     color: theme.palette.secondary.main,
-    marginTop: 40,
-    [theme.breakpoints.down("sm")]: {
-      marginTop: 20
-    }
+    marginTop: 20
   },
   dateInputWarpper: {
     marginTop: 20,
@@ -44,14 +45,22 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 12
   },
   timeInputWrapper: {
-    marginTop: 20
+    marginTop: 10,
+    paddingBottom: 20
   },
   skipBtn: {
     fontSize: 16
   },
   actionWrapper: {
     textAlign: "center",
-    marginTop: 15
+    marginTop: 15,
+    [theme.breakpoints.down("sm")]: {
+      padding: "0px 30px 0px 30px !important"
+    }
+  },
+  topActionsWrapper: {
+    display: "flex",
+    justifyContent: "space-between"
   }
 }));
 
@@ -64,12 +73,16 @@ const CustomDialog = withStyles((theme) => ({
   paperWidthSm: {
     width: 569,
     maxHeight: "auto",
-    padding: 30
+    padding: 30,
+    [theme.breakpoints.down("sm")]: {
+      padding: 0
+    }
   }
 }))(Dialog);
 
 const CustomDialogContent = withStyles((theme) => ({
   root: {
+    padding: "0px 30px 0px 30px !important",
     [theme.breakpoints.down("sm")]: {
       flex: "none"
     }
@@ -113,8 +126,31 @@ const VerificationDateDialog = (props) => {
       aria-labelledby="max-width-dialog-title"
       style={!isMediumScreen ? { height: 771 } : {}}
     >
+      {isMediumScreen && (
+        <div>
+          <VICOMobileLinearProgress step={6} />
+          <div className={classes.topActionsWrapper}>
+            <VICOReturnButton
+              action={() => {
+                //  props.history.push("/create/address");
+              }}
+            />
+            <VICOSaveButton
+              action={() => {
+                // if (house.type === "shared") {
+                //   props.history.push(`/create/dashboard/${house.id}`);
+                // } else {
+                //   props.history.push("/create/availability");
+                // }
+              }}
+            />
+          </div>
+        </div>
+      )}
       <CustomDialogContent>
-        <span className={classes.title}>Fecha de verificación</span>
+        {!isMediumScreen && (
+          <span className={classes.title}>Fecha de verificación</span>
+        )}
 
         <p className={classes.subtitle}>
           ¿En que fecha podrias verificar tu VICO con nuestro equipo ?
