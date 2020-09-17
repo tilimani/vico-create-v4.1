@@ -32,6 +32,7 @@ import RoomEdit from "./RoomEdit";
 import VICOMobileLinearProgress from "../../../atoms/VICOMobileLinearProgress";
 
 import "./index.css";
+import Description from "./Description";
 
 const useStyles = makeStyles((theme) => ({
   leftMenu: {
@@ -363,10 +364,10 @@ const CreateDashboard = (props) => {
         </div>
       )}
       <Grid container spacing={0} className={classes.dashboardWrapper}>
-        <Grid item xs={0} md={3} className={classes.leftMenu}>
+        <Grid item xs={0} lg={3} className={classes.leftMenu}>
           <LeftMenu />
         </Grid>
-        <Grid item xs={12} md={9} className={classes.dashboardContent}>
+        <Grid item xs={12} lg={9} className={classes.dashboardContent}>
           <Cover vicoType="Apartaestudio" />
           <div className={classes.tutoStepsWrapper}>
             <div
@@ -399,14 +400,24 @@ const CreateDashboard = (props) => {
                 text="Zonas sociales"
               />
             </div>
-            <div className={classes.rulesButton}>
+            <div
+              className={classes.rulesButton}
+              //  onClick={() => {
+              //   props.history.push("/create/dashboard/1/interests");
+              // }}
+            >
               <TutorialStep
                 done={false}
                 image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/sF9B-interests.png"
                 text="Puntos de interés"
               />
             </div>
-            <div className={classes.rulesButton}>
+            <div
+              className={classes.rulesButton}
+              onClick={() => {
+                props.history.push("/create/dashboard/1/description");
+              }}
+            >
               <TutorialStep
                 done={false}
                 image="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/UdO0-description.png"
@@ -506,6 +517,10 @@ const CreateDashboard = (props) => {
         <RoomEdit tutorial={tutorialFour} history={props.history} />
       </Route>
 
+      <Route
+        path="/create/dashboard/:houseId/description"
+        component={Description}
+      />
       {/** Datepicker dialog */}
       <VerificationDateDialog
         openDatepicker={openDatepicker}
