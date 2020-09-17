@@ -315,10 +315,10 @@ const CreateDashboard = (props) => {
   });
 
   React.useEffect(() => {
-    const placementCommonAreasGallery =
-      window.innerWidth < 960 ? "center" : "left";
-    const targetCommonAreasGallery =
-      window.innerWidth < 960 ? "body" : "#common_areas_gallery";
+    // const placementCommonAreasGallery =
+    //   window.innerWidth < 960 ? "center" : "left";
+    // const targetCommonAreasGallery =
+    //   window.innerWidth < 960 ? "body" : "#common_areas_gallery";
 
     const placementEditedRoomSuccess =
       window.innerWidth < 960 ? "center" : "bottom";
@@ -326,32 +326,29 @@ const CreateDashboard = (props) => {
       window.innerWidth < 960 ? "body" : "#room_button";
     setTutorialSteps({
       ...tutorialSteps,
-      two: [
-        {
-          ...tutorialSteps.two[0]
-        },
-        {
-          ...tutorialSteps.two[1]
-        },
-        {
-          content: tutorialSteps.two[2].content,
-          placement: placementCommonAreasGallery,
-          target: targetCommonAreasGallery,
-          locale: tutorialSteps.two[2].locale,
-          styles: tutorialSteps.two[2].styles
-        },
-        {
-          ...tutorialSteps.two[3]
-        }
-      ],
+      // two: [
+      //   {
+      //     ...tutorialSteps.two[0]
+      //   },
+      //   {
+      //     ...tutorialSteps.two[1]
+      //   },
+      //   {
+      //     content: tutorialSteps.two[2].content,
+      //     placement: placementCommonAreasGallery,
+      //     target: targetCommonAreasGallery,
+      //     locale: tutorialSteps.two[2].locale,
+      //     styles: tutorialSteps.two[2].styles
+      //   },
+      //   {
+      //     ...tutorialSteps.two[3]
+      //   }
+      // ],
       five: [
         {
           ...tutorialSteps.five[0],
-          // content: tutorialSteps.five[0].content,
           placement: placementEditedRoomSuccess,
           target: targetEditedRoomSuccess
-          // locale: tutorialSteps.five[0].locale,
-          // styles: tutorialSteps.five[0].styles
         }
       ]
     });
