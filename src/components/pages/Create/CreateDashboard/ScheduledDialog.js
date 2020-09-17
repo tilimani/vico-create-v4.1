@@ -3,11 +3,11 @@ import {
   makeStyles,
   withStyles,
   Dialog,
-  DialogTitle,
   DialogContent,
   DialogContentText,
   DialogActions,
-  Button
+  Button,
+  useMediaQuery
 } from "@material-ui/core";
 import VICOButton from "../../../atoms/VICOButton";
 
@@ -17,12 +17,19 @@ const useStyles = makeStyles((theme) => ({
   selectedDate: {
     fontSize: 30,
     fontWeight: "bold",
-    color: theme.palette.secondary.main
+    color: theme.palette.secondary.main,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 22
+    }
   },
   message: {
     fontSize: 22,
     fontWeight: "bold",
-    color: theme.palette.secondary.main
+    color: theme.palette.secondary.main,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 16,
+      fontWeight: "normal"
+    }
   },
   message2: {
     fontSize: 20,
@@ -36,18 +43,27 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.main
   },
   image: {
-    width: 160
+    width: 160,
+    [theme.breakpoints.down("sm")]: {
+      width: 140
+    }
   },
   description: {
     fontSize: 16,
     color: theme.palette.secondary.main,
     position: "relative",
-    width: "50%"
+    width: "50%",
+    [theme.breakpoints.down("sm")]: {
+      width: "auto"
+    }
   },
   imageWarpper: {
     position: "relative",
     width: "50%",
-    textAlign: "center"
+    textAlign: "center",
+    [theme.breakpoints.down("sm")]: {
+      width: "auto"
+    }
   },
 
   skipBtn: {
@@ -56,6 +72,9 @@ const useStyles = makeStyles((theme) => ({
   innerContent: {
     display: "flex",
     marginTop: 40
+    // [theme.breakpoints.down("sm")]: {
+    //   flexDirection: "column"
+    // }
   },
   tipItem: {
     display: "flex",
@@ -77,7 +96,11 @@ const CustomDialog = withStyles((theme) => ({
     height: 482,
     width: 592,
     maxHeight: "auto",
-    padding: 30
+    padding: 30,
+    [theme.breakpoints.down("sm")]: {
+      height: "auto",
+      width: "auto"
+    }
   }
 }))(Dialog);
 const CustomDialogActions = withStyles((theme) => ({
@@ -85,7 +108,11 @@ const CustomDialogActions = withStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     width: "50%",
-    margin: "auto"
+    margin: "auto",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      marginTop: 20
+    }
   }
 }))(DialogActions);
 
@@ -94,13 +121,24 @@ const CustomDialogContentText = withStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     margin: "auto",
-    textAlign: "center"
+    textAlign: "center",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column-reverse"
+    }
   }
 }))(DialogContentText);
 
+const CustomDialogContent = withStyles((theme) => ({
+  root: {
+    [theme.breakpoints.down("sm")]: {
+      flex: "none"
+    }
+  }
+}))(DialogContent);
+
 const ScheduledDialog = (props) => {
   const classes = useStyles();
-
+  const isMediumScreen = useMediaQuery("(max-width:960px)");
   return (
     <CustomDialog
       maxWidth="sm"
@@ -108,8 +146,16 @@ const ScheduledDialog = (props) => {
       onClose={props.handleScheduledClose}
       aria-labelledby="max-width-dialog-title"
     >
-      <DialogTitle id="max-width-dialog-title"></DialogTitle>
-      <DialogContent>
+      <CustomDialogContent>
+        {isMediumScreen && (
+          <div className={classes.imageWarpper}>
+            <img
+              src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/WPT6-finalimg.png"
+              alt=""
+              className={classes.image}
+            />
+          </div>
+        )}
         <CustomDialogContentText>
           <span className={classes.selectedDate}>19/07/2020 - 1:00 p.m</span>
           <span className={classes.message}>
@@ -133,15 +179,17 @@ const ScheduledDialog = (props) => {
               </span>
             </div>
           </div>
-          <div className={classes.imageWarpper}>
-            <img
-              src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/WPT6-finalimg.png"
-              alt=""
-              className={classes.image}
-            />
-          </div>
+          {!isMediumScreen && (
+            <div className={classes.imageWarpper}>
+              <img
+                src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/WPT6-finalimg.png"
+                alt=""
+                className={classes.image}
+              />
+            </div>
+          )}
         </div>
-      </DialogContent>
+      </CustomDialogContent>
       <CustomDialogActions>
         <VICOButton
           variant="contained"

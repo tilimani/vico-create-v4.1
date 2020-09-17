@@ -22,14 +22,20 @@ const CustomSelect = withStyles((theme) => ({
 }))(Select);
 const useStyles = makeStyles((theme) => ({
   timePickerWarpper: {
-    display: "flex"
+    display: "flex",
+    [theme.breakpoints.down("sm")]: {
+      padding: "10px 0px 10px 2px"
+    }
   },
   selectWrapper: {
     width: 141,
     height: 58,
     backgroundColor: "#FFFFFF",
     boxShadow: "0px 2px 4px rgba(239, 142, 1, 0.99)",
-    borderRadius: 6
+    borderRadius: 6,
+    [theme.breakpoints.down("sm")]: {
+      width: "28%"
+    }
   },
   space: {
     width: 20,

@@ -145,7 +145,7 @@ const CreateDashboard = (props) => {
   };
   const isMediumScreen = useMediaQuery("(max-width:960px)");
 
-  const [tutorialSteps] = useState({
+  const [tutorialSteps, setTutorialSteps] = useState({
     one: [
       {
         content: <SuccessfulCreatedVICO />,
@@ -216,6 +216,7 @@ const CreateDashboard = (props) => {
         placement: "left",
         target: "#common_areas_gallery",
         locale: { next: "Omitir", last: "Continue" },
+        disableBeacon: true,
         styles: {
           buttonNext: {
             height: "auto",
@@ -233,9 +234,8 @@ const CreateDashboard = (props) => {
           }
         }
       },
-
       {
-        target: "common_areas_info",
+        target: "#common_areas_info",
         content: <CommonAreasInfo />,
         disableBeacon: true,
         placement: "left",
@@ -311,6 +311,32 @@ const CreateDashboard = (props) => {
       }
     ]
   });
+
+  React.useEffect(() => {
+    const placement = window.innerWidth < 960 ? "center" : "left";
+    const target = window.innerWidth < 960 ? "body" : "#common_areas_gallery";
+    setTutorialSteps({
+      ...tutorialSteps,
+      two: [
+        {
+          ...tutorialSteps.two[0]
+        },
+        {
+          ...tutorialSteps.two[1]
+        },
+        {
+          content: tutorialSteps.two[2].content,
+          placement: placement,
+          target: target,
+          locale: tutorialSteps.two[2].locale,
+          styles: tutorialSteps.two[2].styles
+        },
+        {
+          ...tutorialSteps.two[3]
+        }
+      ]
+    });
+  }, []);
 
   return (
     <>

@@ -3,10 +3,7 @@ import {
   makeStyles,
   withStyles,
   Dialog,
-  DialogTitle,
   DialogContent,
-  DialogContentText,
-  DialogActions,
   Button
 } from "@material-ui/core";
 import VICOButton from "../../../atoms/VICOButton";
@@ -32,7 +29,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 20,
     fontWeight: "bold",
     color: theme.palette.secondary.main,
-    marginTop: 40
+    marginTop: 40,
+    [theme.breakpoints.down("sm")]: {
+      marginTop: 20
+    }
   },
   dateInputWarpper: {
     marginTop: 20,
@@ -47,26 +47,39 @@ const useStyles = makeStyles((theme) => ({
   },
   skipBtn: {
     fontSize: 16
+  },
+  actionWrapper: {
+    textAlign: "center",
+    marginTop: 15
   }
 }));
 
 const CustomDialog = withStyles((theme) => ({
+  root: {
+    [theme.breakpoints.down("sm")]: {
+      flex: "auto"
+    }
+  },
   paperWidthSm: {
     height: 700,
     width: 569,
     marginTop: 200,
     maxHeight: "auto",
-    padding: 30
+    padding: 30,
+    [theme.breakpoints.down("sm")]: {
+      height: "100%",
+      paddingTop: 60
+    }
   }
 }))(Dialog);
-const CustomDialogActions = withStyles((theme) => ({
+
+const CustomDialogContent = withStyles((theme) => ({
   root: {
-    display: "flex",
-    flexDirection: "column",
-    width: "50%",
-    margin: "auto"
+    [theme.breakpoints.down("sm")]: {
+      flex: "none"
+    }
   }
-}))(DialogActions);
+}))(DialogContent);
 
 const VerificationDateDialog = (props) => {
   const classes = useStyles();
@@ -105,19 +118,17 @@ const VerificationDateDialog = (props) => {
       aria-labelledby="max-width-dialog-title"
       style={{ height: 771 }}
     >
-      <DialogTitle id="max-width-dialog-title">
+      <CustomDialogContent>
         <span className={classes.title}>Fecha de verificación</span>
-      </DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          <span className={classes.subtitle}>
-            ¿En que fecha podrias verificar tu VICO con nuestro equipo ?
-          </span>
-          <p className={classes.description}>
-            Antes de publicar tu VICO nuestro equipo debe hacer una verificación
-            por video llamada de la casa que deseas subir a nuestra plataforma.
-          </p>
-        </DialogContentText>
+
+        <p className={classes.subtitle}>
+          ¿En que fecha podrias verificar tu VICO con nuestro equipo ?
+        </p>
+        <p className={classes.description}>
+          Antes de publicar tu VICO nuestro equipo debe hacer una verificación
+          por video llamada de la casa que deseas subir a nuestra plataforma.
+        </p>
+
         <div className={classes.label}>Fecha</div>
         <div className={classes.dateInputWarpper}>
           <VICOCalendar setDate={setDate} />
@@ -127,8 +138,8 @@ const VerificationDateDialog = (props) => {
         <div className={classes.timeInputWrapper}>
           <VICOTimePicker time={time} setTime={setTime} />
         </div>
-      </DialogContent>
-      <CustomDialogActions>
+      </CustomDialogContent>
+      <div className={classes.actionWrapper}>
         <VICOButton
           onClick={() => props.handleScheduleVisit(getFinalDate(date, time))}
           variant="contained"
@@ -142,7 +153,7 @@ const VerificationDateDialog = (props) => {
         >
           Omitir
         </Button>
-      </CustomDialogActions>
+      </div>
     </CustomDialog>
   );
 };
