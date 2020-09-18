@@ -16,18 +16,19 @@ import Gallery from "./Gallery";
 
 const useStyles = makeStyles((theme) => ({
   drawerContent: {
-    width: 450,
+    width: 400,
     flexShrink: 0,
-    marginLeft: 160,
-    marginRight: 160,
     marginTop: 40,
-    [theme.breakpoints.down("md")]: {
-      width: "auto",
-      margin: "30px 70px"
-    },
-    [theme.breakpoints.down("sm")]: {
-      margin: "30px 20px",
+    margin: "30px 70px",
+    [theme.breakpoints.down("xs")]: {
+      width: "auto"
     }
+  },
+  innerContent: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
   },
   additionalContent: {
     marginTop: 40
@@ -112,7 +113,7 @@ const CommonAreas = ({ tutorial, history }) => {
         // history.push("/create/dashboard/1");
       }}
     >
-      <div>
+      <div className={classes.innerContent}>
         <div className={classes.drawerContent}>
           <Gallery images={images} setImages={setImages} tutorial={tutorial} />
           <div id="common_areas_info" className={classes.additionalContent}>
@@ -486,49 +487,6 @@ const CommonAreas = ({ tutorial, history }) => {
         </div>
       </div>
     </RightDrawerScaffold>
-
-    // <>
-    //   <Grid container style={{ margin: "4rem", backgroundColor: "#dadada" }}>
-    //     <Grid item xs={8}>
-    //       <p>Common Areas</p>
-    //       <div id="common_areas_gallery">
-    //         Gallery container
-    //         <Button variant="contained" color="primary">
-    //           Subir Fotos
-    //         </Button>
-    //         <Button
-    //           variant="text"
-    //           color="secondary"
-    //           onClick={() => {
-    //             tutorial.next();
-    //           }}
-    //         >
-    //           Omitir
-    //         </Button>
-    //       </div>
-    //       <Button
-    //         component={RouterLink}
-    //         to="/create/dashboard/1"
-    //         variant="contained"
-    //         color="secondary"
-    //       >
-    //         Close common area
-    //       </Button>
-    //       {/* Tutorial step = 6*/}
-    //       <div id="common_areas_info">
-    //         <Button
-    //           component={RouterLink}
-    //           to="/create/dashboard/1"
-    //           variant="contained"
-    //           color="secondary"
-    //           onClick={handleClick}
-    //         >
-    //           Continue
-    //         </Button>
-    //       </div>
-    //     </Grid>
-    //   </Grid>
-    // </>
   );
 };
 

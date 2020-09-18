@@ -39,18 +39,19 @@ const joyrideSettings = {
 
 const useStyles = makeStyles((theme) => ({
   drawerContent: {
-    width: 450,
+    width: 400,
     flexShrink: 0,
-    marginLeft: 160,
-    marginRight: 160,
     marginTop: 40,
-    [theme.breakpoints.down("md")]: {
-      width: "auto",
-      margin: "30px 70px"
-    },
-    [theme.breakpoints.down("sm")]: {
-      margin: "30px 20px"
+    margin: "30px 70px",
+    [theme.breakpoints.down("xs")]: {
+      width: "auto"
     }
+  },
+  innerContent: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
   },
   additionalContent: {
     marginTop: 40
@@ -178,7 +179,7 @@ const RoomEdit = ({ tutorial, history }) => {
         // history.push("/create/dashboard/1");
       }}
     >
-      <div>
+      <div className={classes.innerContent}>
         {currentComponent === "availibility" && (
           <Availability
             handleClick={(selectedItem) => {

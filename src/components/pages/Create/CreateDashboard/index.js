@@ -38,7 +38,7 @@ import Interests from "./Interests";
 const useStyles = makeStyles((theme) => ({
   leftMenu: {
     position: "relative",
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       display: "none"
     }
   },
@@ -362,10 +362,10 @@ const CreateDashboard = (props) => {
         </div>
       )}
       <Grid container spacing={0} className={classes.dashboardWrapper}>
-        <Grid item xs={0} lg={3} className={classes.leftMenu}>
+        <Grid item xs={0} md={3} className={classes.leftMenu}>
           <LeftMenu />
         </Grid>
-        <Grid item xs={12} lg={9} className={classes.dashboardContent}>
+        <Grid item xs={12} md={9} className={classes.dashboardContent}>
           <Cover vicoType="Apartaestudio" />
           <div className={classes.tutoStepsWrapper}>
             <div
