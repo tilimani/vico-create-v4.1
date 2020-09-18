@@ -7,7 +7,6 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import VICOHouseTypeItem from "./VICOHouseTypeItem";
 import VICOReturnButton from "../../../atoms/VICOReturnButton";
 import VICOSaveButton from "../../../atoms/VICOSaveButton";
-import { CreateConsumer } from "../../../../common/context";
 import VICOMobileLinearProgress from "../../../atoms/VICOMobileLinearProgress";
 
 const useStyles = makeStyles((theme) => ({
@@ -178,14 +177,6 @@ const vicoTypeView = (props) => {
             {!isMobileScreen && <ArrowForwardIcon />}
           </div>
         </div>
-        {/* <VICOButton
-          component={RouterLink}
-          to="/create/name"
-          variant="contained"
-          color="primary"
-          text="Continuar"
-          style={{ width: buttonWidth, marginTop: isMediumScreen ? 20 : 40 }}
-        /> */}
       </div>
     </div>
   );
