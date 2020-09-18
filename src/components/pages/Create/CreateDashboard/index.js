@@ -512,7 +512,7 @@ const CreateDashboard = (props) => {
       </Route>
 
       <Route path="/create/dashboard/:houseId/roomEdit">
-        <RoomEdit tutorial={tutorialFour} history={props.history} />
+        <RoomEdit history={props.history} />
       </Route>
 
       <Route

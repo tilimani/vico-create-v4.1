@@ -18,7 +18,7 @@ class CreateProvider extends Component {
       house: {
         id: 1,
         name: "VICO R",
-        type: "", // HouseType.shared
+        type: HouseType.shared, // HouseType.shared
         rooms: [{}, {}, {}],
         is_manager_in_house: null,
         capacity: 1,

@@ -97,14 +97,17 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const RoomEdit = ({ tutorial, history }) => {
+const RoomEdit = ({ history }) => {
   const isMediumScreen = useMediaQuery("(max-width:960px)");
+
+  const [tutorialEight, setTutorialEight] = useState({});
   /** Joyride steps */
   const [tutorialSteps] = useState({
     eight: [
       {
         target: "#room_edit_gallery",
-        content: <RoomEditGallery tutorial={tutorial} />,
+        content: <RoomEditGallery tutorial={tutorialEight} />,
+        disableBeacon: true,
         placement: isMediumScreen ? "bottom" : "left",
         locale: { next: "Omitir", last: "Continue" },
         styles: {
@@ -137,7 +140,6 @@ const RoomEdit = ({ tutorial, history }) => {
       }
     ]
   });
-  const [tutorialEight, setTutorialEight] = useState({});
 
   const classes = useStyles();
   const { house, changeState, createStep } = useContext(CreateContext);
@@ -183,9 +185,10 @@ const RoomEdit = ({ tutorial, history }) => {
         {currentComponent === "availibility" && (
           <Availability
             handleClick={(selectedItem) => {
-              setTimeout(() => {
-                tutorial.next();
-              }, 300);
+              changeState("createStep", 8);
+              // setTimeout(() => {
+              //   tutorial.next();
+              // }, 300);
               if (selectedItem === "proximo_año" || selectedItem === "nunca") {
                 setCurrentComponent("whoOccupiesRoom");
               } else if (selectedItem === "fecha_especifica") {
@@ -205,7 +208,8 @@ const RoomEdit = ({ tutorial, history }) => {
               subtitle="Sube mínimo 3 fotos de la habitación."
               images={images}
               setImages={setImages}
-              action={() => tutorial.next()}
+              tutorial={tutorialEight}
+              action={() => tutorialEight.next()}
             />
 
             <div id="room_edit_info" className={classes.additionalContent}>

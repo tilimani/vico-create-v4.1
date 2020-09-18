@@ -54,7 +54,15 @@ const useStyles = makeStyles((theme) => ({
 const Gallery = (props) => {
   const classes = useStyles();
 
-  const { joyrideId, title, subtitle, images, setImages, action } = props;
+  const {
+    joyrideId,
+    title,
+    subtitle,
+    images,
+    setImages,
+    action,
+    tutorial
+  } = props;
   return (
     <div id={joyrideId}>
       <span className={classes.title}>{title}</span>
@@ -64,7 +72,7 @@ const Gallery = (props) => {
       {images.length !== 0 && (
         <div className={classes.saveBtnWrapper}>
           <VICOButton
-            onClick={action}
+            onClick={() => tutorial.next()}
             variant="contained"
             color="primary"
             text="Guardar"
