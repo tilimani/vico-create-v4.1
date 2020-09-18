@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: { margin: "auto" },
     [theme.breakpoints.down("sm")]: {
       boxShadow: "none",
-
+      marginTop: 0,
       display: "block",
       padding: 0
     }

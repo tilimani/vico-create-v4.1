@@ -20,7 +20,7 @@ class CreateProvider extends Component {
         name: "VICO R",
         type: "", // HouseType.shared
         rooms: [{}, {}, {}],
-        is_manager_in_house: true,
+        is_manager_in_house: null,
         capacity: 1,
         rooms_quantity: 1,
         baths_quantity: 1
