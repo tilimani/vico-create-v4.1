@@ -449,7 +449,9 @@ const CreateDashboard = (props) => {
                           tutorialFour.close();
                         }, 300);
 
-                        props.history.push("/create/dashboard/1/roomedit");
+                        props.history.push("/create/dashboard/1/roomedit", {
+                          roomNumber: index + 1
+                        });
                       }}
                     >
                       <Room key={index} roomNumber={index + 1} />

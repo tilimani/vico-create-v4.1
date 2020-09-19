@@ -97,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const RoomEdit = ({ history }) => {
+const RoomEdit = (props) => {
   const isMediumScreen = useMediaQuery("(max-width:960px)");
 
   const [tutorialEight, setTutorialEight] = useState({});
@@ -168,16 +168,17 @@ const RoomEdit = ({ history }) => {
   const [specificDate, setSpecificDate] = useState(null);
 
   const handleInfoClick = () => {
-    history.push("/create/dashboard/1");
+    props.history.push("/create/dashboard/1");
     changeState("createStep", 5);
   };
+
   return (
     <RightDrawerScaffold
       close={() => {
-        history.push("/create/dashboard/1");
+        props.history.push("/create/dashboard/1");
       }}
       save={() => {
-        // history.push("/create/dashboard/1");
+        // props.history.push("/create/dashboard/1");
       }}
     >
       <div className={classes.innerContent}>
@@ -203,7 +204,7 @@ const RoomEdit = ({ history }) => {
           <div className={classes.drawerContent}>
             <Gallery
               joyrideId="room_edit_gallery"
-              title="Galeria habitación 1"
+              title={`Galeria habitación ${props.history.location.state.roomNumber}`}
               subtitle="Sube mínimo 3 fotos de la habitación."
               images={images}
               setImages={setImages}
