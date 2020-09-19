@@ -34,12 +34,18 @@ const useStyles = makeStyles((theme) => ({
     color: "#ffffff",
     fontWeight: "bold",
     fontSize: 16,
-    paddingLeft: 60
+    paddingLeft: 60,
+    [theme.breakpoints.down("sm")]: {
+      paddingLeft: 20
+    }
   },
   changeStatusText: {
     color: "#ffffff",
     fontSize: 14,
-    paddingRight: 60
+    paddingRight: 60,
+    [theme.breakpoints.down("sm")]: {
+      paddingRight: 30
+    }
   },
   coverContent: {
     height: "50%",
@@ -88,7 +94,6 @@ const useStyles = makeStyles((theme) => ({
 const Cover = (props) => {
   const classes = useStyles();
   const { vicoType } = props;
-  const isMediumScreen = useMediaQuery("(max-width:960px)");
   return (
     <div className={classes.coverWrapper}>
       <div className={classes.cover}>
@@ -112,12 +117,11 @@ const Cover = (props) => {
           </div>
         </div>
       </div>
-      {!isMediumScreen && (
-        <div className={classes.topBarStatus}>
-          <span className={classes.currentStatusText}>Status Online</span>
-          <span className={classes.changeStatusText}>Cambiar status</span>
-        </div>
-      )}
+
+      <div className={classes.topBarStatus}>
+        <span className={classes.currentStatusText}>Status Online</span>
+        <span className={classes.changeStatusText}>Cambiar status</span>
+      </div>
     </div>
   );
 };

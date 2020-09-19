@@ -47,7 +47,10 @@ const useStyles = makeStyles((theme) => ({
     position: "relative"
   },
   dashboardWrapper: {
-    minHeight: "100vh"
+    minHeight: "100vh",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: 22
+    }
   },
   tutoStepsWrapper: {
     padding: "70px 100px",
