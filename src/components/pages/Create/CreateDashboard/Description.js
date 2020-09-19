@@ -54,6 +54,7 @@ const CustomTextField = withStyles((theme) => ({
     paddingLeft: 20,
     paddingRight: 20,
     boxShadow: "0px 2px 4px rgba(239, 142, 5, 0.53)",
+    color: theme.palette.secondary.main,
     [theme.breakpoints.down("sm")]: {
       width: "80%"
     }
