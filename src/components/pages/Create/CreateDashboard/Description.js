@@ -68,7 +68,12 @@ const Description = (props) => {
   const [description, setDescription] = useState("");
 
   return (
-    <RightDrawerScaffold close={() => {}} save={() => {}}>
+    <RightDrawerScaffold
+      close={() => {
+        props.history.push("/create/dashboard/1");
+      }}
+      save={() => {}}
+    >
       <div className={classes.drawerContent}>
         <span className={classes.title}>Descripción de tu VICO</span>
         <p className={classes.description}>

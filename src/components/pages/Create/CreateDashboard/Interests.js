@@ -190,7 +190,12 @@ const Interests = (props) => {
   };
 
   return (
-    <RightDrawerScaffold close={() => {}} save={() => {}}>
+    <RightDrawerScaffold
+      close={() => {
+        props.history.push("/create/dashboard/1");
+      }}
+      save={() => {}}
+    >
       <div className={classes.drawerContent}>
         <span className={classes.title}>Puntos de interés</span>
         <p className={classes.description}>
