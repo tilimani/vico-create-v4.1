@@ -7,18 +7,19 @@ import VICOButton from "../../../atoms/VICOButton";
 
 const useStyles = makeStyles((theme) => ({
   drawerContent: {
-    width: 350,
+    width: 400,
     flexShrink: 0,
-    marginLeft: 160,
-    marginRight: 160,
-    marginTop: 50,
-    [theme.breakpoints.down("md")]: {
-      width: "auto",
-      margin: "30px 70px"
-    },
-    [theme.breakpoints.down("sm")]: {
-      margin: "30px 20px"
+    marginTop: 40,
+    margin: "30px 70px",
+    [theme.breakpoints.down("xs")]: {
+      width: "auto"
     }
+  },
+  innerContent: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
   },
   title: {
     fontSize: 20,
@@ -74,46 +75,48 @@ const Description = (props) => {
       }}
       save={() => {}}
     >
-      <div className={classes.drawerContent}>
-        <span className={classes.title}>Descripción de tu VICO</span>
-        <p className={classes.description}>
-          Nos interesa el ambiente de tu VICO, en el primer paso debes ingresar
-          al información esencial de tu casa.
-        </p>
-        {/** QUESTION 1 : Required */}
-        <div className={classes.question}>
-          <span className={classes.questionTitle}>VICO Exito</span>
-          <p className={classes.questionDescription}>Calle 33c # 88a-115</p>
-          <div className={classes.TextAreaResponseWrapper}>
-            <CustomTextField
-              multiline
-              rows={8}
-              InputLabelProps={{
-                shrink: true
-              }}
-              label="Descripición"
-              placeholder="Ejemplo: Hoy Conquistadores es uno de los barrios más exclusivos de la ciudad de Medellín. Esta gran unidad está ubicada justo al lado del primer centro comercial de Medellín Unicentro."
-              value={description}
-              onChange={(event) => {
-                setDescription(event.target.value);
+      <div className={classes.innerContent}>
+        <div className={classes.drawerContent}>
+          <span className={classes.title}>Descripción de tu VICO</span>
+          <p className={classes.description}>
+            Nos interesa el ambiente de tu VICO, en el primer paso debes
+            ingresar al información esencial de tu casa.
+          </p>
+          {/** QUESTION 1 : Required */}
+          <div className={classes.question}>
+            <span className={classes.questionTitle}>VICO Exito</span>
+            <p className={classes.questionDescription}>Calle 33c # 88a-115</p>
+            <div className={classes.TextAreaResponseWrapper}>
+              <CustomTextField
+                multiline
+                rows={8}
+                InputLabelProps={{
+                  shrink: true
+                }}
+                label="Descripición"
+                placeholder="Ejemplo: Hoy Conquistadores es uno de los barrios más exclusivos de la ciudad de Medellín. Esta gran unidad está ubicada justo al lado del primer centro comercial de Medellín Unicentro."
+                value={description}
+                onChange={(event) => {
+                  setDescription(event.target.value);
+                }}
+              />
+            </div>
+          </div>
+
+          <div className={classes.continueBtnWrapper}>
+            <VICOButton
+              onClick={() => props.history.push("/create/dashboard/1")}
+              variant="contained"
+              color="primary"
+              text="Guardar"
+              style={{
+                width: 267,
+                marginTop: 46,
+                marginBottom: 40,
+                color: "white"
               }}
             />
           </div>
-        </div>
-
-        <div className={classes.continueBtnWrapper}>
-          <VICOButton
-            onClick={() => props.history.push("/create/dashboard/1")}
-            variant="contained"
-            color="primary"
-            text="Guardar"
-            style={{
-              width: 267,
-              marginTop: 46,
-              marginBottom: 40,
-              color: "white"
-            }}
-          />
         </div>
       </div>
     </RightDrawerScaffold>

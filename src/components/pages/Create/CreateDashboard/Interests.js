@@ -20,18 +20,19 @@ import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
   drawerContent: {
-    width: 350,
+    width: 400,
     flexShrink: 0,
-    marginLeft: 160,
-    marginRight: 160,
-    marginTop: 50,
-    [theme.breakpoints.down("md")]: {
-      width: "auto",
-      margin: "30px 70px"
-    },
-    [theme.breakpoints.down("sm")]: {
-      margin: "30px 20px"
+    marginTop: 40,
+    margin: "30px 70px",
+    [theme.breakpoints.down("xs")]: {
+      width: "auto"
     }
+  },
+  innerContent: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
   },
   title: {
     fontSize: 20,
@@ -196,118 +197,120 @@ const Interests = (props) => {
       }}
       save={() => {}}
     >
-      <div className={classes.drawerContent}>
-        <span className={classes.title}>Puntos de interés</span>
-        <p className={classes.description}>
-          ¿Hay un museo cerca o una cancha de football? Describe si hay algún
-          lugar de interés.
-        </p>
-        <div className={classes.checkboxesWrapper}>
-          {zones.map((item, index) => {
-            return (
-              <>
-                <FormControlLabel
-                  key={index}
-                  control={
-                    <Checkbox
-                      checked={zonesCheckState[item]}
-                      onChange={handleChange}
-                      name={item}
-                      color="primary"
-                    />
-                  }
-                  label={<span className={classes.text}>{item}</span>}
-                />
-                <Collapse in={zonesCheckState[item] === true}>
-                  <div className={classes.innerCollapse}>
-                    <span className={classes.text}>
-                      Se encuentra a una distancia de
-                    </span>
-                    <div className={classes.handleNumericValueWrapper}>
-                      <CustomButtonIcon
-                        onClick={() => {
-                          if (distance[item] > 1) {
+      <div className={classes.innerContent}>
+        <div className={classes.drawerContent}>
+          <span className={classes.title}>Puntos de interés</span>
+          <p className={classes.description}>
+            ¿Hay un museo cerca o una cancha de football? Describe si hay algún
+            lugar de interés.
+          </p>
+          <div className={classes.checkboxesWrapper}>
+            {zones.map((item, index) => {
+              return (
+                <>
+                  <FormControlLabel
+                    key={index}
+                    control={
+                      <Checkbox
+                        checked={zonesCheckState[item]}
+                        onChange={handleChange}
+                        name={item}
+                        color="primary"
+                      />
+                    }
+                    label={<span className={classes.text}>{item}</span>}
+                  />
+                  <Collapse in={zonesCheckState[item] === true}>
+                    <div className={classes.innerCollapse}>
+                      <span className={classes.text}>
+                        Se encuentra a una distancia de
+                      </span>
+                      <div className={classes.handleNumericValueWrapper}>
+                        <CustomButtonIcon
+                          onClick={() => {
+                            if (distance[item] > 1) {
+                              setDistance({
+                                ...distance,
+                                [item]: distance[item] - 1
+                              });
+                            }
+                          }}
+                        >
+                          <RemoveIcon />
+                        </CustomButtonIcon>
+                        <span
+                          className={clsx(classes.text, classes.distance)}
+                        >{`${distance[item]} Minuto${
+                          distance[item] > 1 ? "s" : ""
+                        }`}</span>
+                        <CustomButtonIcon
+                          onClick={() =>
                             setDistance({
                               ...distance,
-                              [item]: distance[item] - 1
-                            });
+                              [item]: distance[item] + 1
+                            })
                           }
-                        }}
-                      >
-                        <RemoveIcon />
-                      </CustomButtonIcon>
-                      <span
-                        className={clsx(classes.text, classes.distance)}
-                      >{`${distance[item]} Minuto${
-                        distance[item] > 1 ? "s" : ""
-                      }`}</span>
-                      <CustomButtonIcon
-                        onClick={() =>
-                          setDistance({
-                            ...distance,
-                            [item]: distance[item] + 1
-                          })
-                        }
-                      >
-                        <AddIcon />
-                      </CustomButtonIcon>
+                        >
+                          <AddIcon />
+                        </CustomButtonIcon>
+                      </div>
                     </div>
-                  </div>
-                </Collapse>
-              </>
-            );
-          })}
-        </div>
-        <div>
-          <CustomAddButton
-            variant="outlined"
-            color="default"
-            className={classes.button}
-            startIcon={<AddCircleOutlineIcon />}
-          >
-            Agregar lugar
-          </CustomAddButton>
-        </div>
-        <div className={classes.question}>
-          <span className={classes.questionTitle}>
-            ¿Cómo describes la zona y el barrio de tu VICO? esta habitación?
-          </span>
-          <div className={classes.TextAreaResponseWrapper}>
-            <CustomTextField
-              multiline
-              rows={4}
-              InputLabelProps={{
-                shrink: true
-              }}
-              label={
-                <span className={classes.descriptionLabel}>
-                  Descripción de la zona
-                </span>
-              }
-              value={pointsOfInterests.zoneDescription}
-              onChange={(event) => {
-                setPointsOfInterests({
-                  ...pointsOfInterests,
-                  zoneDescription: event.target.value
-                });
+                  </Collapse>
+                </>
+              );
+            })}
+          </div>
+          <div>
+            <CustomAddButton
+              variant="outlined"
+              color="default"
+              className={classes.button}
+              startIcon={<AddCircleOutlineIcon />}
+            >
+              Agregar lugar
+            </CustomAddButton>
+          </div>
+          <div className={classes.question}>
+            <span className={classes.questionTitle}>
+              ¿Cómo describes la zona y el barrio de tu VICO? esta habitación?
+            </span>
+            <div className={classes.TextAreaResponseWrapper}>
+              <CustomTextField
+                multiline
+                rows={4}
+                InputLabelProps={{
+                  shrink: true
+                }}
+                label={
+                  <span className={classes.descriptionLabel}>
+                    Descripción de la zona
+                  </span>
+                }
+                value={pointsOfInterests.zoneDescription}
+                onChange={(event) => {
+                  setPointsOfInterests({
+                    ...pointsOfInterests,
+                    zoneDescription: event.target.value
+                  });
+                }}
+              />
+            </div>
+          </div>
+
+          <div className={classes.continueBtnWrapper}>
+            <VICOButton
+              onClick={() => props.history.push("/create/dashboard/1")}
+              variant="contained"
+              color="primary"
+              text="Guardar"
+              style={{
+                width: 267,
+                marginTop: 46,
+                marginBottom: 40,
+                color: "white"
               }}
             />
           </div>
-        </div>
-
-        <div className={classes.continueBtnWrapper}>
-          <VICOButton
-            onClick={() => props.history.push("/create/dashboard/1")}
-            variant="contained"
-            color="primary"
-            text="Guardar"
-            style={{
-              width: 267,
-              marginTop: 46,
-              marginBottom: 40,
-              color: "white"
-            }}
-          />
         </div>
       </div>
     </RightDrawerScaffold>

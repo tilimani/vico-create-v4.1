@@ -9,18 +9,19 @@ import VICOCheckbox from "../../../../atoms/VICOCheckbox";
 
 const useStyles = makeStyles((theme) => ({
   drawerContent: {
-    width: 450,
+    width: 400,
     flexShrink: 0,
-    marginLeft: 160,
-    marginRight: 160,
-    marginTop: 100,
-    [theme.breakpoints.down("md")]: {
-      width: "auto",
-      margin: "30px 70px"
-    },
-    [theme.breakpoints.down("sm")]: {
-      margin: "30px 20px"
+    marginTop: 40,
+    margin: "30px 70px",
+    [theme.breakpoints.down("xs")]: {
+      width: "auto"
     }
+  },
+  innerContent: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
   },
   title: {
     fontSize: 20,
@@ -33,7 +34,10 @@ const useStyles = makeStyles((theme) => ({
   responseWrapper: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "center"
+    justifyContent: "flex-start",
+    [theme.breakpoints.down("xs")]: {
+      justifyContent: "center"
+    }
   },
   response: {
     display: "flex",
@@ -67,93 +71,71 @@ const Services = (props) => {
         // props.history.push("/create/dashboard/1/services");
       }}
     >
-      <div className={classes.drawerContent}>
-        <span className={classes.title}>
-          Los servicios públicos deben estar incluidos en el valor del alquiler
-          mensual.
-        </span>
-        <div className={classes.responseWrapper}>
-          <div className={classes.response}>
-            <VICOSquareBtn
-              color="primary"
-              icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/1RiF-wifi.png"
-            />
-            <span className={classes.responseText}>Wifi</span>
+      <div className={classes.innerContent}>
+        <div className={classes.drawerContent}>
+          <span className={classes.title}>
+            Los servicios públicos deben estar incluidos en el valor del
+            alquiler mensual.
+          </span>
+          <div className={classes.responseWrapper}>
+            <div className={classes.response}>
+              <VICOSquareBtn
+                color="primary"
+                icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/1RiF-wifi.png"
+              />
+              <span className={classes.responseText}>Wifi</span>
+            </div>
+            <div className={classes.response}>
+              <VICOSquareBtn
+                color="primary"
+                icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Pkk0-water.png"
+              />
+              <span className={classes.responseText}>Agua</span>
+            </div>
+            <div className={classes.response}>
+              <VICOSquareBtn
+                color="primary"
+                icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/_T7M-gas.png"
+              />
+              <span className={classes.responseText}>Gas</span>
+            </div>
+            <div className={classes.response}>
+              <VICOSquareBtn
+                color="primary"
+                icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Xb8l-light.png"
+              />
+              <span className={classes.responseText}>Luz</span>
+            </div>
           </div>
-          <div className={classes.response}>
-            <VICOSquareBtn
-              color="primary"
-              icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Pkk0-water.png"
-            />
-            <span className={classes.responseText}>Agua</span>
-          </div>
-          <div className={classes.response}>
-            <VICOSquareBtn
-              color="primary"
-              icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/_T7M-gas.png"
-            />
-            <span className={classes.responseText}>Gas</span>
-          </div>
-          <div className={classes.response}>
-            <VICOSquareBtn
-              color="primary"
-              icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Xb8l-light.png"
-            />
-            <span className={classes.responseText}>Luz</span>
-          </div>
-        </div>
 
-        <div className={classes.confirmCheckboxWrapper}>
-          <VICOCheckbox
-            handleChange={(event) => {
-              setUtilitiesIncluded(event.target.checked);
-            }}
-            text="Confirmo que en el alquiler se incluyen los servicios de WIFI, agua, gas y luz."
-          />
-        </div>
-        <div className={classes.continueBtnWrapper}>
-          <VICOButton
-            onClick={() => {
-              changeState("createStep", 2);
-              props.history.push("/create/dashboard/1");
-            }}
-            disabled={!utilitiesIncluded}
-            variant="contained"
-            color="primary"
-            text="Continuar"
-            style={{
-              width: 267,
-              marginTop: 46,
-              color: "white"
-            }}
-          />
+          <div className={classes.confirmCheckboxWrapper}>
+            <VICOCheckbox
+              handleChange={(event) => {
+                setUtilitiesIncluded(event.target.checked);
+              }}
+              text="Confirmo que en el alquiler se incluyen los servicios de WIFI, agua, gas y luz."
+            />
+          </div>
+          <div className={classes.continueBtnWrapper}>
+            <VICOButton
+              onClick={() => {
+                changeState("createStep", 2);
+                props.history.push("/create/dashboard/1");
+              }}
+              disabled={!utilitiesIncluded}
+              variant="contained"
+              color="primary"
+              text="Continuar"
+              style={{
+                width: 267,
+                marginTop: 46,
+                color: "white"
+              }}
+            />
+          </div>
         </div>
       </div>
     </RightDrawerScaffold>
-    // <>
-    //   <Grid container style={{ margin: "4rem", backgroundColor: "#dadada" }}>
-    //     <Grid item xs={8}>
-    //       <p>Services</p>
-    //       <Button
-    //         component={RouterLink}
-    //         to="/create/dashboard/1"
-    //         variant="contained"
-    //         color="secondary"
-    //       >
-    //         Close Services
-    //       </Button>
-    //       <Button
-    //         component={RouterLink}
-    //         to="/create/dashboard/1"
-    //         variant="contained"
-    //         color="secondary"
-    //         onClick={handleClick}
-    //       >
-    //         Continue
-    //       </Button>
-    //     </Grid>
-    //   </Grid>
-    // </>
   );
 };
 
