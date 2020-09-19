@@ -423,34 +423,39 @@ const CreateDashboard = (props) => {
               />
             </div>
           </div>
-          <div>
-            <span className={classes.sectionTitle}>Habitationes</span>
-          </div>
-          <div className={classes.roomsWrapper}>
-            {house.rooms.map((item, index) => (
-              <div
-                key={index}
-                item
-                xs={6}
-                sm={3}
-                className={classes.tutorialStepGridItem}
-              >
-                <div
-                  id="room_button"
-                  className={classes.rulesButton}
-                  onClick={() => {
-                    setTimeout(() => {
-                      tutorialFour.close();
-                    }, 300);
 
-                    props.history.push("/create/dashboard/1/roomedit");
-                  }}
-                >
-                  <Room key={index} roomNumber={index + 1} />
-                </div>
+          {house.type && house.type !== "studio" && (
+            <>
+              <div>
+                <span className={classes.sectionTitle}>Habitationes</span>
               </div>
-            ))}
-          </div>
+              <div className={classes.roomsWrapper}>
+                {house.rooms.map((item, index) => (
+                  <div
+                    key={index}
+                    item
+                    xs={6}
+                    sm={3}
+                    className={classes.tutorialStepGridItem}
+                  >
+                    <div
+                      id="room_button"
+                      className={classes.rulesButton}
+                      onClick={() => {
+                        setTimeout(() => {
+                          tutorialFour.close();
+                        }, 300);
+
+                        props.history.push("/create/dashboard/1/roomedit");
+                      }}
+                    >
+                      <Room key={index} roomNumber={index + 1} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </Grid>
       </Grid>
 
