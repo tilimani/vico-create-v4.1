@@ -174,10 +174,9 @@ const RoomEdit = ({ history }) => {
   return (
     <RightDrawerScaffold
       close={() => {
-        // history.push("/create/dashboard/1");
+        history.push("/create/dashboard/1");
       }}
       save={() => {
-        // changeState("createStep", 3);
         // history.push("/create/dashboard/1");
       }}
     >

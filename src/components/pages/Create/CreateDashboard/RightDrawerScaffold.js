@@ -1,11 +1,6 @@
-import React, { Children } from "react";
-import {
-  Button,
-  Grid,
-  makeStyles,
-  Drawer,
-  withStyles
-} from "@material-ui/core";
+import React, { Children, useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { makeStyles, Drawer, withStyles, Button } from "@material-ui/core";
 import VICOTransparantButton from "../../../atoms/VICOTransparantButton";
 
 const useStyles = makeStyles((theme) => ({
@@ -47,11 +42,17 @@ const CustomDrawer = withStyles((theme) => ({
 
 const RightDrawerScaffold = (props) => {
   const classes = useStyles();
+
   return (
     <CustomDrawer anchor="right" open={true} className={classes.drawer}>
       <div className={classes.drawerHeader}>
         <div className={classes.headerLeftBtn}>
-          <VICOTransparantButton text="Cerrar" action={props.close} />
+          <VICOTransparantButton
+            component={RouterLink}
+            to="/create/dashboard/1"
+            text="Cerrar"
+            action={props.close}
+          />
         </div>
         <div className={classes.headerRightBtn}>
           <VICOTransparantButton text="Guadar" action={props.save} />

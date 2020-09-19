@@ -131,7 +131,7 @@ const Rules = (props) => {
   return (
     <RightDrawerScaffold
       close={() => {
-        //props.history.push("/create/dashboard/1")
+        props.history.push("/create/dashboard/1");
       }}
       save={() => {
         //props.history.push("/create/dashboard/1/services")

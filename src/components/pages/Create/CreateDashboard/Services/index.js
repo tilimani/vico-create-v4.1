@@ -61,10 +61,9 @@ const Services = (props) => {
   return (
     <RightDrawerScaffold
       close={() => {
-        // props.history.push("/create/dashboard/1")
+        props.history.push("/create/dashboard/1");
       }}
       save={() => {
-        // changeState("createStep", 2);
         // props.history.push("/create/dashboard/1/services");
       }}
     >
