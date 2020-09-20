@@ -75,9 +75,9 @@ const useStyles = makeStyles((theme) => ({
   labelFormControl: {
     display: "contents"
   },
-  paddingLeft: {
-    paddingLeft: "11px"
-  },
+  // paddingLeft: {
+  //   paddingLeft: "11px"
+  // },
   iconButton: {
     "& $text": {
       textAlign: "left"

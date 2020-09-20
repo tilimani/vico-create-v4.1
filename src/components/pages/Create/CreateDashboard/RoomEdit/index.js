@@ -208,7 +208,10 @@ const RoomEdit = (props) => {
             <>
               <Gallery
                 joyrideId="room_edit_gallery"
-                title={`Galeria habitación ${props.history.location.state.roomNumber}`}
+                title={`Galeria habitación ${
+                  props.history.location.state &&
+                  props.history.location.state.roomNumber
+                }`}
                 subtitle="Sube mínimo 3 fotos de la habitación."
                 images={images}
                 setImages={setImages}
