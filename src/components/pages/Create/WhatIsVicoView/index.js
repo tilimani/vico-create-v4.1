@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
       height: "98vh",
       padding: "20px 30px 0px"
     },
+    [theme.breakpoints.down("sm")]: {
+      justifyContent: "flex-start"
+    },
     [theme.breakpoints.down("xs")]: {
       display: "block"
     }

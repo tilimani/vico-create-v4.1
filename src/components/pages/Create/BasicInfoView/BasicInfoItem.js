@@ -36,7 +36,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     margin: "auto",
-    marginTop: 40
+    marginTop: 40,
+    [theme.breakpoints.down("xs")]: {
+      width: "100%"
+    }
   }
 }));
 

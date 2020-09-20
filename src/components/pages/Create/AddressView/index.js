@@ -32,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
   },
   subtitle: {
     fontSize: 16,
-    color: theme.palette.secondary.main
+    color: theme.palette.secondary.main,
+    [theme.breakpoints.down("xs")]: { textAlign: "center" }
   },
   formWrapper: {
     display: "flex",
@@ -51,7 +52,11 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     [theme.breakpoints.down("sm")]: {
       marginTop: 40,
-      width: "100%"
+      width: "100%",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center"
     }
   },
   tips: {
@@ -89,7 +94,10 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.main
   },
   autocompleteWrapper: {
-    marginTop: 40
+    marginTop: 40,
+    [theme.breakpoints.down("xs")]: {
+      width: "100%"
+    }
   },
   addtionalInfoField: {
     marginTop: 40,

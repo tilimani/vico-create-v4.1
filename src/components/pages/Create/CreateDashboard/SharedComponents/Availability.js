@@ -1,9 +1,6 @@
 import React from "react";
-import clsx from "clsx";
+import { makeStyles, Grid } from "@material-ui/core";
 
-import { makeStyles } from "@material-ui/core";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Grid from "@material-ui/core/Grid";
 import { CreateContext } from "../../../../../common/context";
 
 import VICOSquareBtn from "../../../../atoms/VICOSquareBtn";

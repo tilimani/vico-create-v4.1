@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0px 5px 4px 0px #AEA7A1",
     borderRadius: 8,
     padding: "40px 20px",
-    margin: "150px 200px",
+    margin: "0px 200px",
     [theme.breakpoints.down("sm")]: {
       boxShadow: "none",
       padding: "40px 20px",
