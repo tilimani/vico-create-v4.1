@@ -176,7 +176,14 @@ const AddressView = (props) => {
                   label="Dirección"
                   options={addresses.map((option) => option.title)}
                   VICOAddress={VICOAddress}
-                  setVICOAddress={setVICOAddress}
+                  setVICOAddress={(event, newValue) => {
+                    setVICOAddress(newValue);
+                    window.scrollTo({
+                      top: 0,
+                      left: 0,
+                      behavior: "smooth"
+                    });
+                  }}
                 />
               </div>
               <VICOTextField

@@ -53,9 +53,7 @@ function VICOAutoComplete(props) {
       options={props.options}
       noOptionsText="No hay opciones"
       value={props.VICOAddress}
-      onChange={(event, newValue) => {
-        props.setVICOAddress(newValue);
-      }}
+      onChange={props.setVICOAddress}
       renderInput={(params) => (
         <TextField
           placeholder="Calle 33c  # 88a-115"
