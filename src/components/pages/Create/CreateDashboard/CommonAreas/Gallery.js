@@ -8,6 +8,20 @@ import VICODropZone from "../../../../atoms/VICODropZone";
 import VICOButton from "../../../../atoms/VICOButton";
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    position: "relative"
+  },
+  overlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(33, 33, 33, 0.83)",
+    transition: "background-color 0.5s",
+    opacity: ".7",
+    zIndex: 1900
+  },
   title: {
     fontSize: 20,
     color: theme.palette.secondary.main,
@@ -66,9 +80,10 @@ const CustomTextField = withStyles((theme) => ({
 const Gallery = (props) => {
   const classes = useStyles();
 
-  const { images, setImages, tutorial } = props;
+  const { images, setImages } = props;
   return (
-    <div id="common_areas_gallery">
+    <div id="common_areas_gallery" className={classes.container}>
+      {props.isOverlayed && <div className={classes.overlay}></div>}
       <span className={classes.title}>Galeria zonas sociales</span>
       <p className={classes.subtitle}>
         Sube mínimo 5 fotos de las zonas sociales y áreas compartidas de tu
@@ -79,9 +94,7 @@ const Gallery = (props) => {
       {images.length !== 0 && (
         <div className={classes.saveBtnWrapper}>
           <VICOButton
-            // component={RouterLink}
-            // to="/create/dashboard/1"
-            onClick={() => tutorial.next()}
+            onClick={props.goNext}
             variant="contained"
             color="primary"
             text="Guardar"

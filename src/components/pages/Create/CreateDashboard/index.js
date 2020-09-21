@@ -215,41 +215,41 @@ const CreateDashboard = (props) => {
             display: "none"
           }
         }
-      },
-      {
-        content: <CommonAreasGallery />,
-        placement: "left",
-        target: "#common_areas_gallery",
-        locale: { next: "Omitir", last: "Continue" },
-        disableBeacon: true,
-        styles: {
-          buttonNext: {
-            height: "auto",
-            border: "none",
-            backgroundColor: "transparent",
-            marginRight: 40,
-            marginLeft: 40,
-            width: 273,
-            borderRadius: 12,
-            fontFamily: `"Nunito", sans-serif`,
-            fontWeight: "bold",
-            marginBottom: 10,
-            outline: "none",
-            color: "#2A3C44"
-          }
-        }
-      },
-      {
-        target: "#common_areas_info",
-        content: <CommonAreasInfo />,
-        disableBeacon: true,
-        placement: "left",
-        styles: {
-          buttonNext: {
-            display: "none"
-          }
-        }
       }
+      // {
+      //   content: <CommonAreasGallery />,
+      //   placement: "left",
+      //   target: "#common_areas_gallery",
+      //   locale: { next: "Omitir", last: "Continue" },
+      //   disableBeacon: true,
+      //   styles: {
+      //     buttonNext: {
+      //       height: "auto",
+      //       border: "none",
+      //       backgroundColor: "transparent",
+      //       marginRight: 40,
+      //       marginLeft: 40,
+      //       width: 273,
+      //       borderRadius: 12,
+      //       fontFamily: `"Nunito", sans-serif`,
+      //       fontWeight: "bold",
+      //       marginBottom: 10,
+      //       outline: "none",
+      //       color: "#2A3C44"
+      //     }
+      //   }
+      // },
+      // {
+      //   target: "#common_areas_info",
+      //   content: <CommonAreasInfo />,
+      //   disableBeacon: true,
+      //   placement: "left",
+      //   styles: {
+      //     buttonNext: {
+      //       display: "none"
+      //     }
+      //   }
+      // }
     ],
     three: [
       {
@@ -390,7 +390,7 @@ const CreateDashboard = (props) => {
               className={classes.rulesButton}
               onClick={() => {
                 setTimeout(() => {
-                  tutorialTwo.next();
+                  tutorialTwo.close();
                 }, 300);
                 props.history.push("/create/dashboard/1/commonareas");
               }}

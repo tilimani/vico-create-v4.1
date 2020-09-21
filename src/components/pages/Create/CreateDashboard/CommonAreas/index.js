@@ -1,6 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
+import Joyride from "react-joyride";
+
 import { CreateContext } from "../../../../../common/context";
 
 import RightDrawerScaffold from "../RightDrawerScaffold";
@@ -13,6 +15,9 @@ import VICOSquareBtn from "../../../../atoms/VICOSquareBtn";
 import VICORadioButton from "../../../../atoms/VICORadioButton";
 
 import Gallery from "./Gallery";
+
+import CommonAreasGallery from "../JoyrideCustomContents/CommonAreasGallery";
+import CommonAreasInfo from "../JoyrideCustomContents/CommonAreasInfo";
 
 const useStyles = makeStyles((theme) => ({
   drawerContent: {
@@ -31,7 +36,19 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center"
   },
   additionalContent: {
-    marginTop: 40
+    marginTop: 40,
+    position: "relative"
+  },
+  overlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(33, 33, 33, 0.83)",
+    transition: "background-color 0.5s",
+    opacity: ".7",
+    zIndex: 1900
   },
   question: {
     marginTop: 40
@@ -89,7 +106,7 @@ const CommonAreas = ({ tutorial, history }) => {
   const classes = useStyles();
 
   const [images, setImages] = useState([]);
-  const [videoUrl, setVideoUrl] = useState(null);
+
   const [information, setInformation] = useState({
     tags: [],
     cameraType: null,
@@ -99,6 +116,106 @@ const CommonAreas = ({ tutorial, history }) => {
   });
 
   const { changeState, house } = useContext(CreateContext);
+
+  const [runGalleryTutorial, setRunGalleryTutorial] = useState(true);
+  const [runInofTutorial, setRunInfoTutorial] = useState(false);
+
+  /** These states workingOnGallery and workingOnInfo are use to trigger the
+   * apprearance of the overlay in each step  */
+  const [workingOnGallery, setWorkingOnGallery] = useState(false);
+  const [workingOnInfo, setWorkingOnInfo] = useState(false);
+
+  const joyrideSettings = {
+    continuous: true,
+    locale: { next: "Continuar", last: "Continue" },
+    disableOverlayClose: false,
+    spotlightClicks: true,
+    styles: {
+      options: { width: 360, height: 270 },
+      buttonClose: {
+        display: "none"
+      },
+      buttonBack: {
+        display: "none"
+      }
+    }
+  };
+
+  const [tutorialSteps, setTutorialSteps] = useState({
+    gallery: [
+      {
+        content: (
+          <>
+            <CommonAreasGallery />
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <VICOButton
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setRunGalleryTutorial(false);
+                  setWorkingOnGallery(true);
+                }}
+                text="Continuar"
+                style={{ marginBottom: 0, marginTop: 10, height: 50 }}
+              />
+              <VICOButton
+                variant="contained"
+                color="default"
+                onClick={() => {
+                  setRunGalleryTutorial(false);
+                  setRunInfoTutorial(true);
+                  setWorkingOnGallery(false);
+                  setWorkingOnInfo(true);
+                }}
+                text="Omitir"
+                style={{ marginBottom: 0, marginTop: 10, height: 50 }}
+              />
+            </div>
+          </>
+        ),
+        placement: "center",
+        target: "body",
+        disableBeacon: true,
+        styles: {
+          buttonNext: {
+            display: "none"
+          }
+        }
+      }
+    ],
+    info: [
+      {
+        target: "body",
+        content: (
+          <>
+            <CommonAreasInfo />
+            <VICOButton
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                setRunInfoTutorial(false);
+
+                setWorkingOnInfo(true);
+                document.getElementById("common_areas_info").scrollIntoView({
+                  behavior: "smooth"
+                });
+              }}
+              text="Continuar"
+              style={{ marginBottom: 0, marginTop: 10, height: 50 }}
+            />
+          </>
+        ),
+        disableBeacon: true,
+        placement: "center",
+        styles: {
+          buttonNext: {
+            display: "none"
+          }
+        }
+      }
+    ]
+  });
+
   const handleClick = () => {
     changeState("createStep", 3);
   };
@@ -114,8 +231,18 @@ const CommonAreas = ({ tutorial, history }) => {
     >
       <div className={classes.innerContent}>
         <div className={classes.drawerContent}>
-          <Gallery images={images} setImages={setImages} tutorial={tutorial} />
+          <Gallery
+            images={images}
+            setImages={setImages}
+            goNext={() => {
+              setRunGalleryTutorial(false);
+              setRunInfoTutorial(true);
+              setWorkingOnGallery(false);
+            }}
+            isOverlayed={workingOnInfo}
+          />
           <div id="common_areas_info" className={classes.additionalContent}>
+            {workingOnGallery && <div className={classes.overlay}></div>}
             <div className={classes.question} style={{ paddingTop: 20 }}>
               <span className={classes.questionTitle}>
                 ¿Cómo definirías tu VICO?
@@ -484,6 +611,18 @@ const CommonAreas = ({ tutorial, history }) => {
             </div>
           </div>
         </div>
+        <Joyride
+          key={"gallery-tutorial"}
+          steps={tutorialSteps.gallery}
+          run={runGalleryTutorial}
+          {...joyrideSettings}
+        />
+        <Joyride
+          key={"info-tutorial"}
+          steps={tutorialSteps.info}
+          run={runInofTutorial}
+          {...joyrideSettings}
+        />
       </div>
     </RightDrawerScaffold>
   );
