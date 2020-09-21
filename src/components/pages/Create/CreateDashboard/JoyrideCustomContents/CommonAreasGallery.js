@@ -1,6 +1,5 @@
 import React from "react";
-import { makeStyles, useMediaQuery } from "@material-ui/core";
-import VICOButton from "../../../../atoms/VICOButton";
+import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   innerContent: {
@@ -26,9 +25,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CommonAreasGallery = ({ tutorial }) => {
+const CommonAreasGallery = () => {
   const classes = useStyles();
-  const isMediumScreen = useMediaQuery("(max-width:960px)");
   return (
     <div className={classes.innerContent}>
       <div>
@@ -48,32 +46,6 @@ const CommonAreasGallery = ({ tutorial }) => {
         Recuerda subir fotos de las zonas sociales, habitación y baño de tu
         VICO.
       </p>
-
-      {/* <VICOButton
-        //onClick={() => tutorial.close}
-        variant="contained"
-        color="primary"
-        text="Continuar"
-        style={{
-          width: 267,
-          marginTop: 10
-        }}
-      /> */}
-
-      {/* <VICOButton
-        variant="outlined"
-        color="default"
-        text="Omitir"
-        onClick={() => {
-          props.tutorial();
-        }}
-        style={{
-          width: 267,
-          height: "auto",
-          border: "none",
-          backgroundColor: "transparent"
-        }}
-      /> */}
     </div>
   );
 };

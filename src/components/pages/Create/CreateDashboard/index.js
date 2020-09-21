@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link as RouterLink, Route, withRouter } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles, Grid } from "@material-ui/core";
 
@@ -15,8 +15,6 @@ import SuccessfulCreatedVICO from "./JoyrideCustomContents/SuccessfulCreatedVICO
 import CreateVICORules from "./JoyrideCustomContents/CreateVICORules";
 import SuccessfulCreatedVICORules from "./JoyrideCustomContents/SuccessfulCreatedVICORules";
 import CreateVICOCommonAreas from "./JoyrideCustomContents/CreateVICOCommonAreas";
-import CommonAreasGallery from "./JoyrideCustomContents/CommonAreasGallery";
-import CommonAreasInfo from "./JoyrideCustomContents/CommonAreasInfo";
 import EditRoom from "./JoyrideCustomContents/EditRoom";
 import SuccessfulCreatedCommonAreas from "./JoyrideCustomContents/SuccessfulCreatedCommonAreas";
 import SuccessfulRoomEdit from "./JoyrideCustomContents/SuccessfulRoomEdit";
@@ -216,40 +214,6 @@ const CreateDashboard = (props) => {
           }
         }
       }
-      // {
-      //   content: <CommonAreasGallery />,
-      //   placement: "left",
-      //   target: "#common_areas_gallery",
-      //   locale: { next: "Omitir", last: "Continue" },
-      //   disableBeacon: true,
-      //   styles: {
-      //     buttonNext: {
-      //       height: "auto",
-      //       border: "none",
-      //       backgroundColor: "transparent",
-      //       marginRight: 40,
-      //       marginLeft: 40,
-      //       width: 273,
-      //       borderRadius: 12,
-      //       fontFamily: `"Nunito", sans-serif`,
-      //       fontWeight: "bold",
-      //       marginBottom: 10,
-      //       outline: "none",
-      //       color: "#2A3C44"
-      //     }
-      //   }
-      // },
-      // {
-      //   target: "#common_areas_info",
-      //   content: <CommonAreasInfo />,
-      //   disableBeacon: true,
-      //   placement: "left",
-      //   styles: {
-      //     buttonNext: {
-      //       display: "none"
-      //     }
-      //   }
-      // }
     ],
     three: [
       {
@@ -318,35 +282,12 @@ const CreateDashboard = (props) => {
   });
 
   React.useEffect(() => {
-    // const placementCommonAreasGallery =
-    //   window.innerWidth < 960 ? "center" : "left";
-    // const targetCommonAreasGallery =
-    //   window.innerWidth < 960 ? "body" : "#common_areas_gallery";
-
     const placementEditedRoomSuccess =
       window.innerWidth < 960 ? "center" : "bottom";
     const targetEditedRoomSuccess =
       window.innerWidth < 960 ? "body" : "#room_button";
     setTutorialSteps({
       ...tutorialSteps,
-      // two: [
-      //   {
-      //     ...tutorialSteps.two[0]
-      //   },
-      //   {
-      //     ...tutorialSteps.two[1]
-      //   },
-      //   {
-      //     content: tutorialSteps.two[2].content,
-      //     placement: placementCommonAreasGallery,
-      //     target: targetCommonAreasGallery,
-      //     locale: tutorialSteps.two[2].locale,
-      //     styles: tutorialSteps.two[2].styles
-      //   },
-      //   {
-      //     ...tutorialSteps.two[3]
-      //   }
-      // ],
       five: [
         {
           ...tutorialSteps.five[0],
