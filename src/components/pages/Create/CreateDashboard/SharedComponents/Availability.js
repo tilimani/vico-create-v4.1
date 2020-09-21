@@ -8,10 +8,8 @@ import VICOButton from "../../../../atoms/VICOButton";
 
 const useStyles = makeStyles((theme) => ({
   drawerContent: {
-    width: 550,
+    width: "100%",
     flexShrink: 0,
-    marginLeft: 160,
-    marginRight: 160,
     marginTop: 50,
     [theme.breakpoints.down("md")]: {
       width: "auto",
@@ -42,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   grid: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center"
   },
   date: {
