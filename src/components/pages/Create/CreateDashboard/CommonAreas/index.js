@@ -164,11 +164,15 @@ const CommonAreas = ({ tutorial, history }) => {
                 onClick={() => {
                   setRunGalleryTutorial(false);
                   setRunInfoTutorial(true);
-                  setWorkingOnGallery(false);
-                  setWorkingOnInfo(true);
                 }}
                 text="Omitir"
-                style={{ marginBottom: 0, marginTop: 10, height: 50 }}
+                style={{
+                  marginBottom: 0,
+                  marginTop: 10,
+                  height: 50,
+                  boxShadow: "none",
+                  backgroundColor: "transparent"
+                }}
               />
             </div>
           </>

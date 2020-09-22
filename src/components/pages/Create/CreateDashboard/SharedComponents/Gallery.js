@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, TextField, withStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 
 import CloseIcon from "@material-ui/icons/Close";
 import CheckIcon from "@material-ui/icons/Check";
@@ -8,6 +8,20 @@ import VICODropZone from "../../../../atoms/VICODropZone";
 import VICOButton from "../../../../atoms/VICOButton";
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    position: "relative"
+  },
+  overlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(33, 33, 33, 0.83)",
+    transition: "background-color 0.5s",
+    opacity: ".7",
+    zIndex: 1900
+  },
   title: {
     fontSize: 20,
     color: theme.palette.secondary.main,
@@ -54,17 +68,10 @@ const useStyles = makeStyles((theme) => ({
 const Gallery = (props) => {
   const classes = useStyles();
 
-  const {
-    joyrideId,
-    title,
-    subtitle,
-    images,
-    setImages,
-    action,
-    tutorial
-  } = props;
+  const { title, subtitle, images, setImages, tutorial } = props;
   return (
-    <div id={joyrideId}>
+    <div id="room_edit_gallery" className={classes.container}>
+      {props.isOverlayed && <div className={classes.overlay}></div>}
       <span className={classes.title}>{title}</span>
       <p className={classes.subtitle}>{subtitle}</p>
 
@@ -72,7 +79,7 @@ const Gallery = (props) => {
       {images.length !== 0 && (
         <div className={classes.saveBtnWrapper}>
           <VICOButton
-            onClick={() => tutorial.next()}
+            onClick={props.goNext}
             variant="contained"
             color="primary"
             text="Guardar"

@@ -54,7 +54,19 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center"
   },
   additionalContent: {
-    marginTop: 40
+    marginTop: 40,
+    position: "relative"
+  },
+  overlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(33, 33, 33, 0.83)",
+    transition: "background-color 0.5s",
+    opacity: ".7",
+    zIndex: 1900
   },
   question: {
     marginTop: 40
@@ -98,55 +110,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RoomEdit = (props) => {
-  const isMediumScreen = useMediaQuery("(max-width:960px)");
-
-  const [tutorialEight, setTutorialEight] = useState({});
-  /** Joyride steps */
-  const [tutorialSteps] = useState({
-    eight: [
-      {
-        target: "#room_edit_gallery",
-        content: <RoomEditGallery tutorial={tutorialEight} />,
-        disableBeacon: true,
-        placement: isMediumScreen ? "bottom" : "left",
-        locale: { next: "Omitir", last: "Continue" },
-        styles: {
-          buttonNext: {
-            height: "auto",
-            border: "none",
-            backgroundColor: "transparent",
-            marginRight: 40,
-            marginLeft: 40,
-            width: 273,
-            borderRadius: 12,
-            fontFamily: `"Nunito", sans-serif`,
-            fontWeight: "bold",
-            marginBottom: 10,
-            outline: "none",
-            color: "#2A3C44"
-          }
-        }
-      },
-      {
-        target: "#room_edit_info",
-        content: <RoomEditInfo />,
-        disableBeacon: true,
-        placement: "left",
-        styles: {
-          buttonNext: {
-            display: "none"
-          }
-        }
-      }
-    ]
-  });
-
   const classes = useStyles();
-  const { house, changeState, createStep } = useContext(CreateContext);
+  const { house, changeState } = useContext(CreateContext);
   const [currentComponent, setCurrentComponent] = useState(
     house.type === "shared" ? "availibility" : "galleryAndInfo"
-    //"galleryAndInfo"
   );
+
   const [images, setImages] = useState([]);
   const [information, setInformation] = useState({
     tags: [],
@@ -167,6 +136,94 @@ const RoomEdit = (props) => {
 
   const [specificDate, setSpecificDate] = useState(null);
 
+  const [runGalleryTutorial, setRunGalleryTutorial] = useState(false);
+  const [runInofTutorial, setRunInfoTutorial] = useState(false);
+
+  /** These states workingOnGallery and workingOnInfo are use to trigger the
+   * apprearance of the overlay in each step  */
+  const [workingOnGallery, setWorkingOnGallery] = useState(false);
+  const [workingOnInfo, setWorkingOnInfo] = useState(false);
+
+  /** Joyride steps */
+  const [tutorialSteps] = useState({
+    gallery: [
+      {
+        target: "body",
+        content: (
+          <>
+            <RoomEditGallery />
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <VICOButton
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setRunGalleryTutorial(false);
+                  setWorkingOnGallery(true);
+                }}
+                text="Continuar"
+                style={{ marginBottom: 0, marginTop: 10, height: 50 }}
+              />
+              <VICOButton
+                variant="contained"
+                color="default"
+                onClick={() => {
+                  setRunGalleryTutorial(false);
+                  setRunInfoTutorial(true);
+                }}
+                text="Omitir"
+                style={{
+                  marginBottom: 0,
+                  marginTop: 10,
+                  height: 50,
+                  boxShadow: "none",
+                  backgroundColor: "transparent"
+                }}
+              />
+            </div>
+          </>
+        ),
+        disableBeacon: true,
+        placement: "center",
+
+        styles: {
+          buttonNext: {
+            display: "none"
+          }
+        }
+      }
+    ],
+    info: [
+      {
+        target: "body",
+        content: (
+          <>
+            <RoomEditInfo />
+            <VICOButton
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                setRunInfoTutorial(false);
+                setWorkingOnInfo(true);
+                document.getElementById("room_edit_info").scrollIntoView({
+                  behavior: "smooth"
+                });
+              }}
+              text="Continuar"
+              style={{ marginBottom: 0, marginTop: 10, height: 50 }}
+            />
+          </>
+        ),
+        disableBeacon: true,
+        placement: "center",
+        styles: {
+          buttonNext: {
+            display: "none"
+          }
+        }
+      }
+    ]
+  });
+
   const handleInfoClick = () => {
     props.history.push("/create/dashboard/1");
     changeState("createStep", 5);
@@ -186,10 +243,6 @@ const RoomEdit = (props) => {
           {currentComponent === "availibility" && (
             <Availability
               handleClick={(selectedItem) => {
-                changeState("createStep", 8);
-                // setTimeout(() => {
-                //   tutorial.next();
-                // }, 300);
                 if (
                   selectedItem === "proximo_año" ||
                   selectedItem === "nunca"
@@ -200,6 +253,7 @@ const RoomEdit = (props) => {
                 } else {
                   changeState("createStep", 8);
                   setCurrentComponent("galleryAndInfo");
+                  setRunGalleryTutorial(true);
                 }
               }}
             />
@@ -207,7 +261,6 @@ const RoomEdit = (props) => {
           {currentComponent === "galleryAndInfo" && (
             <>
               <Gallery
-                joyrideId="room_edit_gallery"
                 title={`Galeria habitación ${
                   props.history.location.state &&
                   props.history.location.state.roomNumber
@@ -215,11 +268,16 @@ const RoomEdit = (props) => {
                 subtitle="Sube mínimo 3 fotos de la habitación."
                 images={images}
                 setImages={setImages}
-                tutorial={tutorialEight}
-                action={() => tutorialEight.next()}
+                goNext={() => {
+                  setRunGalleryTutorial(false);
+                  setRunInfoTutorial(true);
+                  setWorkingOnGallery(false);
+                }}
+                isOverlayed={workingOnInfo}
               />
 
               <div id="room_edit_info" className={classes.additionalContent}>
+                {workingOnGallery && <div className={classes.overlay}></div>}
                 {house.type === "shared" && (
                   <div className={classes.question}>
                     <span className={classes.questionTitle}>
@@ -433,13 +491,17 @@ const RoomEdit = (props) => {
         </div>
       </div>
       {/** Joyrides */}
+
       <Joyride
-        key={"eight-tutorial"}
-        steps={tutorialSteps.eight}
-        run={createStep === 8}
-        getHelpers={(helpers) => {
-          setTutorialEight(helpers);
-        }}
+        key={"edit-room-gallery-tutorial"}
+        steps={tutorialSteps.gallery}
+        run={runGalleryTutorial}
+        {...joyrideSettings}
+      />
+      <Joyride
+        key={"edit-room-info-tutorial"}
+        steps={tutorialSteps.info}
+        run={runInofTutorial}
         {...joyrideSettings}
       />
     </RightDrawerScaffold>

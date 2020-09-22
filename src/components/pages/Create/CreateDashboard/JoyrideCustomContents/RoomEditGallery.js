@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
-import VICOButton from "../../../../atoms/VICOButton";
 
 const useStyles = makeStyles((theme) => ({
   innerContent: {
@@ -34,15 +33,6 @@ const RoomEditGallery = (props) => {
       <p className={classes.description}>
         Puedes entrar en cualquier momento y editar las opciones.
       </p>
-      <VICOButton
-        variant="contained"
-        color="primary"
-        text="Continuar"
-        style={{
-          width: 267,
-          marginTop: 10
-        }}
-      />
     </div>
   );
 };
