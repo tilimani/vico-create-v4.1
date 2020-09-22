@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SuccessfulRoomEdit = (props) => {
   const classes = useStyles();
-  const isMediumScreen = useMediaQuery("(max-width:960px)");
+
   return (
     <div className={classes.innerContent}>
       <img

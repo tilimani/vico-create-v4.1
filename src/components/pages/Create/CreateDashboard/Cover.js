@@ -117,12 +117,21 @@ const useStatusTooltipStyles = makeStyles((theme) => ({
 
 function StatusTooltip(props) {
   const classes = useStatusTooltipStyles();
+  const isMediumScreen = useMediaQuery("(max-width:960px)");
 
-  return <Tooltip arrow classes={classes} placement="bottom-end" {...props} />;
+  return (
+    <Tooltip
+      arrow={!isMediumScreen}
+      classes={classes}
+      placement="bottom-end"
+      {...props}
+    />
+  );
 }
 
 const Cover = (props) => {
   const classes = useStyles();
+
   const { vicoType, setStatusIsChanging } = props;
   const [status, setStatus] = React.useState("En linea");
 
