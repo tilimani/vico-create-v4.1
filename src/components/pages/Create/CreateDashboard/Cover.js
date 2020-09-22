@@ -1,7 +1,9 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Button, Tooltip } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import VICOTransparentIconBtn from "../../../atoms/VICOTransparentIconBtn";
+import ChangeStatusContent from "./ChangeStatusContent";
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
   coverWrapper: {
@@ -24,11 +26,21 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
     left: 0,
     height: "6vh",
-    backgroundColor: "#07A529",
+
     width: "100%",
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
+    zIndex: 1500
+  },
+  onlineTopBarStatus: {
+    backgroundColor: "#07A529"
+  },
+  offlineTopBarStatus: {
+    backgroundColor: "#C4C4C4"
+  },
+  pendingTopBarStatus: {
+    backgroundColor: "#EA3131"
   },
   currentStatusText: {
     color: "#ffffff",
@@ -39,12 +51,12 @@ const useStyles = makeStyles((theme) => ({
       paddingLeft: 20
     }
   },
-  changeStatusText: {
+  changeStatusButton: {
     color: "#ffffff",
     fontSize: 14,
-    paddingRight: 60,
+    marginRight: 60,
     [theme.breakpoints.down("sm")]: {
-      paddingRight: 30
+      marginRight: 30
     }
   },
   coverContent: {
@@ -91,9 +103,38 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const useStatusTooltipStyles = makeStyles((theme) => ({
+  arrow: {
+    color: "white"
+  },
+  tooltip: {
+    backgroundColor: "white",
+    color: theme.palette.secondary.main,
+    fontSize: 16,
+    borderRadius: 6
+  }
+}));
+
+function StatusTooltip(props) {
+  const classes = useStatusTooltipStyles();
+
+  return <Tooltip arrow classes={classes} placement="bottom-end" {...props} />;
+}
+
 const Cover = (props) => {
   const classes = useStyles();
-  const { vicoType } = props;
+  const { vicoType, setStatusIsChanging } = props;
+  const [status, setStatus] = React.useState("online");
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
   return (
     <div className={classes.coverWrapper}>
       <div className={classes.cover}>
@@ -118,9 +159,45 @@ const Cover = (props) => {
         </div>
       </div>
 
-      <div className={classes.topBarStatus}>
-        <span className={classes.currentStatusText}>Status Online</span>
-        <span className={classes.changeStatusText}>Cambiar status</span>
+      <div
+        className={clsx(
+          classes.topBarStatus,
+          status === "En linea" && classes.onlineTopBarStatus,
+          status === "Fuera de linea" && classes.offlineTopBarStatus,
+          status === "Pendiente" && classes.pendingTopBarStatus
+        )}
+      >
+        <span className={classes.currentStatusText}>{`Status ${status}`}</span>
+
+        <StatusTooltip
+          interactive
+          disableHoverListener
+          disableTouchListener
+          disableFocusListener
+          open={open}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          title={
+            <ChangeStatusContent
+              status={status}
+              setStatus={setStatus}
+              close={() => {
+                handleClose();
+                setStatusIsChanging(false);
+              }}
+            />
+          }
+        >
+          <Button
+            onClick={() => {
+              setStatusIsChanging(true);
+              handleOpen();
+            }}
+            className={classes.changeStatusButton}
+          >
+            Cambiar status
+          </Button>
+        </StatusTooltip>
       </div>
     </div>
   );

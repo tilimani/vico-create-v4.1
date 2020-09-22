@@ -34,6 +34,20 @@ import Description from "./Description";
 import Interests from "./Interests";
 
 const useStyles = makeStyles((theme) => ({
+  dashboardContainer: {
+    position: "relative"
+  },
+  overlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(33, 33, 33, 0.83)",
+    transition: "background-color 0.5s",
+    opacity: ".7",
+    zIndex: 1000
+  },
   leftMenu: {
     position: "relative",
     [theme.breakpoints.down("sm")]: {
@@ -107,6 +121,9 @@ const CreateDashboard = (props) => {
   const [tutorialThree, setTutorialThree] = useState({});
   const [tutorialFour, setTutorialFour] = useState({});
   const [tutorialFive, setTutorialFive] = useState({});
+
+  /** Status (online/ offline/pending) */
+  const [statusIsChanging, setStatusIsChanging] = useState(false);
 
   const nextStep = () => {
     if (hasRooms) {
@@ -299,18 +316,24 @@ const CreateDashboard = (props) => {
   }, []);
 
   return (
-    <>
+    <div className={classes.dashboardContainer}>
       {isMediumScreen && (
         <div className="mobile-progress-wrapper">
           <VICOMobileLinearProgress step={7} />
         </div>
       )}
+
+      {statusIsChanging && <div className={classes.overlay}> </div>}
       <Grid container spacing={0} className={classes.dashboardWrapper}>
         <Grid item xs={0} md={3} className={classes.leftMenu}>
           <LeftMenu />
         </Grid>
         <Grid item xs={12} md={9} className={classes.dashboardContent}>
-          <Cover vicoType="Apartaestudio" />
+          <Cover
+            vicoType="Apartaestudio"
+            statusIsChanging={statusIsChanging}
+            setStatusIsChanging={setStatusIsChanging}
+          />
           <div className={classes.tutoStepsWrapper}>
             <div
               id="rules_button"
@@ -490,7 +513,7 @@ const CreateDashboard = (props) => {
         openScheduled={openScheduled}
         handleScheduledClose={handleScheduledClose}
       />
-    </>
+    </div>
   );
 };
 
