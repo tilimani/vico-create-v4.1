@@ -6,8 +6,6 @@ import "./Room.css";
 
 const useStyles = makeStyles((theme) => ({
   roomFrame: {
-    height: 182,
-    width: 301,
     borderRadius: 6,
     backgroundColor: "#fbf7f4",
     position: "relative",

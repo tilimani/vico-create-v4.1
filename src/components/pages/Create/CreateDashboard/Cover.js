@@ -7,7 +7,7 @@ import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
   coverWrapper: {
-    position: "relative"
+    //position: "relative"
   },
   cover: {
     height: "30vh",
@@ -124,7 +124,7 @@ function StatusTooltip(props) {
 const Cover = (props) => {
   const classes = useStyles();
   const { vicoType, setStatusIsChanging } = props;
-  const [status, setStatus] = React.useState("online");
+  const [status, setStatus] = React.useState("En linea");
 
   const [open, setOpen] = React.useState(false);
 

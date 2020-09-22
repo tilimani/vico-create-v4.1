@@ -15,7 +15,7 @@ import { CreateProvider } from "../../../common/context";
 const useStyles = makeStyles((theme) => ({
   createContainer: {
     position: "relative",
-    height: "98vh",
+    // height: "98vh",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
