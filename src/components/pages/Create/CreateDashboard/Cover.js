@@ -30,7 +30,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "center"
+  },
+  notHiddenToolbar: {
     zIndex: 1500
   },
   onlineTopBarStatus: {
@@ -171,6 +173,7 @@ const Cover = (props) => {
       <div
         className={clsx(
           classes.topBarStatus,
+          open && classes.notHiddenToolbar,
           status === "En linea" && classes.onlineTopBarStatus,
           status === "Fuera de linea" && classes.offlineTopBarStatus,
           status === "Pendiente" && classes.pendingTopBarStatus
