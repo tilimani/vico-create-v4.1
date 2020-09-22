@@ -316,8 +316,10 @@ const CreateDashboard = (props) => {
               id="rules_button"
               className={classes.rulesButton}
               onClick={() => {
-                tutorialOne.close();
-                props.history.push("/create/dashboard/1/rules");
+                if (createStep < 2) {
+                  tutorialOne.close();
+                  props.history.push("/create/dashboard/1/rules");
+                }
               }}
             >
               <TutorialStep
@@ -330,10 +332,12 @@ const CreateDashboard = (props) => {
               id="common_areas_button"
               className={classes.rulesButton}
               onClick={() => {
-                setTimeout(() => {
-                  tutorialTwo.close();
-                }, 300);
-                props.history.push("/create/dashboard/1/commonareas");
+                if (createStep < 3) {
+                  setTimeout(() => {
+                    tutorialTwo.close();
+                  }, 300);
+                  props.history.push("/create/dashboard/1/commonareas");
+                }
               }}
             >
               <TutorialStep
