@@ -14,11 +14,9 @@ const useStyles = makeStyles((theme) => ({
   iconWrapper: { marginRight: 20 },
   icon: {
     width: 40,
-    [theme.breakpoints.down("md")]: {
-      width: 30
-    },
+
     [theme.breakpoints.down("sm")]: {
-      width: 20
+      width: 30
     }
   },
   textWrapper: {

@@ -72,7 +72,7 @@ const CreateWelcomeView = () => {
       <div className={classes.welcomeViewContent}>
         <img
           className={classes.logo}
-          src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Ksur-vicoLogo.png"
+          src="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/7K6m-vicoLogo1.png"
           alt="logo"
         />
         <span className={classes.welcomeText}>Bienvenidos</span>

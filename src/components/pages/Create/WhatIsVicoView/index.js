@@ -103,21 +103,21 @@ const WhatIsVicoView = () => {
           >
             <Grid item xs={12} md={4}>
               <VICOTypeItem
-                icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/0lbb-furnished.png"
+                icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/jrpq-chair.png"
                 title="Completamente amoblada"
                 subtitle="La sala, cocina y las habitaciones deben estar completamente equipados y listos para mudarse."
               />
             </Grid>
             <Grid item xs={12} md={4}>
               <VICOTypeItem
-                icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/EZVQ-calendar.png"
+                icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/doxq-calendarDates.png"
                 title="Estadías de mínimo 30 días"
                 subtitle="Tanto la estadía mínima como el tiempo de cancelación son de 30 días."
               />
             </Grid>
             <Grid item xs={12} md={4}>
               <VICOTypeItem
-                icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/CqnI-inclusive.png"
+                icon="https://uploads.codesandbox.io/uploads/user/129a52fa-24c5-45b6-8b1e-048cf0197deb/Vthz-securitySafety.png"
                 title="Todo incluído"
                 subtitle="El wifi y los servicios públicos deben estar incluidos en el valor del alquiler mensual."
               />
