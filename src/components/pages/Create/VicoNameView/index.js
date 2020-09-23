@@ -22,10 +22,12 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 8,
     padding: "40px 20px",
     margin: "auto",
+    marginTop: "10%",
     width: 506,
     [theme.breakpoints.down("sm")]: {
       width: "auto",
-      boxShadow: "none"
+      boxShadow: "none",
+      marginTop: "0%"
     }
   },
   title: {
