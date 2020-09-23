@@ -9,15 +9,8 @@ const useStyles = makeStyles((theme) => ({
   drawerContent: {
     width: 406,
     flexShrink: 0,
-    marginLeft: 160,
-    marginRight: 160,
-    marginTop: 50,
     [theme.breakpoints.down("md")]: {
-      width: "auto",
-      margin: "30px 70px"
-    },
-    [theme.breakpoints.down("sm")]: {
-      margin: "30px 20px"
+      width: "auto"
     }
   },
   question: {
@@ -116,7 +109,7 @@ const WhoOccupiesRoom = (props) => {
 
   return (
     <div className={classes.drawerContent}>
-      <div className={classes.question}>
+      <div>
         <span className={classes.questionTitle}>
           ¿Quién ocupa la habitación acutalmente?
         </span>

@@ -13,14 +13,14 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 20
   },
   headerLeftBtn: {
-    paddingLeft: 80,
+    paddingLeft: 40,
     [theme.breakpoints.down("sm")]: {
       paddingLeft: 0,
       paddingTop: 10
     }
   },
   headerRightBtn: {
-    paddingRight: 80,
+    paddingRight: 40,
     [theme.breakpoints.down("sm")]: {
       paddingRight: 0,
       paddingTop: 10
