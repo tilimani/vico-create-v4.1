@@ -75,7 +75,9 @@ const Availability = (props) => {
   return (
     <div className={classes.drawerContent} id="room_availibility">
       <span className={classes.title}>
-        ¿A partir de cuándo está disponible este apartaestudio?
+        {`¿A partir de cuándo está disponible este ${
+          house.type === "studio" ? "apartaestudio" : "room"
+        }?`}
       </span>
 
       <Grid container spacing={3} className={classes.availableDates}>

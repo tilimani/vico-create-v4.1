@@ -141,7 +141,9 @@ const Availability = (props) => {
         )}
         <div className={`${classes.formWrapper}`}>
           <span className={classes.title}>
-            ¿A partir de cuándo está disponible este apartaestudio?
+            {`¿A partir de cuándo está disponible este ${
+              house.type === "studio" ? "apartaestudio" : "room"
+            }?`}
           </span>
 
           <Grid container spacing={3} className={classes.availableDates}>
